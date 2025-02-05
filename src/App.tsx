@@ -1,8 +1,9 @@
+import BoxCalcForm from "./features/box-calc/box-calc-form";
 
 function App() {
 
     return (
-        <h1 className="fw-bold">Schachtel</h1>
+        <BoxCalcForm/>
     )
 }
 
