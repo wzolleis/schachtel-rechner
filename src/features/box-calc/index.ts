@@ -23,3 +23,7 @@ export const defaultValues: BoxCalcFormData = {
     falz: 4
 }
 
+export type BoxCalcResultData = {
+    innen: Dimension,
+    boden: Dimension
+}

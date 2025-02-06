@@ -1,85 +1,65 @@
 import {Form} from "react-router";
 import {defaultValues} from "./index";
+import FormInputLabel from "../../common/components/form-input-label";
+import FormCheckboxLabel from "../../common/components/form-checkbox-label";
 
 const BoxCalcForm = () => {
     //let data = useLoaderData();
     //let fetcher = useFetcher();
 
+    const {thickness, falz, length, width, outer, height} = defaultValues
 
 
     return (
-        <div className={'container-fluid  p-3'}>
-            <h3>Berechne die Teile für eine Box mit Gehrung</h3>
+        <div className={'p-3 bg-gradient-to-tr bg-primary-subtle'}>
             <Form method='POST'>
                 <div className={'border-2'}>
-                    <div className={'row-end-3'}>
-                        <div className="form-check">
-                            <input type="checkbox"
-                                   className="form-check-input"
-                                   id="innen-aussen-checkbox"
-                                   defaultChecked={defaultValues.outer}
-                                   name={'outer'}
-                            />
-                            <label className="form-check-label" htmlFor="innen-aussen-checkbox">Aussen</label>
-                        </div>
-                    </div>
+                    <FormCheckboxLabel id={'innen-aussen-checkbox'}
+                                       label={'Aussen'}
+                                       name={'outer'}
+                                       defaultValue={outer}
+                    />
                     <div className="row">
-                        <div className="col-3">
-                            <label htmlFor="staerke-input" className="form-label">Material-Dicke (mm)</label>
-                            <input type="number"
-                                   className="form-control"
-                                   id="dicke-input"
-                                   defaultValue={defaultValues.thickness}
-                                   name={"thickness"}
-                            />
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-3">
-                            <label htmlFor="falztiefe-input" className="form-label">Falz-Tiefe (mm)</label>
-                            <input type="number"
-                                   className="form-control"
-                                   id="falz"
-                                   defaultValue={defaultValues.falz}
-                                   name={"falz"}
-                            />
-                        </div>
+                        <FormInputLabel id={'staerke-input"'}
+                                        label={'Material-Dicke (mm)'}
+                                        type={'number'}
+                                        name={'thickness'}
+                                        defaultValue={thickness}
+                                        colClass={'col-xl-3 col-12'}
+                        />
+                        <FormInputLabel id={'falz"'}
+                                        label={'Falz (mm)'}
+                                        type={'number'}
+                                        name={'falz'}
+                                        defaultValue={falz}
+                                        colClass={'col-md-3 col-12'}
+                        />
                     </div>
                     <div className="row mt-2">
-                        <div className="col-3">
-                            <label htmlFor="breite-input" className="form-label">Front (mm)</label>
-                            <input type="number"
-                                   className="form-control"
-                                   id="breite-input"
-                                   defaultValue={defaultValues.width}
-                                   name={"width"}
-                            />
-                        </div>
-                        <div className="col-3">
-                            <label htmlFor="laenge-input" className="form-label">Seitenwand (mnm)</label>
-                            <input type="number"
-                                   className="form-control"
-                                   id="laenge-input"
-                                   defaultValue={defaultValues.length}
-                                   name={"length"}
-                            />
-                        </div>
-                        <div className="col-3">
-                            <label htmlFor="hoehe-input" className="form-label">Hoehe der Box (mnm)</label>
-                            <input type="number"
-                                   className="form-control"
-                                   id="hoehe-input"
-                                   defaultValue={defaultValues.height}
-                                   name={"height"}
-                            />
-                        </div>
+                        <FormInputLabel id={'width'}
+                                        label={'Breite (mm)'}
+                                        type={'number'}
+                                        name={'width'}
+                                        defaultValue={width}
+                                        colClass={'col-3'}/>
+                        <FormInputLabel id={'length'}
+                                        label={'Länge (mm)'}
+                                        type={'number'}
+                                        name={'length'}
+                                        defaultValue={length}
+                                        colClass={'col-3'}
+                        />
+                        <FormInputLabel id={'height'}
+                                        label={'Höhe (mm)'}
+                                        type={'number'}
+                                        name={'height'}
+                                        defaultValue={height}
+                                        colClass={'col-3'}
+                        />
                     </div>
                 </div>
-
                 <div className={'row-auto mt-3'}>
-
                     <button type="submit" className="btn btn-primary">Berechnung</button>
-
                 </div>
             </Form>
         </div>

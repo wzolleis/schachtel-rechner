@@ -1,10 +1,10 @@
-import {BoxCalcFormData, Dimension, FormFieldName} from "./index";
+import {BoxCalcFormData, BoxCalcResultData, Dimension, FormFieldName} from "./index";
 
 const extractFormValue = (formData: FormData, name: FormFieldName ) => {
     return formData.get(name) as string
 }
 
-export const calculateBox = async ({  request }: {request: Request}) => {
+export const calculateBox = async ({request}: { request: Request }): Promise<BoxCalcResultData> => {
     console.log("calculate box ....")
     const formData: FormData = await request.formData()
     const data: BoxCalcFormData = {
@@ -31,5 +31,5 @@ export const calculateBox = async ({  request }: {request: Request}) => {
     console.log('boden', boden)
 
 
-    return {}
+    return {innen, boden}
 }
