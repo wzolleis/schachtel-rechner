@@ -18,6 +18,7 @@ const BoxCalcForm = () => {
                                        label={'Aussen'}
                                        name={'outer'}
                                        defaultValue={outer}
+                                       disabled={true}
                     />
                     <div className="row">
                         <FormInputLabel id={'staerke-input"'}

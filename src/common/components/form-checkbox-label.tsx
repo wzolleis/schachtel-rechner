@@ -2,10 +2,11 @@ type InputWithLabelProps = {
     id: string
     label: string
     name: string
+    disabled: boolean
     defaultValue: boolean
 }
 
-const FormCheckboxLabel = ({name, defaultValue, id, label,}: InputWithLabelProps) => {
+const FormCheckboxLabel = ({name, defaultValue, disabled, id, label,}: InputWithLabelProps) => {
     return (
         <div className={'row-end-3'}>
             <div className="form-check">
@@ -14,6 +15,7 @@ const FormCheckboxLabel = ({name, defaultValue, id, label,}: InputWithLabelProps
                        id={id}
                        defaultChecked={defaultValue}
                        name={name}
+                       disabled={disabled}
                 />
                 <label className="form-check-label" htmlFor={id}>{label}</label>
             </div>
