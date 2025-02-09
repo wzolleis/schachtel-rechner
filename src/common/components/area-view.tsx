@@ -11,15 +11,14 @@ const AreaView = (props: AreaViewProps) => {
     return (
         <div className={'row'}>
             <h5>{label}</h5>
-            <LengthMeasurementView id={'length'}
-                                   value={size.length}
-                                   label={'Laenge'}
-            />
             <LengthMeasurementView id={'width'}
                                    value={size.width}
                                    label={'Breite'}
             />
-
+            <LengthMeasurementView id={'length'}
+                                   value={size.length}
+                                   label={'Laenge'}
+            />
         </div>
     )
 }
