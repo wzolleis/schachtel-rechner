@@ -19,9 +19,9 @@ const BoxCalcResult = () => {
         <div className={'p-3 bg-gradient-to-tr bg-secondary-subtle'}>
             <AreaView label={'Boden'} size={data.boden.size}/>
             <hr/>
-            <AreaView label={'Seite'} size={data.seite.size}/>
+            <AreaView label={'Seite'} size={data.seite.size} distance={data.seite.distance}/>
             <hr/>
-            <AreaView label={'Front'} size={data.front.size}/>
+            <AreaView label={'Front'} size={data.front.size} distance={data.front.distance}/>
 
         </div>
     )

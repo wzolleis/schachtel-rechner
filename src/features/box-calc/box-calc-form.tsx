@@ -29,7 +29,7 @@ const BoxCalcForm = () => {
                                         colClass={'col-xl-3 col-12'}
                         />
                         <FormInputLabel id={'falz"'}
-                                        label={'Falz (mm)'}
+                                        label={'Falztiefe (mm)'}
                                         type={'number'}
                                         name={'falz'}
                                         defaultValue={falz}
@@ -37,12 +37,6 @@ const BoxCalcForm = () => {
                         />
                     </div>
                     <div className="row mt-2">
-                        <FormInputLabel id={'width'}
-                                        label={'Breite (mm)'}
-                                        type={'number'}
-                                        name={'width'}
-                                        defaultValue={width}
-                                        colClass={'col-3'}/>
                         <FormInputLabel id={'length'}
                                         label={'Länge (mm)'}
                                         type={'number'}
@@ -50,6 +44,13 @@ const BoxCalcForm = () => {
                                         defaultValue={length}
                                         colClass={'col-3'}
                         />
+                        <FormInputLabel id={'width'}
+                                        label={'Breite (mm)'}
+                                        type={'number'}
+                                        name={'width'}
+                                        defaultValue={width}
+                                        colClass={'col-3'}/>
+
                         <FormInputLabel id={'height'}
                                         label={'Höhe (mm)'}
                                         type={'number'}
