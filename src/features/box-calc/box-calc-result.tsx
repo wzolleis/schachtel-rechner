@@ -1,5 +1,6 @@
 import {useActionData} from "react-router";
 import {BoxCalcResultData} from "./index"
+import AreaView from "../../common/components/area-view";
 
 const NoResult = () => {
     return (
@@ -12,10 +13,16 @@ const NoResult = () => {
 const BoxCalcResult = () => {
     const data = useActionData() as BoxCalcResultData
     if (!data) return <NoResult/>
+    console.log('boden', data.boden)
 
     return (
         <div className={'p-3 bg-gradient-to-tr bg-secondary-subtle'}>
-            <div>{JSON.stringify(data, null, 2)}</div>
+            <AreaView label={'Boden'} size={data.boden.size}/>
+            <hr/>
+            <AreaView label={'Seite'} size={data.seite.size}/>
+            <hr/>
+            <AreaView label={'Front'} size={data.front.size}/>
+
         </div>
     )
 }
