@@ -5,7 +5,7 @@ const BoxCalculator = () => {
     return (
         <div>
             <h3>Berechne die Teile für eine Box mit Gehrung</h3>
-            <h4>Die angegebenen Masse sind die Aussenmaße in mm</h4>
+            <h4>Die angegebenen Maße sind die Aussenmaße in mm</h4>
             <BoxCalcForm/>
             <hr/>
             <h3>Ergebnis</h3>

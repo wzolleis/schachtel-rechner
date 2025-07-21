@@ -1,4 +1,4 @@
-import {LengthMeasurement} from "../../features/box-calc";
+import {LengthMeasurement} from "../../features/box-calc-gehrung";
 
 type LengthMeasurementVieProps = {
     value: LengthMeasurement

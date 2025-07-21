@@ -1,6 +1,6 @@
 import {Route} from "react-router";
 import App from "../App";
-import {calculateBox} from "../features/box-calc/box-calc-form-action";
+import {calculateBox} from "../features/box-calc-gehrung/box-calc-form-action";
 import Loading from "../common/components/Loading";
 
 const AppRutes =

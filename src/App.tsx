@@ -1,10 +1,10 @@
-import BoxCalculator from "./features/box-calc/box-calculator";
+import {LandingPage} from "./features/landingpage/landing-page";
 
 function App() {
 
     return (
         <div className={'container-fluid m-1 p-5'}>
-            <BoxCalculator/>
+            <LandingPage/>
         </div>
     )
 }
