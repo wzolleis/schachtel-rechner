@@ -10,7 +10,7 @@ type AreaViewProps = {
 const AreaView = (props: AreaViewProps) => {
     const {label, distance, size} = props
     return (
-        <div className={'row'}>
+        <div className="grid w-full max-w-sm items-center gap-3">
             <h5>{label}</h5>
 
             <LengthMeasurementView id={'length'}

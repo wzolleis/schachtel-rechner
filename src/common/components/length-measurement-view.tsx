@@ -1,19 +1,18 @@
 import {LengthMeasurement} from "../../features/box-calc-gehrung";
+import {Label} from "@/components/ui/label";
 
 type LengthMeasurementVieProps = {
     value: LengthMeasurement
     id: string
-    colClass?: string
     label: string
 }
 
 const LengthMeasurementView = (props: LengthMeasurementVieProps) => {
-    const {value, id, label, colClass = 'col-12 col-md-3'} = props
+    const {value, id, label} = props
     return (
-        <div className={colClass}>
-            <label htmlFor={id} className="form-label">{label}</label>
+        <div className="grid w-full max-w-sm items-center gap-3">
+            <Label htmlFor={id}>{label}</Label>
             <input type="number"
-                   className="form-control"
                    id={id}
                    value={value.value}
                    readOnly={true}

@@ -2,8 +2,9 @@ import {Form} from "react-router";
 import {defaultValues} from "./index";
 import FormInputLabel from "../../common/components/form-input-label";
 import FormCheckboxLabel from "../../common/components/form-checkbox-label";
+import {Button} from "@/components/ui/button";
 
-const BoxCalcForm = () => {
+export const BoxCalcForm = () => {
     //let data = useLoaderData();
     //let fetcher = useFetcher();
 
@@ -13,7 +14,7 @@ const BoxCalcForm = () => {
     return (
         <div className={'p-3 bg-gradient-to-tr bg-primary-subtle'}>
             <Form method='POST'>
-                <div className={'border-2'}>
+                <div className="grid w-full max-w-sm items-center gap-3">
                     <FormCheckboxLabel id={'innen-aussen-checkbox'}
                                        label={'Aussen'}
                                        name={'outer'}
@@ -61,11 +62,9 @@ const BoxCalcForm = () => {
                     </div>
                 </div>
                 <div className={'row-auto mt-3'}>
-                    <button type="submit" className="btn btn-primary">Berechnung</button>
+                    <Button variant={'default'} type="submit">Berechnung</Button>
                 </div>
             </Form>
         </div>
     )
 }
-
-export default BoxCalcForm
