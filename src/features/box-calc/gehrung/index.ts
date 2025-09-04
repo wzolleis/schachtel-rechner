@@ -1,13 +1,18 @@
-export type BoxCalcFormData = {
-    thickness: number
-    length: number
-    width: number
-    height: number
-    outer: boolean
-    falz: number
-}
+import {z} from "zod";
 
-export type FormFieldName = keyof BoxCalcFormData
+export const GehrungSchema = z.object({
+    outerDimension: z.number().min(1),
+    thickness: z.number().min(6),
+    length: z.number().min(1),
+    width: z.number().min(1),
+    height: z.number().min(1),
+    outer: z.boolean(),
+    falz: z.number().min(1)
+})
+
+export type GehrungFormData = z.infer<typeof GehrungSchema>
+
+export type FormFieldName = keyof GehrungFormData
 
 export type Size = {
     length: LengthMeasurement,
@@ -21,17 +26,8 @@ export type LengthMeasurement = {
     unit: DistanceUnit
 }
 
-export const defaultValues: BoxCalcFormData = {
-    length: 600,
-    width: 300,
-    thickness: 8,
-    height: 100,
-    outer: true,
-    falz: 4
-}
-
 export type BoxCalcResultData = {
-    input: BoxCalcFormData,
+    input: GehrungFormData,
     innen: Size,
     boden: Boden,
     seite: Seite,

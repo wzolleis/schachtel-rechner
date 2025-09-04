@@ -1,14 +1,19 @@
 import {Form} from "react-router";
-import {defaultValues} from "./index";
-import FormInputLabel from "../../common/components/form-input-label";
-import FormCheckboxLabel from "../../common/components/form-checkbox-label";
+import FormInputLabel from "../../../common/components/form-input-label";
+import FormCheckboxLabel from "../../../common/components/form-checkbox-label";
 import {Button} from "@/components/ui/button";
 
 export const BoxCalcForm = () => {
     //let data = useLoaderData();
     //let fetcher = useFetcher();
 
-    const {thickness, falz, length, width, outer, height} = defaultValues
+    const {thickness, length, width, outer, height} = {
+        thickness: 10,
+        length: 100,
+        width: 100,
+        outer: true,
+        height: 20
+    }
 
 
     return (
@@ -28,13 +33,6 @@ export const BoxCalcForm = () => {
                                         name={'thickness'}
                                         defaultValue={thickness}
                                         colClass={'col-xl-3 col-12'}
-                        />
-                        <FormInputLabel id={'falz"'}
-                                        label={'Falztiefe (mm)'}
-                                        type={'number'}
-                                        name={'falz'}
-                                        defaultValue={falz}
-                                        colClass={'col-md-3 col-12'}
                         />
                     </div>
                     <div className="row mt-2">

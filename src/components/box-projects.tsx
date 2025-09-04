@@ -6,6 +6,7 @@ import {
     SidebarMenuItem
 } from "@/components/ui/sidebar";
 import {LucideIcon} from "lucide-react";
+import {Link} from "react-router";
 
 export type BoxProject = {
     url: string;
@@ -25,10 +26,10 @@ export const BoxProjects = ({boxes}: BoxProjectsProps) => {
                 {boxes.map((item) => (
                     <SidebarMenuItem key={item.name}>
                         <SidebarMenuButton asChild>
-                            <a href={item.url}>
+                            <Link to={item.url}>
                                 <item.icon/>
                                 <span>{item.name}</span>
-                            </a>
+                            </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 ))}

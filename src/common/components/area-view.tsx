@@ -1,4 +1,4 @@
-import {LengthMeasurement, Size} from "../../features/box-calc-gehrung";
+import {LengthMeasurement, Size} from "../../features/box-calc/gehrung";
 import LengthMeasurementView from "./length-measurement-view";
 
 type AreaViewProps = {

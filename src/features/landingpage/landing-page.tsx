@@ -1,11 +1,7 @@
-import {BoxCalcForm} from "@/features/box-calc-gehrung/box-calc-form";
-import Page from "@/dashboard/page";
+import DashboardPage from "@/dashboard/dashboard-page";
 
 export const LandingPage = () => {
     return (
-        <>
-            <Page/>
-            <BoxCalcForm/>
-        </>
+        <DashboardPage/>
     )
 }

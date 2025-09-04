@@ -1,6 +1,6 @@
 import {useActionData} from "react-router";
 import {BoxCalcResultData} from "./index"
-import AreaView from "../../common/components/area-view";
+import AreaView from "../../../common/components/area-view";
 
 const NoResult = () => {
     return (

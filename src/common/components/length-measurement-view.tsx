@@ -1,4 +1,4 @@
-import {LengthMeasurement} from "../../features/box-calc-gehrung";
+import {LengthMeasurement} from "../../features/box-calc/gehrung";
 import {Label} from "@/components/ui/label";
 
 type LengthMeasurementVieProps = {

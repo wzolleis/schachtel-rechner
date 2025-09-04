@@ -1,6 +1,6 @@
 // noinspection JSSuspiciousNameCombination
 
-import {Boden, BoxCalcFormData, BoxCalcResultData, FormFieldName, Front, LengthMeasurement, Seite, Size} from "./index";
+import {Boden, BoxCalcResultData, FormFieldName, Front, GehrungFormData, LengthMeasurement, Seite, Size} from "./index";
 
 const extractFormValue = (formData: FormData, name: FormFieldName) => {
     return formData.get(name) as string
@@ -8,13 +8,14 @@ const extractFormValue = (formData: FormData, name: FormFieldName) => {
 
 export const calculateBox = async ({request}: { request: Request }): Promise<BoxCalcResultData> => {
     const formData: FormData = await request.formData()
-    const data: BoxCalcFormData = {
+    const data: GehrungFormData = {
         thickness: Number.parseInt(extractFormValue(formData, 'thickness')),
         length: Number.parseInt(extractFormValue(formData, 'length')),
         width: Number.parseInt(extractFormValue(formData, 'width')),
         height: Number.parseInt(extractFormValue(formData, 'height')),
         outer: !!extractFormValue(formData, 'outer'),
-        falz: Number.parseInt(extractFormValue(formData, 'falz'))
+        outerDimension: Number.parseInt(extractFormValue(formData, 'outerDimension')),
+        falz: Number.parseInt(extractFormValue(formData, 'falz')),
     }
     const innen: Size = calculateInnenSize(data)
     const boden: Boden = calculateBoden(data, innen)
@@ -23,7 +24,7 @@ export const calculateBox = async ({request}: { request: Request }): Promise<Box
     return {innen, boden, seite, front, input: data}
 }
 
-const calculateBoden = (data: BoxCalcFormData, innen: Size): Boden => {
+const calculateBoden = (data: GehrungFormData, innen: Size): Boden => {
     const bodenSize: Size = {
         length: {value: innen.length.value + 2 * data.falz, unit: "mm"},
         width: {value: innen.width.value + 2 * data.falz, unit: "mm"}
@@ -35,7 +36,7 @@ const calculateBoden = (data: BoxCalcFormData, innen: Size): Boden => {
     }
 }
 
-const calculateSeite = (data: BoxCalcFormData): Seite => {
+const calculateSeite = (data: GehrungFormData): Seite => {
     const distance: LengthMeasurement = {
         value: data.length - data.thickness,
         unit: "mm"
@@ -50,7 +51,7 @@ const calculateSeite = (data: BoxCalcFormData): Seite => {
     }
 }
 
-const calculateFront = (data: BoxCalcFormData): Front => {
+const calculateFront = (data: GehrungFormData): Front => {
     const distance: LengthMeasurement = {
         value: data.width - data.thickness,
         unit: "mm"
@@ -66,7 +67,7 @@ const calculateFront = (data: BoxCalcFormData): Front => {
     }
 }
 
-const calculateInnenSize = (data: BoxCalcFormData): Size => {
+const calculateInnenSize = (data: GehrungFormData): Size => {
     return {
         length: {value: data.length - 2 * data.thickness, unit: 'mm'},
         width: {value: data.width - 2 * data.thickness, unit: "mm"}
