@@ -2,7 +2,7 @@ import * as React from "react"
 import {Box,} from "lucide-react"
 import {Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail,} from "@/components/ui/sidebar"
 import {BoxProjects} from "./box-projects"
-import {boxCalcGehrungElements, sidebarLink} from "@/app/route-urls";
+import {boxCalcGehrungAltElements, boxCalcGehrungElements, sidebarLink} from "@/app/route-urls";
 
 const menu = {
     boxes: [
@@ -10,6 +10,11 @@ const menu = {
             name: 'Gehrung',
             icon: Box,
             url: sidebarLink(boxCalcGehrungElements),
+        },
+        {
+            name: 'Gehrung alt',
+            icon: Box,
+            url: sidebarLink(boxCalcGehrungAltElements),
         }
     ]
 }

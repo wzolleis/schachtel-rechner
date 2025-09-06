@@ -1,6 +1,7 @@
 export const boxCalc = 'box-calc'
 
 export const gehrung = 'gehrung'
+export const gehrung_alt = "gehrung-alt"
 
 export type LinkPathElement = string
 
@@ -15,4 +16,9 @@ export const pageLink = (pathElements: LinkPathElement[]) => {
 export const boxCalcGehrungElements: LinkPathElement[] = [
     boxCalc,
     gehrung
+]
+
+export const boxCalcGehrungAltElements: LinkPathElement[] = [
+    boxCalc,
+    gehrung_alt
 ]

@@ -1,13 +1,13 @@
 import {z} from "zod";
 
 export const GehrungSchema = z.object({
-    outerDimension: z.number().min(1),
-    thickness: z.number().min(6),
-    length: z.number().min(1),
-    width: z.number().min(1),
-    height: z.number().min(1),
+    outerDimension: z.number(),
+    thickness: z.number(),
+    length: z.number(),
+    width: z.number(),
+    height: z.number(),
     outer: z.boolean(),
-    falz: z.number().min(1)
+    falz: z.number()
 })
 
 export type GehrungFormData = z.infer<typeof GehrungSchema>

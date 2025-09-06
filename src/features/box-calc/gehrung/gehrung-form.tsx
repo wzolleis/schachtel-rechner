@@ -1,10 +1,19 @@
 import {Button} from "@/components/ui/button";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form"
+import {
+    Form as FormUi,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form"
 import {Input} from "@/components/ui/input"
 import {zodResolver} from "@hookform/resolvers/zod"
 import {useForm} from "react-hook-form"
 import {GehrungFormData, GehrungSchema} from "@/features/box-calc/gehrung/index";
-import {AspectRatio} from "@/components/ui/aspect-ratio";
+import {Form as RouterForm} from "react-router";
+import {z} from "zod";
 
 const defaultValues: GehrungFormData = {
     length: 600,
@@ -19,25 +28,27 @@ const defaultValues: GehrungFormData = {
 export const GehrungForm = () => {
     const form = useForm<GehrungFormData>({
         resolver: zodResolver(GehrungSchema),
-        defaultValues
+        defaultValues,
     })
 
     // 2. Define a submit handler.
     function onSubmit(values: GehrungFormData) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
-        console.log(values)
+        console.log('onSubmit', values)
+        const validation = z.safeParse(GehrungSchema, values)
+        console.log('validation', validation)
     }
-
-    const width = form.watch('width')
-    const height = form.watch('height')
 
     return (
         <>
             <h4 className={'my-4 p-4 text-center text-xl bg-yellow-50 alert-heading font-bold'}>Gehrung</h4>
 
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <FormUi {...form}>
+                <RouterForm onSubmit={form.handleSubmit(onSubmit)}
+                            className="space-y-8"
+                            method={'POST'}
+                >
                     <FormField
                         control={form.control}
                         name="thickness"
@@ -47,19 +58,21 @@ export const GehrungForm = () => {
                                 <FormControl>
                                     <Input placeholder="10" {...field} type={'number'}/>
                                 </FormControl>
+                                <FormDescription>Material-Stärke der einzelnen Wände</FormDescription>
                                 <FormMessage/>
                             </FormItem>
                         )}
                     />
                     <FormField
                         control={form.control}
-                        name="height"
+                        name="length"
                         render={({field}) => (
                             <FormItem>
-                                <FormLabel>Höhe</FormLabel>
+                                <FormLabel>Länge [mm]</FormLabel>
                                 <FormControl>
                                     <Input placeholder="10" {...field} type={'number'}/>
                                 </FormControl>
+                                <FormDescription>Länge der Seitenwand</FormDescription>
                                 <FormMessage/>
                             </FormItem>
                         )}
@@ -69,20 +82,47 @@ export const GehrungForm = () => {
                         name="width"
                         render={({field}) => (
                             <FormItem>
-                                <FormLabel>Breite</FormLabel>
+                                <FormLabel>Breite [mm]</FormLabel>
                                 <FormControl>
                                     <Input placeholder="10" {...field} type={'number'}/>
                                 </FormControl>
                                 <FormMessage/>
+                                <FormDescription>Breite der Front/Rückseite</FormDescription>
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="height"
+                        render={({field}) => (
+                            <FormItem>
+                                <FormLabel>Höhe [mm]</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="10" {...field} type={'number'}/>
+                                </FormControl>
+                                <FormMessage/>
+                                <FormDescription>Höhe der Wände</FormDescription>
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="falz"
+                        render={({field}) => (
+                            <FormItem>
+                                <FormLabel>Falztiefe [mm]</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="10" {...field} type={'number'}/>
+                                </FormControl>
+                                <FormMessage/>
+                                <FormDescription>Der Falz für den Deckel/Boden</FormDescription>
                             </FormItem>
                         )}
                     />
 
-
-                    <AspectRatio ratio={width / height} className="bg-red-800 rounded-lg"/>
                     <Button type="submit">Berechnen</Button>
-                </form>
-            </Form>
+                </RouterForm>
+            </FormUi>
         </>
     )
 }

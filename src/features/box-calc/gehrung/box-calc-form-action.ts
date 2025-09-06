@@ -8,6 +8,8 @@ const extractFormValue = (formData: FormData, name: FormFieldName) => {
 
 export const calculateBox = async ({request}: { request: Request }): Promise<BoxCalcResultData> => {
     const formData: FormData = await request.formData()
+    console.log('calculateBox', formData)
+
     const data: GehrungFormData = {
         thickness: Number.parseInt(extractFormValue(formData, 'thickness')),
         length: Number.parseInt(extractFormValue(formData, 'length')),
