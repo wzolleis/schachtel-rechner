@@ -1,11 +1,9 @@
 import {Outlet, Route} from "react-router";
-import {calculateBox} from "@/features/box-calc/gehrung/box-calc-form-action";
 import Loading from "../common/components/Loading";
-import {boxCalc, gehrung, gehrung_alt} from "@/app/route-urls";
+import {boxCalc, gehrung} from "@/app/route-urls";
 import BoxCalculator from "@/features/box-calc/gehrung/box-calculator";
 import {BoxCalcLandingPage} from "@/features/box-calc/box-calc-landing-page";
 import {LandingPage} from "@/features/landingpage/landing-page";
-import BoxCalculatorAlt from "@/features/box-calc/gehrung/box-calculator-alt";
 
 const AppRutes =
     <Route path={'/'}
@@ -24,13 +22,7 @@ const AppRutes =
                           <Route path={gehrung}
                                  hydrateFallbackElement={<Loading/>}
                                  element={<BoxCalculator/>}
-                                 action={calculateBox}
                           />,
-                          <Route path={gehrung_alt}
-                                 hydrateFallbackElement={<Loading/>}
-                                 element={<BoxCalculatorAlt/>}
-                                 action={calculateBox}
-                          />
                       ]}
                />
            ]}

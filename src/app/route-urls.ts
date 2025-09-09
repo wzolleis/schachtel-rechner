@@ -17,8 +17,3 @@ export const boxCalcGehrungElements: LinkPathElement[] = [
     boxCalc,
     gehrung
 ]
-
-export const boxCalcGehrungAltElements: LinkPathElement[] = [
-    boxCalc,
-    gehrung_alt
-]
