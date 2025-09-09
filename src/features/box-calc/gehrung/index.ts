@@ -2,16 +2,14 @@ import {z} from "zod/v3";
 import {ValueWithUnitDefinition} from "@/lib/unit-utils";
 
 export const GehrungSchema = z.object({
-    outerDimension: z.coerce.number(),
-    thickness: z.coerce.number(),
-    length: z.coerce.number(),
-    width:z.coerce.number(),
-    height: z.coerce.number(),
+    thickness: z.coerce.number().min(1),
+    length: z.coerce.number().min(1),
+    width: z.coerce.number().min(1),
+    height: z.coerce.number().min(1),
     outer: z.boolean(),
-    falz: z.coerce.number(),
+    falz: z.coerce.number().min(1),
 })
 
-export type GehrungFormData = z.infer<typeof GehrungSchema>
 export type GehrungSchemaInput = z.input<typeof GehrungSchema>
 
 export type Size = {

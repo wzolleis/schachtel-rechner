@@ -13,7 +13,6 @@ const defaultValues: GehrungSchemaInput = {
     thickness: 10,
     height: 100,
     outer: true,
-    outerDimension: 100,
     falz: 5
 }
 
@@ -23,8 +22,6 @@ export const GehrungForm = () => {
         defaultValues,
         mode: "onChange"
     })
-
-    const watchedValues = form.watch()
 
     useEffect(() => {
         const subscription = form.watch((value) => {
@@ -184,32 +181,7 @@ export const GehrungForm = () => {
                                     </FormItem>
                                 )}
                             />
-                            {watchedValues.outer && (
-                                <FormField
-                                    control={form.control}
-                                    name="outerDimension"
-                                    render={({field}) => (
-                                        <FormItem className="ml-8">
-                                            <FormLabel className="text-xs font-mono text-gray-700 uppercase tracking-wider">Außenmaß</FormLabel>
-                                            <FormControl>
-                                                <Input 
-                                                    placeholder="100" 
-                                                    {...field} 
-                                                    type="number"
-                                                    className="border-gray-300 border-0 border-b-2 rounded-none bg-transparent px-0 py-2 focus:border-gray-900 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none font-mono"
-                                                    onChange={(e) => field.onChange(Number(e.target.value))}
-                                                />
-                                            </FormControl>
-                                            <FormDescription className="text-xs text-gray-500 font-mono mt-1">
-                                                Gesamtmaß in mm
-                                            </FormDescription>
-                                            <FormMessage/>
-                                        </FormItem>
-                                    )}
-                                />
-                            )}
                         </div>
-
                     </form>
                 </Form>
             </div>
