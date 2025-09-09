@@ -1,54 +1,42 @@
-import {z} from "zod";
+import {z} from "zod/v3";
+import {ValueWithUnitDefinition} from "@/lib/unit-utils";
 
 export const GehrungSchema = z.object({
-    outerDimension: z.number(),
-    thickness: z.number(),
-    length: z.number(),
-    width: z.number(),
-    height: z.number(),
+    outerDimension: z.coerce.number(),
+    thickness: z.coerce.number(),
+    length: z.coerce.number(),
+    width:z.coerce.number(),
+    height: z.coerce.number(),
     outer: z.boolean(),
-    falz: z.number()
+    falz: z.coerce.number(),
 })
 
 export type GehrungFormData = z.infer<typeof GehrungSchema>
-
-export type FormFieldName = keyof GehrungFormData
+export type GehrungSchemaInput = z.input<typeof GehrungSchema>
 
 export type Size = {
-    length: LengthMeasurement,
-    width: LengthMeasurement,
-}
-
-export type DistanceUnit = 'mm'
-
-export type LengthMeasurement = {
-    value: number,
-    unit: DistanceUnit
+    length: ValueWithUnitDefinition,
+    width: ValueWithUnitDefinition,
 }
 
 export type BoxCalcResultData = {
-    input: GehrungFormData,
     innen: Size,
     boden: Boden,
     seite: Seite,
     front: Front
 }
-export type BoxPartName = "Boden" | "Seite" | "Front"
 
 export type Boden = {
-    name: BoxPartName,
     size: Size
 }
 
 export type Seite = {
-    name: BoxPartName,
     size: Size,
-    distance: LengthMeasurement
+    distance: ValueWithUnitDefinition
 }
 
 export type Front = {
-    name: BoxPartName,
     size: Size,
-    distance: LengthMeasurement
+    distance: ValueWithUnitDefinition
 }
 

@@ -1,10 +1,11 @@
-import {LengthMeasurement, Size} from "../../features/box-calc/gehrung";
+import {Size} from "../../features/box-calc/gehrung";
 import LengthMeasurementView from "./length-measurement-view";
+import {ValueWithUnitDefinition} from "@/lib/unit-utils";
 
 type AreaViewProps = {
     label: string
     size: Size
-    distance?: LengthMeasurement
+    distance?: ValueWithUnitDefinition
 }
 
 const AreaView = (props: AreaViewProps) => {

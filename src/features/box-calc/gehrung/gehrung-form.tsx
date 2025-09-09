@@ -1,21 +1,13 @@
-import {Button} from "@/components/ui/button";
-import {
-    Form as FormUi,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
+import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form"
 import {Input} from "@/components/ui/input"
+import {Checkbox} from "@/components/ui/checkbox"
 import {zodResolver} from "@hookform/resolvers/zod"
 import {useForm} from "react-hook-form"
-import {GehrungFormData, GehrungSchema} from "@/features/box-calc/gehrung/index";
-import {Form as RouterForm} from "react-router";
-import {z} from "zod";
+import {useEffect} from "react"
+import {GehrungSchema, GehrungSchemaInput} from "@/features/box-calc/gehrung/index";
+import {GehrungDataStore$} from "@/features/box-calc/gehrung/gehrung-calculation";
 
-const defaultValues: GehrungFormData = {
+const defaultValues: GehrungSchemaInput = {
     length: 600,
     width: 300,
     thickness: 10,
@@ -26,103 +18,201 @@ const defaultValues: GehrungFormData = {
 }
 
 export const GehrungForm = () => {
-    const form = useForm<GehrungFormData>({
+    const form = useForm<GehrungSchemaInput>({
         resolver: zodResolver(GehrungSchema),
         defaultValues,
+        mode: "onChange"
     })
 
-    // 2. Define a submit handler.
-    function onSubmit(values: GehrungFormData) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log('onSubmit', values)
-        const validation = z.safeParse(GehrungSchema, values)
-        console.log('validation', validation)
-    }
+    const watchedValues = form.watch()
+
+    useEffect(() => {
+        const subscription = form.watch((value) => {
+            const validatedData = GehrungSchema.safeParse(value)
+            if (validatedData.success) {
+                GehrungDataStore$.assign(validatedData.data)
+            }
+        })
+        return () => subscription.unsubscribe()
+    }, [form])
+
+    const onSubmit = form.handleSubmit(data => {
+        GehrungDataStore$.assign(data)
+    })
 
     return (
-        <>
-            <h4 className={'my-4 p-4 text-center text-xl bg-yellow-50 alert-heading font-bold'}>Gehrung</h4>
+        <div className="border border-gray-200">
+            <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
+                <h2 className="text-sm font-medium text-gray-900 tracking-wider uppercase">Eingabe</h2>
+            </div>
+            <div className="p-6">
+                <Form {...form}>
+                    <form onSubmit={onSubmit} className="space-y-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <FormField
+                                control={form.control}
+                                name="thickness"
+                                render={({field}) => (
+                                    <FormItem>
+                                        <FormLabel className="text-xs font-mono text-gray-700 uppercase tracking-wider">Material-Dicke</FormLabel>
+                                        <FormControl>
+                                            <Input 
+                                                placeholder="10" 
+                                                {...field} 
+                                                type="number"
+                                                className="border-gray-300 border-0 border-b-2 rounded-none bg-transparent px-0 py-2 focus:border-gray-900 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none font-mono"
+                                                onChange={(e) => field.onChange(Number(e.target.value))}
+                                            />
+                                        </FormControl>
+                                        <FormDescription className="text-xs text-gray-500 font-mono mt-1">
+                                            Materialstärke in mm
+                                        </FormDescription>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="length"
+                                render={({field}) => (
+                                    <FormItem>
+                                        <FormLabel className="text-xs font-mono text-gray-700 uppercase tracking-wider">Länge</FormLabel>
+                                        <FormControl>
+                                            <Input 
+                                                placeholder="600" 
+                                                {...field} 
+                                                type="number"
+                                                className="border-gray-300 border-0 border-b-2 rounded-none bg-transparent px-0 py-2 focus:border-gray-900 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none font-mono"
+                                                onChange={(e) => field.onChange(Number(e.target.value))}
+                                            />
+                                        </FormControl>
+                                        <FormDescription className="text-xs text-gray-500 font-mono mt-1">
+                                            Seitenwand in mm
+                                        </FormDescription>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="width"
+                                render={({field}) => (
+                                    <FormItem>
+                                        <FormLabel className="text-xs font-mono text-gray-700 uppercase tracking-wider">Breite</FormLabel>
+                                        <FormControl>
+                                            <Input 
+                                                placeholder="300" 
+                                                {...field} 
+                                                type="number"
+                                                className="border-gray-300 border-0 border-b-2 rounded-none bg-transparent px-0 py-2 focus:border-gray-900 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none font-mono"
+                                                onChange={(e) => field.onChange(Number(e.target.value))}
+                                            />
+                                        </FormControl>
+                                        <FormDescription className="text-xs text-gray-500 font-mono mt-1">
+                                            Front/Rückseite in mm
+                                        </FormDescription>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="height"
+                                render={({field}) => (
+                                    <FormItem>
+                                        <FormLabel className="text-xs font-mono text-gray-700 uppercase tracking-wider">Höhe</FormLabel>
+                                        <FormControl>
+                                            <Input 
+                                                placeholder="100" 
+                                                {...field} 
+                                                type="number"
+                                                className="border-gray-300 border-0 border-b-2 rounded-none bg-transparent px-0 py-2 focus:border-gray-900 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none font-mono"
+                                                onChange={(e) => field.onChange(Number(e.target.value))}
+                                            />
+                                        </FormControl>
+                                        <FormDescription className="text-xs text-gray-500 font-mono mt-1">
+                                            Wandhöhe in mm
+                                        </FormDescription>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="falz"
+                                render={({field}) => (
+                                    <FormItem>
+                                        <FormLabel className="text-xs font-mono text-gray-700 uppercase tracking-wider">Falztiefe</FormLabel>
+                                        <FormControl>
+                                            <Input 
+                                                placeholder="5" 
+                                                {...field} 
+                                                type="number"
+                                                className="border-gray-300 border-0 border-b-2 rounded-none bg-transparent px-0 py-2 focus:border-gray-900 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none font-mono"
+                                                onChange={(e) => field.onChange(Number(e.target.value))}
+                                            />
+                                        </FormControl>
+                                        <FormDescription className="text-xs text-gray-500 font-mono mt-1">
+                                            Deckel/Boden in mm
+                                        </FormDescription>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
+                        
+                        <div className="space-y-6 border-t border-gray-200 pt-8 mt-8">
+                            <FormField
+                                control={form.control}
+                                name="outer"
+                                render={({field}) => (
+                                    <FormItem className="flex flex-row items-start space-x-4 space-y-0">
+                                        <FormControl>
+                                            <Checkbox
+                                                checked={field.value}
+                                                onCheckedChange={field.onChange}
+                                                className="mt-1 border-gray-400 data-[state=checked]:bg-gray-900 data-[state=checked]:border-gray-900"
+                                            />
+                                        </FormControl>
+                                        <div className="space-y-1">
+                                            <FormLabel className="text-xs font-mono text-gray-700 uppercase tracking-wider">Außenmaß verwenden</FormLabel>
+                                            <FormDescription className="text-xs text-gray-500 font-mono">
+                                                Berechnung mit Außenmaßen
+                                            </FormDescription>
+                                        </div>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}
+                            />
+                            {watchedValues.outer && (
+                                <FormField
+                                    control={form.control}
+                                    name="outerDimension"
+                                    render={({field}) => (
+                                        <FormItem className="ml-8">
+                                            <FormLabel className="text-xs font-mono text-gray-700 uppercase tracking-wider">Außenmaß</FormLabel>
+                                            <FormControl>
+                                                <Input 
+                                                    placeholder="100" 
+                                                    {...field} 
+                                                    type="number"
+                                                    className="border-gray-300 border-0 border-b-2 rounded-none bg-transparent px-0 py-2 focus:border-gray-900 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none font-mono"
+                                                    onChange={(e) => field.onChange(Number(e.target.value))}
+                                                />
+                                            </FormControl>
+                                            <FormDescription className="text-xs text-gray-500 font-mono mt-1">
+                                                Gesamtmaß in mm
+                                            </FormDescription>
+                                            <FormMessage/>
+                                        </FormItem>
+                                    )}
+                                />
+                            )}
+                        </div>
 
-            <FormUi {...form}>
-                <RouterForm onSubmit={form.handleSubmit(onSubmit)}
-                            className="space-y-8"
-                            method={'POST'}
-                >
-                    <FormField
-                        control={form.control}
-                        name="thickness"
-                        render={({field}) => (
-                            <FormItem>
-                                <FormLabel>Material-Dicke (mm)</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="10" {...field} type={'number'}/>
-                                </FormControl>
-                                <FormDescription>Material-Stärke der einzelnen Wände</FormDescription>
-                                <FormMessage/>
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="length"
-                        render={({field}) => (
-                            <FormItem>
-                                <FormLabel>Länge [mm]</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="10" {...field} type={'number'}/>
-                                </FormControl>
-                                <FormDescription>Länge der Seitenwand</FormDescription>
-                                <FormMessage/>
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="width"
-                        render={({field}) => (
-                            <FormItem>
-                                <FormLabel>Breite [mm]</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="10" {...field} type={'number'}/>
-                                </FormControl>
-                                <FormMessage/>
-                                <FormDescription>Breite der Front/Rückseite</FormDescription>
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="height"
-                        render={({field}) => (
-                            <FormItem>
-                                <FormLabel>Höhe [mm]</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="10" {...field} type={'number'}/>
-                                </FormControl>
-                                <FormMessage/>
-                                <FormDescription>Höhe der Wände</FormDescription>
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="falz"
-                        render={({field}) => (
-                            <FormItem>
-                                <FormLabel>Falztiefe [mm]</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="10" {...field} type={'number'}/>
-                                </FormControl>
-                                <FormMessage/>
-                                <FormDescription>Der Falz für den Deckel/Boden</FormDescription>
-                            </FormItem>
-                        )}
-                    />
-
-                    <Button type="submit">Berechnen</Button>
-                </RouterForm>
-            </FormUi>
-        </>
+                    </form>
+                </Form>
+            </div>
+        </div>
     )
 }
