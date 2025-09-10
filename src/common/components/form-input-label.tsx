@@ -1,3 +1,6 @@
+import {Label} from "@/components/ui/label";
+import {Input} from "@/components/ui/input";
+
 export type InputType = 'number' | 'text'
 
 export type InputWithLabelProps = {
@@ -16,15 +19,13 @@ const FormInputLabel = (props: InputWithLabelProps) => {
         label,
         name = props.id,
         defaultValue,
-        colClass = 'col-12 col-md-3',
         readonly = false
     } = props
 
     return (
-        <div className={colClass}>
-            <label htmlFor={id} className="form-label">{label}</label>
-            <input type="number"
-                   className="form-control"
+        <div className="grid w-full max-w-sm items-center gap-3">
+            <Label htmlFor={id}>{label}</Label>
+            <Input type="number"
                    id={id}
                    defaultValue={defaultValue}
                    name={name}

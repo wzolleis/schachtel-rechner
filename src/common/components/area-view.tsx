@@ -1,16 +1,17 @@
-import {LengthMeasurement, Size} from "../../features/box-calc";
+import {Size} from "../../features/box-calc/gehrung";
 import LengthMeasurementView from "./length-measurement-view";
+import {ValueWithUnitDefinition} from "@/lib/unit-utils";
 
 type AreaViewProps = {
     label: string
     size: Size
-    distance?: LengthMeasurement
+    distance?: ValueWithUnitDefinition
 }
 
 const AreaView = (props: AreaViewProps) => {
     const {label, distance, size} = props
     return (
-        <div className={'row'}>
+        <div className="grid w-full max-w-sm items-center gap-3">
             <h5>{label}</h5>
 
             <LengthMeasurementView id={'length'}

@@ -1,3 +1,6 @@
+import {Label} from "@/components/ui/label";
+import {Checkbox} from "@/components/ui/checkbox";
+
 type InputWithLabelProps = {
     id: string
     label: string
@@ -8,17 +11,14 @@ type InputWithLabelProps = {
 
 const FormCheckboxLabel = ({name, defaultValue, disabled, id, label,}: InputWithLabelProps) => {
     return (
-        <div className={'row-end-3'}>
-            <div className="form-check">
-                <input type="checkbox"
-                       className="form-check-input"
-                       id={id}
-                       defaultChecked={defaultValue}
-                       name={name}
-                       disabled={disabled}
-                />
-                <label className="form-check-label" htmlFor={id}>{label}</label>
-            </div>
+        <div className="grid w-full max-w-sm items-center gap-3">
+            <Checkbox
+                id={id}
+                defaultChecked={defaultValue}
+                name={name}
+                disabled={disabled}
+            />
+            <Label htmlFor={id}>{label}</Label>
         </div>
     )
 }
