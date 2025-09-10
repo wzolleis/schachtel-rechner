@@ -17,7 +17,7 @@ const defaultValues: GehrungSchemaInput = {
 }
 
 export const GehrungForm = () => {
-    const form = useForm<GehrungSchemaInput>({
+    const form = useForm({
         resolver: zodResolver(GehrungSchema),
         defaultValues,
         mode: "onChange"
@@ -58,7 +58,6 @@ export const GehrungForm = () => {
                                                 {...field} 
                                                 type="number"
                                                 className="border-gray-300 border-0 border-b-2 rounded-none bg-transparent px-0 py-2 focus:border-gray-900 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none font-mono"
-                                                onChange={(e) => field.onChange(Number(e.target.value))}
                                             />
                                         </FormControl>
                                         <FormDescription className="text-xs text-gray-500 font-mono mt-1">
@@ -80,7 +79,6 @@ export const GehrungForm = () => {
                                                 {...field} 
                                                 type="number"
                                                 className="border-gray-300 border-0 border-b-2 rounded-none bg-transparent px-0 py-2 focus:border-gray-900 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none font-mono"
-                                                onChange={(e) => field.onChange(Number(e.target.value))}
                                             />
                                         </FormControl>
                                         <FormDescription className="text-xs text-gray-500 font-mono mt-1">
@@ -102,7 +100,6 @@ export const GehrungForm = () => {
                                                 {...field} 
                                                 type="number"
                                                 className="border-gray-300 border-0 border-b-2 rounded-none bg-transparent px-0 py-2 focus:border-gray-900 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none font-mono"
-                                                onChange={(e) => field.onChange(Number(e.target.value))}
                                             />
                                         </FormControl>
                                         <FormDescription className="text-xs text-gray-500 font-mono mt-1">
@@ -124,7 +121,6 @@ export const GehrungForm = () => {
                                                 {...field} 
                                                 type="number"
                                                 className="border-gray-300 border-0 border-b-2 rounded-none bg-transparent px-0 py-2 focus:border-gray-900 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none font-mono"
-                                                onChange={(e) => field.onChange(Number(e.target.value))}
                                             />
                                         </FormControl>
                                         <FormDescription className="text-xs text-gray-500 font-mono mt-1">
@@ -146,7 +142,6 @@ export const GehrungForm = () => {
                                                 {...field} 
                                                 type="number"
                                                 className="border-gray-300 border-0 border-b-2 rounded-none bg-transparent px-0 py-2 focus:border-gray-900 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none font-mono"
-                                                onChange={(e) => field.onChange(Number(e.target.value))}
                                             />
                                         </FormControl>
                                         <FormDescription className="text-xs text-gray-500 font-mono mt-1">

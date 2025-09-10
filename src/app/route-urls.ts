@@ -1,3 +1,4 @@
+export const projects = 'projects'
 export const boxCalc = 'box-calc'
 
 export const gehrung = 'gehrung'
@@ -12,6 +13,10 @@ export const sidebarLink = (pathElements: LinkPathElement[]) => {
 export const pageLink = (pathElements: LinkPathElement[]) => {
     return '/' + pathElements.join('/')
 }
+
+export const projectsElements: LinkPathElement[] = [
+    projects
+]
 
 export const boxCalcGehrungElements: LinkPathElement[] = [
     boxCalc,
