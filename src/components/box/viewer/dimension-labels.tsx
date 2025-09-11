@@ -1,4 +1,5 @@
 import {BoxViewData, BoxViewType} from "@/features/viewer/utils/view-types";
+import {getDimensionLabels} from "@/features/viewer/utils/view-type-helpers";
 
 interface DimensionLabelsProps {
     viewData: BoxViewData
@@ -8,30 +9,9 @@ interface DimensionLabelsProps {
 
 export function DimensionLabels({ viewData, showInnerDimensions, viewType }: DimensionLabelsProps) {
     const { boxDimensions, outerRect, padding } = viewData
-
-    // Different labels based on view type
-    const getLabels = () => {
-        switch (viewType) {
-            case "top":
-            case "bottom":
-                return {
-                    horizontal: "L", // Length (front-to-back)
-                    vertical: "W"   // Width (left-to-right) 
-                }
-            case "front":
-            case "back":
-            case "left":
-            case "right":
-                return {
-                    horizontal: "W", // Width
-                    vertical: "H"   // Height
-                }
-        }
-    }
-
-    const labels = getLabels()
-    const horizontalValue = showInnerDimensions ? boxDimensions.innerHeight : boxDimensions.height
-    const verticalValue = showInnerDimensions ? boxDimensions.innerWidth : boxDimensions.width
+    const labels = getDimensionLabels(viewType)
+    const horizontalValue = showInnerDimensions ? boxDimensions.innerWidth : boxDimensions.width
+    const verticalValue = showInnerDimensions ? boxDimensions.innerHeight : boxDimensions.height
 
     return (
         <>
@@ -48,9 +28,9 @@ export function DimensionLabels({ viewData, showInnerDimensions, viewType }: Dim
 
             {/* Right vertical label */}
             <text
-                x={outerRect.x + outerRect.width + 25}
+                x={outerRect.x + outerRect.width + 10}
                 y={boxDimensions.centerY + padding.top + 4}
-                textAnchor="middle"
+                textAnchor="start"
                 className="text-xs font-mono fill-gray-700"
             >
                 {labels.vertical}: {verticalValue.toFixed(1)}mm
