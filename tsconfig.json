@@ -4,8 +4,12 @@
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ],
+  "moduleResolution": "bundler",
   "compilerOptions": {
     "baseUrl": ".",
+    "types": [
+      "vitest/globals"
+    ],
     "paths": {
       "@/*": [
         "./src/*"
