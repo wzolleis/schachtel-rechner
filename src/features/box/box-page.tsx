@@ -3,8 +3,7 @@ import {Button} from "@/components/ui/button"
 import {PageDescription, PageHeaderSeparator, PageTitle} from "@/components/ui/page-header"
 import {Box} from "@/features/box/box-schema";
 import {withUnit} from "@/lib/unit-utils";
-import {TopView} from "@/components/box/viewer/top-view";
-import {SideView} from "@/components/box/viewer/side-view";
+import {View2D} from "@/components/box/viewer/2d-view";
 
 export function BoxPage() {
     const [showInner, setShowInner] = useState(false)
@@ -17,39 +16,39 @@ export function BoxPage() {
         sides: {
             // Front face (what you see when drawer is closed)
             front: {
-                width: withUnit(450, {unit: "mm"}),   // 45cm wide
+                width: withUnit(250, {unit: "mm"}),   // 45cm wide
                 height: withUnit(150, {unit: "mm"}),  // 15cm tall
-                thickness: withUnit(18, {unit: "mm"}) // 18mm thick plywood
+                thickness: withUnit(12, {unit: "mm"}) // 18mm thick plywood
             },
             // Back panel (inside the cabinet)
             back: {
-                width: withUnit(450, {unit: "mm"}),   
+                width: withUnit(250, {unit: "mm"}),
                 height: withUnit(150, {unit: "mm"}),  
-                thickness: withUnit(6, {unit: "mm"})
+                thickness: withUnit(12, {unit: "mm"}) // Same as front
             },
             // Left side panel
             left: {
-                width: withUnit(500, {unit: "mm"}),   // 40cm depth
+                width: withUnit(1060, {unit: "mm"}),   // 40cm depth
                 height: withUnit(150, {unit: "mm"}),  
-                thickness: withUnit(12, {unit: "mm"})
+                thickness: withUnit(12, {unit: "mm"}) // Consistent thickness
             },
             // Right side panel
             right: {
-                width: withUnit(500, {unit: "mm"}),
+                width: withUnit(1060, {unit: "mm"}),   // Same depth as left
                 height: withUnit(150, {unit: "mm"}),  
-                thickness: withUnit(18, {unit: "mm"})
+                thickness: withUnit(12, {unit: "mm"}) // Consistent thickness
             },
             // Bottom panel (drawer floor)
             bottom: {
-                width: withUnit(450, {unit: "mm"}),   
-                height: withUnit(400, {unit: "mm"}),  // width x depth
-                thickness: withUnit(12, {unit: "mm"}) // Thinner bottom panel
+                width: withUnit(450, {unit: "mm"}),   // Same as front/back width
+                height: withUnit(450, {unit: "mm"}),  // Same as front/back width
+                thickness: withUnit(12, {unit: "mm"}) // Same thickness as sides
             },
             // Top panel (usually open for drawer)
             top: {
-                width: withUnit(450, {unit: "mm"}),   
-                height: withUnit(400, {unit: "mm"}),  
-                thickness: withUnit(25, {unit: "mm"})  // No top panel for drawer
+                width: withUnit(450, {unit: "mm"}),   // Same as front/back width
+                height: withUnit(450, {unit: "mm"}),  // Same as front/back width
+                thickness: withUnit(10, {unit: "mm"}) // Same thickness as sides
             }
         }
     }
@@ -66,7 +65,7 @@ export function BoxPage() {
             <div className="mt-8">
                 <div className="flex items-center justify-between mb-4">
                     <h3 className="text-lg font-medium text-gray-900 tracking-wider uppercase">
-                        Top View Visualization
+                        Front View Visualization
                     </h3>
                     <Button
                         variant="outline"
@@ -77,10 +76,10 @@ export function BoxPage() {
                         {showInner ? "Show Outer" : "Show Inner"}
                     </Button>
                 </div>
-                <TopView
-                    viewPort={{width: 400, height: 300}}
+                <View2D
+                    viewPort={{width: 400, height: "auto"}}
                     box={drawerBox}
-                    viewType={"top"}
+                    viewType={"front"}
                     showInnerDimensions={showInner}
                 />
             </div>
@@ -88,7 +87,7 @@ export function BoxPage() {
             <div className="mt-8">
                 <div className="flex items-center justify-between mb-4">
                     <h3 className="text-lg font-medium text-gray-900 tracking-wider uppercase">
-                        Side View Visualization (Front)
+                        Left View Visualization
                     </h3>
                     <Button
                         variant="outline"
@@ -99,10 +98,10 @@ export function BoxPage() {
                         {showInner ? "Show Outer" : "Show Inner"}
                     </Button>
                 </div>
-                <SideView
-                    viewPort={{width: 400, height: 300}}
+                <View2D
+                    viewPort={{width: 400, height: "auto"}}
                     box={drawerBox}
-                    viewType={"back"}
+                    viewType={"left"}
                     showInnerDimensions={showInner}
                 />
             </div>
