@@ -11,6 +11,15 @@ export interface Viewport {
     height: number;
 }
 
+/** Flexible viewport sizing - can be a specific number or "auto" to calculate based on box proportions */
+export type ViewportSize = number | "auto";
+
+/** Flexible viewport configuration */
+export interface FlexibleViewport {
+    width: ViewportSize;
+    height: ViewportSize;
+}
+
 /** Padding around viewport for labels and spacing */
 export interface ViewportPadding {
     top: number;

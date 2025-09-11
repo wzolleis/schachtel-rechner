@@ -5,6 +5,7 @@
 import { Box } from "@/features/box/box-schema";
 import { getValueAs } from "@/lib/unit-utils";
 import { BoxViewType, Rectangle, BoxDimensions, ViewportPadding } from "./view-types";
+import { isHorizontalView } from "./view-type-helpers";
 
 /** Amount to nudge rectangle left to make room for right-side labels */
 const LABEL_SPACE_NUDGE = 20;
@@ -75,29 +76,26 @@ function calculateCavityOffsets(
     viewType: BoxViewType,
     scale: number
 ): { xOffset: number; yOffset: number } {
-    switch (viewType) {
-        case "top":
-        case "bottom":
-            // Top view: left wall pushes cavity right, front wall pushes cavity back
-            return {
-                xOffset: getValueAs(box.sides.left.thickness, "mm") * scale,
-                yOffset: getValueAs(box.sides.front.thickness, "mm") * scale
-            };
-            
-        case "front":
-        case "back":
-            // Front view: left wall pushes cavity right, top wall pushes cavity down
-            return {
-                xOffset: getValueAs(box.sides.left.thickness, "mm") * scale,
-                yOffset: getValueAs(box.sides.top.thickness, "mm") * scale
-            };
-            
-        case "left":
-        case "right":
-            // Side view: front wall pushes cavity back, top wall pushes cavity down
-            return {
-                xOffset: getValueAs(box.sides.front.thickness, "mm") * scale,
-                yOffset: getValueAs(box.sides.top.thickness, "mm") * scale
-            };
+    if (isHorizontalView(viewType)) {
+        // Top view: left wall pushes cavity right, front wall pushes cavity back
+        return {
+            xOffset: getValueAs(box.sides.left.thickness, "mm") * scale,
+            yOffset: getValueAs(box.sides.front.thickness, "mm") * scale
+        };
+    }
+    
+    // For vertical views (front/back/left/right)
+    if (viewType === "front" || viewType === "back") {
+        // Front view: left wall pushes cavity right, top wall pushes cavity down
+        return {
+            xOffset: getValueAs(box.sides.left.thickness, "mm") * scale,
+            yOffset: getValueAs(box.sides.top.thickness, "mm") * scale
+        };
+    } else {
+        // Side view: front wall pushes cavity back, top wall pushes cavity down
+        return {
+            xOffset: getValueAs(box.sides.front.thickness, "mm") * scale,
+            yOffset: getValueAs(box.sides.top.thickness, "mm") * scale
+        };
     }
 }

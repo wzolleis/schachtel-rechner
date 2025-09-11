@@ -1,22 +1,27 @@
 import {Box} from "@/features/box/box-schema";
-import {Viewport} from "@/features/viewer/utils/view-types";
+import {BoxViewType, FlexibleViewport} from "@/features/viewer/utils/view-types";
 import {createStandardPadding, getDrawingArea} from "@/features/viewer/utils/viewport-utils";
 import {calculateBoxDimensions} from "@/features/viewer/utils/box-dimensions";
-import {calculateOuterRectangle, calculateInnerRectangle} from "@/features/viewer/utils/view-layout";
+import {calculateInnerRectangle, calculateOuterRectangle} from "@/features/viewer/utils/view-layout";
+import {calculateFlexibleViewport} from "@/features/viewer/utils/dynamic-viewport";
 import {ViewRectangles} from "./view-rectangles";
 import {DimensionLabels} from "./dimension-labels";
 
-interface SideViewProps {
-    viewPort: Viewport
+interface View2DProps {
     box: Box
-    viewType: "left" | "right" | "front" | "back"
+    viewType: BoxViewType
     showInnerDimensions: boolean
+    viewPort?: FlexibleViewport
 }
 
-export function SideView({ box, viewType, showInnerDimensions = false, viewPort }: SideViewProps) {
+export function View2D({ box, viewType, showInnerDimensions = false, viewPort }: View2DProps) {
+    // Use flexible viewport system - default to auto sizing if none provided
+    const flexibleViewport = viewPort || { width: "auto", height: "auto" };
+    const calculatedViewport = calculateFlexibleViewport(box, viewType, flexibleViewport);
+    
     // Calculate view data manually without barrel file
     const padding = createStandardPadding();
-    const drawingArea = getDrawingArea(viewPort, padding);
+    const drawingArea = getDrawingArea(calculatedViewport, padding);
     const boxDimensions = calculateBoxDimensions(box, viewType, drawingArea);
     const outerRect = calculateOuterRectangle(boxDimensions, padding);
     const innerRect = calculateInnerRectangle(box, viewType, boxDimensions, outerRect);
@@ -29,7 +34,7 @@ export function SideView({ box, viewType, showInnerDimensions = false, viewPort 
     };
 
     return (
-        <svg width={viewPort.width} height={viewPort.height} className="border border-gray-200">
+        <svg width={calculatedViewport.width} height={calculatedViewport.height} className="border border-gray-200">
             <g>
                 <ViewRectangles 
                     outerRect={viewData.outerRect} 
