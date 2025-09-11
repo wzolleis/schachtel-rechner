@@ -1,8 +1,8 @@
-import {AppSidebar} from "@/components/app-sidebar"
+import {AppSidebar} from "@/app/layout/app-sidebar"
 import {Separator} from "@/components/ui/separator"
 import {SidebarInset, SidebarProvider, SidebarTrigger,} from "@/components/ui/sidebar"
 import {BoxCalcLandingPage} from "@/features/box-calc/box-calc-landing-page"
-import { ProjectBreadcrumbs } from "@/components/project/project-breadcrumbs"
+import {ProjectBreadcrumbs} from "@/components/project/project-breadcrumbs"
 
 export default function DashboardPage() {
     return (

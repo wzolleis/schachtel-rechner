@@ -3,12 +3,16 @@ import {Box, FolderOpen} from "lucide-react"
 import {
     Sidebar,
     SidebarContent,
-    SidebarFooter, SidebarGroup,
+    SidebarFooter,
+    SidebarGroup,
     SidebarGroupLabel,
-    SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem,
+    SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
     SidebarRail,
 } from "@/components/ui/sidebar"
-import {BoxProjects} from "./box-projects"
+import {BoxProjects} from "../../components/box-projects"
 import {boxCalcGehrungElements, projectsElements, sidebarLink} from "@/app/route-urls";
 import {Link} from "react-router";
 

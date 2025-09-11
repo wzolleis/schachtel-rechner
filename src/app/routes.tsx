@@ -1,9 +1,9 @@
 import {Outlet, Route} from "react-router";
-import Loading from "../common/components/Loading";
+import Loading from "../components/app-state/Loading";
 import {box, boxCalc, boxNew, gehrung, projects} from "@/app/route-urls";
 import BoxCalculator from "@/features/box-calc/gehrung/box-calculator";
 import {BoxCalcLandingPage} from "@/features/box-calc/box-calc-landing-page";
-import {LandingPage} from "@/features/landingpage/landing-page";
+import {LandingPage} from "@/app/layout/landing-page";
 import {ProjectPage} from "@/features/project/project-page";
 import {BoxPage} from "@/features/box/box-page";
 
