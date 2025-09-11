@@ -23,7 +23,9 @@ export const BoxCalcResult = ({data}: BoxCalcResultProps) => {
         setResult(data)
     }, [data])
 
-    if (result === null) return null
+    if (!result) return null
+
+    console.log('box-calc result', result)
 
     const containerClasses = {
         boden: clsx("border-l-2 border-gray-800 pl-4", {
@@ -40,18 +42,18 @@ export const BoxCalcResult = ({data}: BoxCalcResultProps) => {
     return (
         <div className="space-y-8">
             <div className={containerClasses.boden}>
-                <AreaView label={'BODEN'} size={result.boden.size}/>
+                <AreaView label={'BODEN'} length={result.boden.length} width={result.boden.width}/>
             </div>
 
             <div className={containerClasses.seite}>
-                <AreaView label={'SEITE'} size={result.seite.size} distance={result.seite.distance}/>
+                <AreaView label={'SEITE'} length={result.seite.length} width={result.seite.width}
+                          distance={result.seite.distance}/>
             </div>
 
             <div className={containerClasses.front}>
-                <AreaView label={'FRONT'} size={result.front.size} distance={result.front.distance}/>
+                <AreaView label={'FRONT'} length={result.front.length} width={result.front.width}
+                          distance={result.front.distance}/>
             </div>
         </div>
     )
 }
-
-export default BoxCalcResult

@@ -14,7 +14,7 @@ const LengthMeasurementView = (props: LengthMeasurementVieProps) => {
             <Label htmlFor={id}>{label}</Label>
             <input type="number"
                    id={id}
-                   value={value.value}
+                   value={value?.value}
                    readOnly={true}
             />
         </div>
