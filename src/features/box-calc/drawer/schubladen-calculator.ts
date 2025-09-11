@@ -6,7 +6,9 @@ export const calculateDrawer = (box: {
     count: number,
     distance: number,
 }) => {
-    const heigthForDrawer = box.height - 2 * drawerConfig.distance - (drawerConfig.count - 1) * drawerConfig.distance;
+    const abstandObenUndUnten = 2 * drawerConfig.distance
+    const zwischnraueme = (drawerConfig.count - 1) * drawerConfig.distance
+    const heigthForDrawer = box.height - abstandObenUndUnten - zwischnraueme
     const drawerHeight = Math.floor(heigthForDrawer / drawerConfig.count)
 
     return {
