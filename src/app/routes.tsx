@@ -1,10 +1,11 @@
 import {Outlet, Route} from "react-router";
 import Loading from "../common/components/Loading";
-import {boxCalc, gehrung, projects} from "@/app/route-urls";
+import {box, boxCalc, boxNew, gehrung, projects} from "@/app/route-urls";
 import BoxCalculator from "@/features/box-calc/gehrung/box-calculator";
 import {BoxCalcLandingPage} from "@/features/box-calc/box-calc-landing-page";
 import {LandingPage} from "@/features/landingpage/landing-page";
 import {ProjectPage} from "@/features/project/project-page";
+import {BoxPage} from "@/features/box/box-page";
 
 const AppRutes =
     <Route path={'/'}
@@ -15,6 +16,16 @@ const AppRutes =
                <Route path={projects}
                       hydrateFallbackElement={<Loading/>}
                       element={<ProjectPage/>}
+               />,
+               <Route path={box}
+                      hydrateFallbackElement={<Loading/>}
+                      element={<Outlet/>}
+                      children={[
+                          <Route path={boxNew}
+                                 hydrateFallbackElement={<Loading/>}
+                                 element={<BoxPage/>}
+                          />
+                      ]}
                />,
                <Route path={boxCalc}
                       hydrateFallbackElement={<Loading/>}
