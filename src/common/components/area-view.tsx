@@ -1,32 +1,33 @@
-import {Size} from "../../features/box-calc/gehrung";
 import LengthMeasurementView from "./length-measurement-view";
 import {ValueWithUnitDefinition} from "@/lib/unit-utils";
 
 type AreaViewProps = {
     label: string
-    size: Size
+    length: ValueWithUnitDefinition
+    width: ValueWithUnitDefinition
     distance?: ValueWithUnitDefinition
 }
 
 const AreaView = (props: AreaViewProps) => {
-    const {label, distance, size} = props
+    const {label, distance, length, width} = props
+
     return (
         <div className="grid w-full max-w-sm items-center gap-3">
             <h5>{label}</h5>
 
             <LengthMeasurementView id={'length'}
-                                   value={size.length}
-                                   label={`Länge (${size.length.unit})`}
+                                   value={length}
+                                   label={`Länge (${length?.unit})`}
             />
             <LengthMeasurementView id={'width'}
-                                   value={size.width}
-                                   label={`Breite (${size.width.unit})`}
+                                   value={width}
+                                   label={`Breite (${width?.unit})`}
             />
             {
                 !!distance &&
                 <LengthMeasurementView id={'distance'}
                                        value={distance}
-                                       label={`Abstand Seitenanschlag (${distance.unit})`}
+                                       label={`Abstand Seitenanschlag (${distance?.unit})`}
                 />
             }
         </div>

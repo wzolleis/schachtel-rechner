@@ -1,4 +1,4 @@
-import BoxCalcResult from "./box-calc-result";
+import {BoxCalcResult} from "./box-calc-result";
 import {GehrungForm} from "@/features/box-calc/gehrung/gehrung-form";
 import {use$} from "@legendapp/state/react";
 import {GehrungDataStore$} from "@/features/box-calc/gehrung/gehrung-calculation";
