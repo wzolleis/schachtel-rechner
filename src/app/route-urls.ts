@@ -1,8 +1,10 @@
 export const projects = 'projects'
 export const boxCalc = 'box-calc'
+export const box = 'box'
 
 export const gehrung = 'gehrung'
 export const gehrung_alt = "gehrung-alt"
+export const boxNew = 'new'
 
 export type LinkPathElement = string
 
@@ -21,4 +23,9 @@ export const projectsElements: LinkPathElement[] = [
 export const boxCalcGehrungElements: LinkPathElement[] = [
     boxCalc,
     gehrung
+]
+
+export const boxNewElements: LinkPathElement[] = [
+    box,
+    boxNew
 ]
