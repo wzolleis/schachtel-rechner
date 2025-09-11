@@ -21,10 +21,11 @@ describe("Calculator", () => {
 
     it.each([
         [1, 5, 90], // count, distance, expected
-        [1, 0, 100],
-        [1, 1, 98],
-        [4, 5, 18]
-    ])("calculate height of %i drawer with distance %i", (count, distance, expected) => {
+        [1, 0, 100], // edge case, nicht praktisch sowas zu bauen ;-)
+        [1, 1, 98], // eine Schublade, oben und unten jeweils 1 mm Luft
+        [4, 5, 18],// kompliziertes Beispiel
+        [100, 0, 1], // 100 Schubladen ohne Abstand, sieht bestimmt lustig aus
+    ])("calculate height of %i drawer with distance %i and expect %i", (count, distance, expected) => {
         const boxWithDrawer = calculateDrawer(box, {
             count,
             distance
