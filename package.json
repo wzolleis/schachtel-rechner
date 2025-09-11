@@ -9,7 +9,9 @@
     "build": "tsc -b && vite build --base=/box-calc",
     "lint": "eslint .",
     "preview": "vite preview",
-    "ncu": "npx npm-check-updates"
+    "ncu": "npx npm-check-updates",
+    "ncu-update": "npx npm-check-updates -u",
+    "test": "vitest"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
@@ -27,10 +29,11 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@tailwindcss/vite": "^4.1.13",
-    "@tanstack/react-db": "^0.1.15",
+    "@tanstack/react-db": "^0.1.16",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.542.0",
+    "deep-object-diff": "^1.1.9",
+    "lucide-react": "^0.544.0",
     "motion": "^12.23.12",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
@@ -38,7 +41,7 @@
     "react-router": "^7.8.2",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.13",
-    "zod": "^4.1.5"
+    "zod": "^4.1.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
@@ -46,13 +49,19 @@
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.2",
+    "@vitest/browser": "^3.2.4",
     "eslint": "^9.35.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
-    "globals": "^16.3.0",
+    "globals": "^16.4.0",
+    "jsdom": "^26.1.0",
+    "@testing-library/react": "^16.3.0",
     "tw-animate-css": "^1.3.8",
     "typescript": "~5.9.2",
-    "typescript-eslint": "^8.42.0",
-    "vite": "^7.1.4"
+    "typescript-eslint": "^8.43.0",
+    "vite": "^7.1.5",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.2.4",
+    "vitest-browser-react": "^1.0.1"
   }
 }
