@@ -1,5 +1,5 @@
 import {BoxCalcResultData} from "./index"
-import AreaView from "../../../common/components/area-view";
+import AreaView from "../../../components/form/area-view";
 import {useEffect, useState} from "react";
 import {getObjectDiff} from "@/common/calculations/object-diff";
 import {clsx} from "clsx";
@@ -18,14 +18,11 @@ export const BoxCalcResult = ({data}: BoxCalcResultProps) => {
         if (Object.keys(changes).length > 0) {
             setTimeout(() => setChangedFields(null), 3000)
         }
-        console.log('box calc result with changes: ', changes)
         setChangedFields(changes)
         setResult(data)
     }, [data])
 
     if (!result) return null
-
-    console.log('box-calc result', result)
 
     const containerClasses = {
         boden: clsx("border-l-2 border-gray-800 pl-4", {
