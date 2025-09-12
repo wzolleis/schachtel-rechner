@@ -1,5 +1,5 @@
 import * as React from "react"
-import {Box, FolderOpen} from "lucide-react"
+import {Blocks, Box, FolderOpen, IceCream} from "lucide-react"
 import {
     Sidebar,
     SidebarContent,
@@ -12,8 +12,14 @@ import {
     SidebarMenuItem,
     SidebarRail,
 } from "@/components/ui/sidebar"
-import {BoxProjects} from "../../components/box-projects"
-import {boxCalcGehrungElements, projectsElements, sidebarLink} from "@/app/route-urls";
+import {BoxProjects} from "@/components/box-projects"
+import {
+    boxCalcGehrungElements,
+    boxNewElements,
+    projectsElements,
+    sidebarLink,
+    standardDrawerElements
+} from "@/app/route-urls";
 import {Link} from "react-router";
 
 const menu = {
@@ -26,9 +32,19 @@ const menu = {
     ],
     boxes: [
         {
+            name: 'Boxes New (Experimental)',
+            icon: IceCream,
+            url: sidebarLink(boxNewElements)
+        },
+        {
             name: 'Gehrung',
             icon: Box,
             url: sidebarLink(boxCalcGehrungElements),
+        },
+        {
+            name: 'Schubladen (Standard)',
+            icon: Blocks,
+            url: sidebarLink(standardDrawerElements),
         }
     ]
 }

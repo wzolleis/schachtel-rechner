@@ -1,11 +1,13 @@
 import {Outlet, Route} from "react-router";
 import Loading from "../components/app-state/Loading";
-import {box, boxCalc, boxNew, gehrung, projects} from "@/app/route-urls";
-import BoxCalculator from "@/features/box-calc/gehrung/box-calculator";
+import {box, boxCalc, boxNew, drawer, gehrung, projects, standardDrawer} from "@/app/route-urls";
+import BoxGehrungCalculator from "@/features/box-calc/gehrung/box-calculator";
 import {BoxCalcLandingPage} from "@/features/box-calc/box-calc-landing-page";
 import {LandingPage} from "@/app/layout/landing-page";
 import {ProjectPage} from "@/features/project/project-page";
 import {BoxPage} from "@/features/box/box-page";
+import {DrawerLandingPage} from "@/features/box-calc/drawer/drawer-landing-page";
+import {StandardDrawerCalculator} from "@/features/box-calc/drawer/standard-drawer-calculator";
 
 const AppRutes =
     <Route path={'/'}
@@ -37,10 +39,20 @@ const AppRutes =
                           />,
                           <Route path={gehrung}
                                  hydrateFallbackElement={<Loading/>}
-                                 element={<BoxCalculator/>}
+                                 element={<BoxGehrungCalculator/>}
                           />,
+                          <Route path={drawer}
+                                 hydrateFallbackElement={<Loading/>}
+                                 element={<DrawerLandingPage/>}
+                                 children={[
+                                     <Route path={standardDrawer}
+                                            hydrateFallbackElement={<Loading/>}
+                                            element={<StandardDrawerCalculator/>}
+                                     />
+                                 ]}
+                          />
                       ]}
-               />
+               />,
            ]}
     />
 
