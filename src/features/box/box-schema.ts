@@ -33,5 +33,15 @@ export const BoxSchema = z.object({
     name: BoxNameSchema,
     sides: BoxSidesSchema,
 })
+export const createBoxSchema = z.object({
+    projectId: z.string(),
+    name: BoxNameSchema,
+})
+
+
+export type BoxSide = z.infer<typeof BoxSideSchema>
+export type BoxSides = z.infer<typeof BoxSidesSchema>
 
 export type Box = z.infer<typeof BoxSchema>
+
+export type CreateBox = z.infer<typeof createBoxSchema>
