@@ -25,16 +25,19 @@ export type BoxCalcResultData = {
 }
 
 export type Boden = {
-    size: Size
+    length: ValueWithUnitDefinition
+    width: ValueWithUnitDefinition
 }
 
 export type Seite = {
-    size: Size,
+    length: ValueWithUnitDefinition
+    width: ValueWithUnitDefinition
     distance: ValueWithUnitDefinition
 }
 
 export type Front = {
-    size: Size,
+    length: ValueWithUnitDefinition
+    width: ValueWithUnitDefinition
     distance: ValueWithUnitDefinition
 }
 

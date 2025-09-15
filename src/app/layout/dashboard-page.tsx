@@ -1,8 +1,8 @@
-import {AppSidebar} from "@/components/app-sidebar"
+import {AppSidebar} from "@/app/layout/app-sidebar"
 import {Separator} from "@/components/ui/separator"
 import {SidebarInset, SidebarProvider, SidebarTrigger,} from "@/components/ui/sidebar"
 import {BoxCalcLandingPage} from "@/features/box-calc/box-calc-landing-page"
-import { ProjectBreadcrumbs } from "@/components/project/project-breadcrumbs"
+import {AppBreadcrumbs} from "@/components/breadcrumbs/app-breadcrumbs";
 
 export default function DashboardPage() {
     return (
@@ -17,7 +17,7 @@ export default function DashboardPage() {
                             orientation="vertical"
                             className="mr-2 data-[orientation=vertical]:h-4"
                         />
-                        <ProjectBreadcrumbs />
+                        <AppBreadcrumbs/>
                     </div>
                 </header>
                 <div className="flex flex-1 flex-col gap-4 p-4 pt-0">

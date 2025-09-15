@@ -1,4 +1,4 @@
-import DashboardPage from "@/dashboard/dashboard-page";
+import DashboardPage from "@/app/layout/dashboard-page";
 
 export const LandingPage = () => {
     return (
