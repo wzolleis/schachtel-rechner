@@ -3,7 +3,7 @@ import {Button} from "@/components/ui/button"
 import {PageDescription, PageHeaderSeparator, PageTitle} from "@/components/ui/page-header"
 import {Box} from "@/features/box/box-schema";
 import {withUnit} from "@/lib/unit-utils";
-import {View2D} from "@/components/box/viewer/2d-view";
+import {View2D} from "@/features/box/viewer/2d-view";
 
 export function BoxPage() {
     const [showInner, setShowInner] = useState(false)

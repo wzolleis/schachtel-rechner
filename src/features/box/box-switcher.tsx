@@ -12,7 +12,7 @@ import {FolderIcon, Plus} from "lucide-react";
 import {useState} from "react";
 import {boxCollection} from "@/features/box/box-collection";
 import {selectedBox$} from "@/features/box/box-store";
-import {CreateBoxDialog} from "@/components/box/create-box-dialog";
+import {CreateBoxDialog} from "@/features/box/create-box-dialog";
 
 export function BoxSwitcher() {
     const currentBoxId = use$(selectedBox$.selectedBoxId)

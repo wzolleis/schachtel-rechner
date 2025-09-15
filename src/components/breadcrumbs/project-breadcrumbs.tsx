@@ -5,7 +5,7 @@ import {
     BreadcrumbList,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import {ProjectSwitcher} from "../project/project-switcher"
+import {ProjectSwitcher} from "../../features/project/project-switcher"
 
 export function ProjectBreadcrumbs() {
     return (

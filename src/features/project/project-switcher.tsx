@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {FolderIcon, Plus} from "lucide-react";
 import {useState} from "react";
-import {CreateProjectDialog} from "@/components/project/create-project-dialog";
+import {CreateProjectDialog} from "@/features/project/create-project-dialog";
 
 export function ProjectSwitcher() {
     const currentProjectId = use$(projectStore$.currentProjectId)
