@@ -1,5 +1,7 @@
 import {observable} from "@legendapp/state";
 import {use$} from "@legendapp/state/react";
+import {syncObservable} from "@legendapp/state/sync";
+import {ObservablePersistLocalStorage} from "@legendapp/state/persist-plugins/local-storage";
 
 interface SelectedBoxStore {
     selectedBoxId: string | null
@@ -17,3 +19,10 @@ export const selectedBox$ = observable<SelectedBoxStore>({
 export function useSelectedBox() {
     return use$(selectedBox$.selectedBoxId)
 }
+
+syncObservable(selectedBox$, {
+    persist: {
+        name: "current-box",
+        plugin: ObservablePersistLocalStorage
+    }
+})
