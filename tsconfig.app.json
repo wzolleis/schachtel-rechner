@@ -17,15 +17,7 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-    "typeRoots": [
-      "./node_modules/@types/",
-      "./types",
-      "./node_modules"
-    ],
-    "types": [
-      "vitest/globals"
-    ],
-    /* Linting */
+    /*S Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,

@@ -9,7 +9,6 @@
     "baseUrl": ".",
     "typeRoots": [
       "./node_modules/@types/",
-      "./types",
       "./node_modules"
     ],
     "types": [
