@@ -10,7 +10,8 @@
     "typeRoots": [
       "./node_modules",
       "./types",
-      "./node_modules/@types"
+      "./node_modules/@types",
+      "vitest/globals"
     ],
     "types": [
       "vitest/globals"
