@@ -8,10 +8,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "typeRoots": [
-      "./node_modules",
-      "./types",
       "./node_modules/@types",
-      "vitest/globals"
+      "./node_modules/vitest/globals"
     ],
     "types": [
       "vitest/globals"
