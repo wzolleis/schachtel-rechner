@@ -5,9 +5,9 @@ import {Dialog, DialogContent, DialogHeader, DialogTitle,} from "@/components/ui
 import {Input} from "@/components/ui/input"
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form"
 import {type CreateProject, createProjectSchema} from "@/features/project/project-schema"
-import {projectCollection} from "@/features/project/project-collection";
+import {projectCollection} from "@/features/project/repo/project-collection";
 import {createId} from "@paralleldrive/cuid2";
-import {projectStore$} from "@/features/project/project-store";
+import {projectStore$} from "@/features/project/repo/project-store";
 import {startTransition} from "react";
 
 interface CreateProjectDialogProps {

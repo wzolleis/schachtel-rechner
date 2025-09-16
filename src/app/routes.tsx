@@ -4,8 +4,8 @@ import {box, boxCalc, boxNew, drawer, gehrung, projects, standardDrawer} from "@
 import BoxGehrungCalculator from "@/features/box-calc/gehrung/box-calculator";
 import {BoxCalcLandingPage} from "@/features/box-calc/box-calc-landing-page";
 import {LandingPage} from "@/app/layout/landing-page";
-import {ProjectPage} from "@/features/project/project-page";
-import {BoxPage} from "@/features/box/box-page";
+import {ProjectPage} from "@/features/project/page/project-page";
+import {BoxPage} from "@/features/box/page/box-page";
 import {DrawerLandingPage} from "@/features/box-calc/drawer/drawer-landing-page";
 import {StandardDrawerCalculator} from "@/features/box-calc/drawer/standard-drawer-calculator";
 
