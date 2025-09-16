@@ -6,14 +6,14 @@ import {Input} from "@/components/ui/input"
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form"
 import {createId} from "@paralleldrive/cuid2";
 import {startTransition} from "react";
-import {boxCollection} from "@/features/box/box-collection";
-import {selectedBox$} from "@/features/box/box-store";
+import {boxCollection} from "@/features/box/repo/box-collection";
+import {selectedBox$} from "@/features/box/repo/box-store";
 import {CreateBox, createBoxSchema} from "@/features/box/box-schema";
 import {defaultSides} from "@/features/box/default-box";
 import {use$} from "@legendapp/state/react";
-import {projectStore$} from "@/features/project/project-store";
+import {projectStore$} from "@/features/project/repo/project-store";
 import {eq, useLiveQuery} from "@tanstack/react-db";
-import {projectCollection} from "@/features/project/project-collection";
+import {projectCollection} from "@/features/project/repo/project-collection";
 
 interface CreateBoxDialogProps {
     open: boolean

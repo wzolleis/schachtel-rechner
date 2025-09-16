@@ -3,7 +3,7 @@ import {Edit3, Trash2} from "lucide-react"
 import {Button} from "@/components/ui/button"
 import {Card, CardAction, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
 import {Input} from "@/components/ui/input"
-import {projectCollection} from "@/features/project/project-collection"
+import {projectCollection} from "@/features/project/repo/project-collection"
 import {type Project} from "@/features/project/project-schema"
 
 interface ProjectCardProps {

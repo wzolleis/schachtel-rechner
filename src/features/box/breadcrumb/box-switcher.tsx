@@ -10,9 +10,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {FolderIcon, Plus} from "lucide-react";
 import {useState} from "react";
-import {boxCollection} from "@/features/box/box-collection";
-import {selectedBox$} from "@/features/box/box-store";
-import {CreateBoxDialog} from "@/features/box/create-box-dialog";
+import {boxCollection} from "@/features/box/repo/box-collection";
+import {selectedBox$} from "@/features/box/repo/box-store";
+import {CreateBoxDialog} from "@/features/box/create/create-box-dialog";
 
 export function BoxSwitcher() {
     const currentBoxId = use$(selectedBox$.selectedBoxId)

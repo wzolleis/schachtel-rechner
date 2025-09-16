@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from "react"
 import {Plus} from "lucide-react"
 import {Button} from "@/components/ui/button"
-import {CreateProjectDialog} from "@/features/project/create-project-dialog"
+import {CreateProjectDialog} from "@/features/project/create/create-project-dialog"
 import {FoldersIcon, type FoldersIconHandle} from "@/components/ui/folders";
 
 export const ProjectsEmpty = () => {

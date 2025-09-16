@@ -2,10 +2,10 @@ import {useState} from "react"
 import {Plus} from "lucide-react"
 import {AnimatePresence, motion} from "motion/react"
 import {Button} from "@/components/ui/button"
-import {CreateProjectDialog} from "@/features/project/create-project-dialog"
-import {ProjectCard} from "@/features/project/project-card"
-import {ProjectsEmpty} from "@/features/project/projects-empty"
-import {projectCollection} from "@/features/project/project-collection"
+import {CreateProjectDialog} from "@/features/project/create/create-project-dialog"
+import {ProjectCard} from "@/features/project/page/project-card"
+import {ProjectsEmpty} from "@/features/project/page/projects-empty"
+import {projectCollection} from "@/features/project/repo/project-collection"
 import {useLiveQuery} from "@tanstack/react-db";
 import {PageDescription, PageHeaderSeparator, PageTitle} from "@/components/ui/page-header";
 

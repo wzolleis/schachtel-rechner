@@ -1,7 +1,7 @@
-import {projectStore$} from "@/features/project/project-store"
+import {projectStore$} from "@/features/project/repo/project-store"
 import {use$} from "@legendapp/state/react"
 import {useLiveQuery} from "@tanstack/react-db";
-import {projectCollection} from "@/features/project/project-collection";
+import {projectCollection} from "@/features/project/repo/project-collection";
 import {BreadcrumbItem} from "@/components/ui/breadcrumb";
 import {
     DropdownMenu,
@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {FolderIcon, Plus} from "lucide-react";
 import {useState} from "react";
-import {CreateProjectDialog} from "@/features/project/create-project-dialog";
+import {CreateProjectDialog} from "@/features/project/create/create-project-dialog";
 
 export function ProjectSwitcher() {
     const currentProjectId = use$(projectStore$.currentProjectId)

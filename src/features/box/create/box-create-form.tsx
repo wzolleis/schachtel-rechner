@@ -4,7 +4,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {BoxSchema} from "@/features/box/box-schema";
 import {useCallback, useId} from "react";
 import {use$} from "@legendapp/state/react";
-import {projectStore$} from "@/features/project/project-store";
+import {projectStore$} from "@/features/project/repo/project-store";
 import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
 import {AlertCircleIcon} from "lucide-react";
 import {defaultBox} from "@/features/box/default-box";
