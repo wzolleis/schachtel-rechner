@@ -29,9 +29,14 @@ export function BoxSwitcher() {
     const boxesForProject = boxes.filter(box => box.projectId === currentProjectId)
 
     console.log('>>> box switcher')
-    console.log('>>>>>> currentProjectId', currentProjectId)
-    console.log('>>>>>> boxesForProject', boxesForProject)
-    console.log('>>>>>> currentBoxId', currentBoxId)
+    console.table({
+        currentBoxId,
+        currentProjectId,
+    })
+
+    console.table(boxesForProject)
+
+
 
     return (
         <>

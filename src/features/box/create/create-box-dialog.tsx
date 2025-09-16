@@ -5,14 +5,14 @@ import {Dialog, DialogContent, DialogHeader, DialogTitle,} from "@/components/ui
 import {Input} from "@/components/ui/input"
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form"
 import {createId} from "@paralleldrive/cuid2";
-import {startTransition} from "react";
+import {startTransition, useEffect} from "react";
 import {boxCollection} from "@/features/box/repo/box-collection";
 import {selectedBox$} from "@/features/box/repo/box-store";
 import {CreateBox, createBoxSchema} from "@/features/box/box-schema";
 import {defaultSides} from "@/features/box/default-box";
 import {use$} from "@legendapp/state/react";
 import {projectStore$} from "@/features/project/repo/project-store";
-import {eq, useLiveQuery} from "@tanstack/react-db";
+import {useLiveQuery} from "@tanstack/react-db";
 import {projectCollection} from "@/features/project/repo/project-collection";
 
 interface CreateBoxDialogProps {
@@ -23,18 +23,26 @@ interface CreateBoxDialogProps {
 export function CreateBoxDialog({open, onOpenChange}: CreateBoxDialogProps) {
     const projectId = use$(projectStore$.currentProjectId)
     const {data: projects} = useLiveQuery((q) =>
-        q.from({projects: projectCollection})
-            .where(
-                ({projects}) => eq(projects.id, projectId)
-            ))
+        q.from({projects: projectCollection}))
+
+    const currentProject = projects.find((project => project.id === projectId))
 
     const form = useForm<CreateBox>({
         resolver: zodResolver(createBoxSchema),
         defaultValues: {
             name: "",
-            projectId: projects.length === 1 ? `${projects[0]?.name}` : 'Kein Projekt',
+            projectId: 'no-project-id',
+            projectName: 'no-project-name'
         }
     })
+
+    useEffect(() => {
+        form.reset({
+            name: "",
+            projectId: projectId || 'no-project-id',
+            projectName: currentProject?.name || 'no-project-name'
+        })
+    }, [form, projectId])
 
     const onValid = (data: CreateBox) => {
         console.log('submitHandler: create box ', data)
@@ -56,6 +64,10 @@ export function CreateBoxDialog({open, onOpenChange}: CreateBoxDialogProps) {
 
     const handleSubmit = form.handleSubmit(onValid, onInvalid)
 
+    if (!projectId) {
+        return <div>No Project</div>
+    }
+
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogContent className="sm:max-w-[425px] rounded-none">
@@ -74,6 +86,24 @@ export function CreateBoxDialog({open, onOpenChange}: CreateBoxDialogProps) {
                                     <FormControl>
                                         <Input
                                             placeholder="Aktives Projekt"
+                                            {...field}
+                                            readOnly={true}
+                                            className="border-0 border-b-2 rounded-none bg-transparent px-0 py-2 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none font-mono"
+                                        />
+                                    </FormControl>
+                                    <FormMessage/>
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="projectName"
+                            render={({field}) => (
+                                <FormItem>
+                                    <FormLabel className="font-mono uppercase tracking-wider">Projekt-Name</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="Projekt Name"
                                             {...field}
                                             readOnly={true}
                                             className="border-0 border-b-2 rounded-none bg-transparent px-0 py-2 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none font-mono"

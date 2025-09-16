@@ -35,6 +35,7 @@ export const BoxSchema = z.object({
 })
 export const createBoxSchema = z.object({
     projectId: z.string(),
+    projectName: z.string(),
     name: BoxNameSchema,
 })
 
