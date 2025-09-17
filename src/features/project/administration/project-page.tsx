@@ -1,25 +1,19 @@
-import {useState} from "react"
 import {Plus} from "lucide-react"
 import {AnimatePresence, motion} from "motion/react"
 import {Button} from "@/components/ui/button"
-import {CreateProjectDialog} from "@/features/project/create/create-project-dialog"
-import {ProjectCard} from "@/features/project/page/project-card"
-import {ProjectsEmpty} from "@/features/project/page/projects-empty"
+import {ProjectCard} from "@/features/project/administration/project-card"
+import {ProjectsEmpty} from "@/features/project/administration/projects-empty"
 import {projectCollection} from "@/features/project/repo/project-collection"
 import {useLiveQuery} from "@tanstack/react-db";
 import {PageDescription, PageHeaderSeparator, PageTitle} from "@/components/ui/page-header";
+import {useNavigateToProjectCreate} from "@/features/project/create/navigate-to-project-create";
 
 
 export function ProjectPage() {
-    const [createDialogOpen, setCreateDialogOpen] = useState(false)
     const {data: projects} = useLiveQuery((q) => q.from({project: projectCollection}))
-
+    const navigateToProjectCreate = useNavigateToProjectCreate()
     return (
         <>
-            <CreateProjectDialog
-                open={createDialogOpen}
-                onOpenChange={setCreateDialogOpen}
-            />
             <div className="flex items-center justify-between">
                 <div>
                     <PageTitle>PROJEKTE</PageTitle>
@@ -27,7 +21,7 @@ export function ProjectPage() {
                     <PageDescription>Hier verwaltest du gespeicherte Projekte</PageDescription>
                 </div>
                 <Button
-                    onClick={() => setCreateDialogOpen(true)}
+                    onClick={() => navigateToProjectCreate()}
                     className="font-mono uppercase tracking-wider"
                 >
                     <Plus className="w-4 h-4 mr-2"/>

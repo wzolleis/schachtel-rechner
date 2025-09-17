@@ -39,10 +39,10 @@ export function CreateBoxDialog({open, onOpenChange}: CreateBoxDialogProps) {
     useEffect(() => {
         form.reset({
             name: "",
-            projectId: projectId || 'no-project-id',
+            projectId: currentProject?.id || 'no-project-id',
             projectName: currentProject?.name || 'no-project-name'
         })
-    }, [form, projectId])
+    }, [form, currentProject])
 
     const onValid = (data: CreateBox) => {
         console.log('submitHandler: create box ', data)
@@ -57,7 +57,7 @@ export function CreateBoxDialog({open, onOpenChange}: CreateBoxDialogProps) {
         onOpenChange(false)
     }
 
-    // @ts-ignore
+    // @ts-expect-error Type of Error ist unbekannt
     const onInvalid = (error) => {
         console.log(error)
     }

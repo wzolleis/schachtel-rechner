@@ -20,7 +20,7 @@ export const BoxCalcResult = ({data}: BoxCalcResultProps) => {
         }
         setChangedFields(changes)
         setResult(data)
-    }, [data])
+    }, [data, result])
 
     if (!result) return null
 

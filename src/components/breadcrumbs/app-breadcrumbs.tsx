@@ -5,8 +5,8 @@ import {
     BreadcrumbList,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import {ProjectSwitcher} from "@/features/project/breadcrumb/project-switcher"
-import {BoxSwitcher} from "@/features/box/breadcrumb/box-switcher";
+import {BoxBreadcrumbs} from "@/features/box/breadcrumb/box-breadcrumbs";
+import {ProjectBreadcrumb} from "@/features/project/breadcrumb/project-breadcrumb";
 
 export function AppBreadcrumbs() {
     return (
@@ -18,9 +18,9 @@ export function AppBreadcrumbs() {
                     </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block"/>
-                <ProjectSwitcher/>
+                <ProjectBreadcrumb/>
                 <BreadcrumbSeparator className="hidden md:block"/>
-                <BoxSwitcher/>
+                <BoxBreadcrumbs/>
             </BreadcrumbList>
         </Breadcrumb>
     )
