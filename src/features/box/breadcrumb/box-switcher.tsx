@@ -14,6 +14,7 @@ import {boxCollection} from "@/features/box/repo/box-collection";
 import {selectedBox$} from "@/features/box/repo/box-store";
 import {CreateBoxDialog} from "@/features/box/create/create-box-dialog";
 import {projectStore$} from "@/features/project/repo/project-store";
+import {Box} from "@/features/box/box-schema";
 
 export function BoxSwitcher() {
     const currentBoxId = use$(selectedBox$.selectedBoxId)
@@ -28,15 +29,13 @@ export function BoxSwitcher() {
     })
     const boxesForProject = boxes.filter(box => box.projectId === currentProjectId)
 
-    console.log('>>> box switcher')
-    console.table({
-        currentBoxId,
-        currentProjectId,
-    })
+    // console.log('>>> box switcher')
+    // console.table({currentBoxId, currentProjectId,})
+    // console.table(boxesForProject)
 
-    console.table(boxesForProject)
-
-
+    const onSelectBox = (box: Box) => {
+        selectedBox$.selectBox(box.id)
+    }
 
     return (
         <>
@@ -47,14 +46,17 @@ export function BoxSwitcher() {
                         {currentBox?.name ?? "Keine Box"}
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="start">
-
-                        {boxesForProject.map(box => <DropdownMenuItem className="gap-2 p-2" key={box.id}
-                                                            onSelect={() => selectedBox$.selectBox(box.id)}>
-                            <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
-                                <FolderIcon className="size-4"/>
-                            </div>
-                            <div className="text-muted-foreground font-medium">{box.name}</div>
-                        </DropdownMenuItem>)}
+                        {boxesForProject.map(box =>
+                            <DropdownMenuItem className="gap-2 p-2"
+                                              key={box.id}
+                                              onSelect={() => onSelectBox(box)}
+                            >
+                                <div
+                                    className="flex size-6 items-center justify-center rounded-md border bg-transparent">
+                                    <FolderIcon className="size-4"/>
+                                </div>
+                                <div className="text-muted-foreground font-medium">{box.name}</div>
+                            </DropdownMenuItem>)}
                         {boxes.length > 0 && <DropdownMenuSeparator/>}
                         <DropdownMenuItem className="gap-2 p-2" onSelect={() => setShowCreateBoxDialog(true)}>
                             <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">

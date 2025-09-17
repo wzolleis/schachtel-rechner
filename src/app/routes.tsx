@@ -1,13 +1,11 @@
 import {Outlet, Route} from "react-router";
 import Loading from "../components/app-state/Loading";
-import {box, boxCalc, boxNew, drawer, gehrung, projects, standardDrawer} from "@/app/route-urls";
-import BoxGehrungCalculator from "@/features/box-calc/gehrung/box-calculator";
-import {BoxCalcLandingPage} from "@/features/box-calc/box-calc-landing-page";
+import {box, boxNew} from "@/app/route-urls";
 import {LandingPage} from "@/app/layout/landing-page";
-import {ProjectPage} from "@/features/project/page/project-page";
+import {ProjectPage} from "@/features/project/administration/project-page";
 import {BoxPage} from "@/features/box/page/box-page";
-import {DrawerLandingPage} from "@/features/box-calc/drawer/drawer-landing-page";
-import {StandardDrawerCalculator} from "@/features/box-calc/drawer/standard-drawer-calculator";
+import {ProjectEdit} from "@/features/project/edit/project-edit";
+import {ProjectCreate} from "@/features/project/create/project-create";
 
 const AppRutes =
     <Route path={'/'}
@@ -15,9 +13,21 @@ const AppRutes =
            hydrateFallbackElement={<Loading/>}
            id={'root'}
            children={[
-               <Route path={projects}
+               <Route path={'projects'}
                       hydrateFallbackElement={<Loading/>}
-                      element={<ProjectPage/>}
+                      element={<Outlet/>}
+                      children={[
+                          <Route path={'administration'}
+                                 index={true}
+                                 element={<ProjectPage/>}
+                          />,
+                          <Route path={':id/edit'}
+                                 element={<ProjectEdit/>}
+                          />,
+                          <Route path={'create'}
+                                 element={<ProjectCreate/>}
+                          />
+                      ]}
                />,
                <Route path={box}
                       hydrateFallbackElement={<Loading/>}
@@ -26,30 +36,6 @@ const AppRutes =
                           <Route path={boxNew}
                                  hydrateFallbackElement={<Loading/>}
                                  element={<BoxPage/>}
-                          />
-                      ]}
-               />,
-               <Route path={boxCalc}
-                      hydrateFallbackElement={<Loading/>}
-                      element={<Outlet/>}
-                      children={[
-                          <Route index={true}
-                                 path={'landingpage'}
-                                 element={<BoxCalcLandingPage/>}
-                          />,
-                          <Route path={gehrung}
-                                 hydrateFallbackElement={<Loading/>}
-                                 element={<BoxGehrungCalculator/>}
-                          />,
-                          <Route path={drawer}
-                                 hydrateFallbackElement={<Loading/>}
-                                 element={<DrawerLandingPage/>}
-                                 children={[
-                                     <Route path={standardDrawer}
-                                            hydrateFallbackElement={<Loading/>}
-                                            element={<StandardDrawerCalculator/>}
-                                     />
-                                 ]}
                           />
                       ]}
                />,
