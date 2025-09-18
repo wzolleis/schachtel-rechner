@@ -12,16 +12,16 @@ import {
     SidebarMenuItem,
     SidebarRail,
 } from "@/components/ui/sidebar"
-import {BoxProjects} from "@/components/box-projects"
 import {boxNewElements, sidebarLink,} from "@/app/route-urls";
 import {Link} from "react-router";
+import {PageSidebar} from "@/components/page-sidebar/page-sidebar";
 
 const menu = {
     projects: [
         {
             name: 'Projekte',
             icon: FolderOpen,
-            url: sidebarLink(['projects', 'administration']),
+            url: sidebarLink(['projects', 'dashboard']),
         }
     ],
     boxes: [
@@ -52,10 +52,14 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                         ))}
-
                     </SidebarMenu>
                 </SidebarGroup>
-                <BoxProjects boxes={menu.boxes}/>
+                {
+                    /*
+                    <BoxProjects boxes={menu.boxes}/>
+                     */
+                }
+                <PageSidebar/>
             </SidebarContent>
             <SidebarFooter>
             </SidebarFooter>

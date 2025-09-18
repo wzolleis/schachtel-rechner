@@ -2,6 +2,7 @@ import {useLiveQuery} from "@tanstack/react-db";
 import {projectCollection} from "@/features/project/repo/project-collection";
 import {use$} from "@legendapp/state/react";
 import {projectStore$} from "@/features/project/repo/project-store";
+import {PageDescription, PageHeaderSeparator, PageTitle} from "@/components/ui/page-header";
 
 export const ProjectEdit = () => {
     const currentProjectId = use$(projectStore$.currentProjectId)
@@ -9,6 +10,16 @@ export const ProjectEdit = () => {
     const currentProject = projects.find(project => project.id === currentProjectId)
 
     return (
-        <div>{`Project ${currentProject?.name}`}</div>
+        <>
+            <div className="flex items-center justify-between">
+                <div>
+                    <PageTitle>{currentProject?.name}</PageTitle>
+                    <PageHeaderSeparator/>
+                    <PageDescription>Hier bearbeitest du das Projekt</PageDescription>
+                </div>
+
+            </div>
+        </>
+
     )
 }

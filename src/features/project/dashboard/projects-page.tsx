@@ -1,15 +1,15 @@
 import {Plus} from "lucide-react"
 import {AnimatePresence, motion} from "motion/react"
 import {Button} from "@/components/ui/button"
-import {ProjectCard} from "@/features/project/administration/project-card"
-import {ProjectsEmpty} from "@/features/project/administration/projects-empty"
+import {ProjectCard} from "@/features/project/dashboard/project-card"
+import {ProjectsEmpty} from "@/features/project/dashboard/projects-empty"
 import {projectCollection} from "@/features/project/repo/project-collection"
 import {useLiveQuery} from "@tanstack/react-db";
 import {PageDescription, PageHeaderSeparator, PageTitle} from "@/components/ui/page-header";
-import {useNavigateToProjectCreate} from "@/features/project/create/navigate-to-project-create";
+import {useNavigateToProjectCreate} from "@/features/project/hooks/navigate-to-project-create";
 
 
-export function ProjectPage() {
+export function ProjectsPage() {
     const {data: projects} = useLiveQuery((q) => q.from({project: projectCollection}))
     const navigateToProjectCreate = useNavigateToProjectCreate()
     return (

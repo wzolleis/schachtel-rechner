@@ -12,8 +12,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {FolderIcon, Plus} from "lucide-react";
 import {Project} from "@/features/project/project-schema";
-import {useNavigateToProjectEdit} from "@/features/project/edit/navigate-to-project-edit";
-import {useNavigateToProjectCreate} from "@/features/project/create/navigate-to-project-create";
+import {useNavigateToProjectEdit} from "@/features/project/hooks/navigate-to-project-edit";
+import {useNavigateToProjectCreate} from "@/features/project/hooks/navigate-to-project-create";
 
 export function ProjectSwitcher() {
     const currentProjectId = use$(projectStore$.currentProjectId)
