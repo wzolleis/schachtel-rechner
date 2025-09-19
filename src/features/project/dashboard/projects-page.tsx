@@ -21,7 +21,7 @@ export function ProjectsPage() {
                     <PageDescription>Hier verwaltest du gespeicherte Projekte</PageDescription>
                 </div>
                 <Button
-                    onClick={() => navigateToProjectCreate()}
+                    onClick={navigateToProjectCreate}
                     className="font-mono uppercase tracking-wider"
                 >
                     <Plus className="w-4 h-4 mr-2"/>

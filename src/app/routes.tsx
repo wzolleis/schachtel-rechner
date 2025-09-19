@@ -3,7 +3,7 @@ import Loading from "../components/app-state/Loading";
 import {box, boxNew} from "@/app/route-urls";
 import {LandingPage} from "@/app/layout/landing-page";
 import {ProjectsPage} from "@/features/project/dashboard/projects-page";
-import {BoxPage} from "@/features/box/page/box-page";
+import {BoxPage} from "@/features/box/edit/box-page";
 import {ProjectEdit} from "@/features/project/edit/project-edit";
 import {ProjectCreate} from "@/features/project/create/project-create";
 

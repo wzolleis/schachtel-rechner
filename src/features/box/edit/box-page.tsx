@@ -2,7 +2,7 @@ import {PageDescription, PageHeaderSeparator, PageTitle} from "@/components/ui/p
 import {use$} from "@legendapp/state/react";
 import {useLiveQuery} from "@tanstack/react-db";
 import {boxCollection} from "@/features/box/repo/box-collection";
-import {BoxCard} from "@/features/box/page/box-card";
+import {BoxCard} from "@/features/box/edit/box-card";
 import {projectStore$} from "@/features/project/repo/project-store";
 
 export function BoxPage() {
