@@ -24,7 +24,7 @@ export function ProjectSwitcher() {
 
     const onSelectProject = (project: Project) => {
         projectStore$.setProject(project.id)
-        navigateToProjectEdit(project)
+        navigateToProjectEdit(project.id)
     }
 
     return (
