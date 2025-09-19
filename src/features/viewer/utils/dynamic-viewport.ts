@@ -2,7 +2,7 @@
  * Dynamic viewport sizing based on box dimensions
  */
 
-import {Box} from "@/features/box/box-schema";
+import {Box} from "@/features/boxes/box-schema";
 import {getValueAs} from "@/lib/unit-utils";
 import {BoxViewType, FlexibleViewport, Viewport} from "./view-types";
 import {createStandardPadding} from "./viewport-utils";

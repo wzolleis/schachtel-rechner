@@ -2,10 +2,10 @@
  * Layout calculations for positioning rectangles in box views
  */
 
-import { Box } from "@/features/box/box-schema";
-import { getValueAs } from "@/lib/unit-utils";
-import { BoxViewType, Rectangle, BoxDimensions, ViewportPadding } from "./view-types";
-import { isHorizontalView } from "./view-type-helpers";
+import {Box} from "@/features/boxes/box-schema";
+import {getValueAs} from "@/lib/unit-utils";
+import {BoxDimensions, BoxViewType, Rectangle, ViewportPadding} from "./view-types";
+import {isHorizontalView} from "./view-type-helpers";
 
 /** Amount to nudge rectangle left to make room for right-side labels */
 const LABEL_SPACE_NUDGE = 20;

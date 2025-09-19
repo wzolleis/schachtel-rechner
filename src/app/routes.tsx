@@ -1,11 +1,10 @@
 import {Outlet, Route} from "react-router";
 import Loading from "../components/app-state/Loading";
-import {box, boxNew} from "@/app/route-urls";
 import {LandingPage} from "@/app/layout/landing-page";
-import {ProjectsPage} from "@/features/project/dashboard/projects-page";
-import {BoxPage} from "@/features/box/edit/box-page";
-import {ProjectEdit} from "@/features/project/edit/project-edit";
-import {ProjectCreate} from "@/features/project/create/project-create";
+import {ProjectsPage} from "@/features/projects/dashboard/projects-page";
+import {ProjectEdit} from "@/features/projects/edit/project-edit";
+import {ProjectCreate} from "@/features/projects/create/project-create";
+import {BoxesPage} from "@/features/boxes/dashboard/boxes-page";
 
 const AppRutes =
     <Route path={'/'}
@@ -31,21 +30,18 @@ const AppRutes =
                                             element={<ProjectEdit/>}
                                             index={true}
                                      />,
-                                     <Route path={'boxes'}
-                                            element={<BoxPage/>}
-                                     />
                                  ]}
                           />,
                       ]}
                />,
-               <Route path={box}
+               <Route path={'boxes'}
                       hydrateFallbackElement={<Loading/>}
                       element={<Outlet/>}
                       children={[
-                          <Route path={boxNew}
-                                 hydrateFallbackElement={<Loading/>}
-                                 element={<BoxPage/>}
-                          />
+                          <Route path={'dashboard'}
+                                 index={true}
+                                 element={<BoxesPage/>}
+                          />,
                       ]}
                />,
            ]}

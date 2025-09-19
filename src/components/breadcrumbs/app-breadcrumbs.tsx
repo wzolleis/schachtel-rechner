@@ -5,8 +5,8 @@ import {
     BreadcrumbList,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import {BoxBreadcrumbs} from "@/features/box/breadcrumb/box-breadcrumbs";
-import {ProjectBreadcrumb} from "@/features/project/breadcrumb/project-breadcrumb";
+import {BoxBreadcrumbs} from "@/features/boxes/breadcrumb/box-breadcrumbs";
+import {ProjectBreadcrumb} from "@/features/projects/breadcrumb/project-breadcrumb";
 
 export function AppBreadcrumbs() {
     return (

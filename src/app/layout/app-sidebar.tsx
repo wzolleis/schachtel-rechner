@@ -1,5 +1,5 @@
 import * as React from "react"
-import {FolderOpen, IceCream} from "lucide-react"
+import {Box, FolderOpen, LucideIcon} from "lucide-react"
 import {
     Sidebar,
     SidebarContent,
@@ -12,24 +12,49 @@ import {
     SidebarMenuItem,
     SidebarRail,
 } from "@/components/ui/sidebar"
-import {boxNewElements, sidebarLink,} from "@/app/route-urls";
 import {Link} from "react-router";
 
-const menu = {
+interface AppSidebarMenuitem {
+    name: string
+    icon: LucideIcon
+    url: string
+}
+
+const menu: Record<string, AppSidebarMenuitem[]> = {
     projects: [
         {
             name: 'Projekte',
             icon: FolderOpen,
-            url: sidebarLink(['projects', 'dashboard']),
+            url: '/projects/dashboard'
         }
     ],
     boxes: [
         {
-            name: 'Boxes New (Experimental)',
-            icon: IceCream,
-            url: sidebarLink(boxNewElements)
-        },
+            name: 'Boxen',
+            icon: Box,
+            url: '/boxes/dashboard'
+        }
     ]
+}
+
+export const AppSidebarMenu = ({items}: { items: AppSidebarMenuitem[] }) => {
+    return (
+        <SidebarMenu>
+            {
+                items.map((item: AppSidebarMenuitem) => {
+                    return (<SidebarMenuItem key={item.name}>
+                            <SidebarMenuButton asChild>
+                                <Link to={item.url}>
+                                    <item.icon/>
+                                    <span>{item.name}</span>
+                                </Link>
+                            </SidebarMenuButton>
+                        </SidebarMenuItem>
+                    )
+                })
+            }
+        </SidebarMenu>
+    )
 }
 
 export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
@@ -40,24 +65,9 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
             <SidebarContent>
                 <SidebarGroup className="group-data-[collapsible=icon]:hidden">
                     <SidebarGroupLabel>General</SidebarGroupLabel>
-                    <SidebarMenu>
-                        {menu.projects.map((item) => (
-                            <SidebarMenuItem key={item.name}>
-                                <SidebarMenuButton asChild>
-                                    <Link to={item.url}>
-                                        <item.icon/>
-                                        <span>{item.name}</span>
-                                    </Link>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                        ))}
-                    </SidebarMenu>
+                    <AppSidebarMenu items={menu.projects}/>
+                    <AppSidebarMenu items={menu.boxes}/>
                 </SidebarGroup>
-                {
-                    /*
-                    <BoxProjects boxes={menu.boxes}/>
-                     */
-                }
             </SidebarContent>
             <SidebarFooter>
             </SidebarFooter>

@@ -2,11 +2,11 @@
  * Box dimension calculations for 2D views
  */
 
-import { Box } from "@/features/box/box-schema";
-import { getValueAs } from "@/lib/unit-utils";
-import { BoxViewType, Viewport, BoxDimensions } from "./view-types";
-import { getViewportCenter } from "./viewport-utils";
-import { isHorizontalView } from "./view-type-helpers";
+import {Box} from "@/features/boxes/box-schema";
+import {getValueAs} from "@/lib/unit-utils";
+import {BoxDimensions, BoxViewType, Viewport} from "./view-types";
+import {getViewportCenter} from "./viewport-utils";
+import {isHorizontalView} from "./view-type-helpers";
 
 /**
  * Calculates box dimensions for a 2D view with scaling and positioning
