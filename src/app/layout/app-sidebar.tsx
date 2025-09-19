@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/sidebar"
 import {boxNewElements, sidebarLink,} from "@/app/route-urls";
 import {Link} from "react-router";
-import {PageSidebar} from "@/components/page-sidebar/page-sidebar";
 
 const menu = {
     projects: [
@@ -59,7 +58,6 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
                     <BoxProjects boxes={menu.boxes}/>
                      */
                 }
-                <PageSidebar/>
             </SidebarContent>
             <SidebarFooter>
             </SidebarFooter>

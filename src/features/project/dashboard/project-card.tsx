@@ -1,10 +1,11 @@
 import {KeyboardEvent, useState} from "react"
-import {Edit3, Trash2} from "lucide-react"
+import {BookA, Edit3, Trash2} from "lucide-react"
 import {Button} from "@/components/ui/button"
 import {Card, CardAction, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
 import {Input} from "@/components/ui/input"
 import {projectCollection} from "@/features/project/repo/project-collection"
 import {type Project} from "@/features/project/project-schema"
+import {useNavigateToProjectEdit} from "@/features/project/hooks/navigate-to-project-edit";
 
 interface ProjectCardProps {
     project: Project
@@ -13,6 +14,8 @@ interface ProjectCardProps {
 export const ProjectCard = ({project}: ProjectCardProps) => {
     const [enableEdit, setEnableEdit] = useState(false)
     const [editName, setEditName] = useState(project.name)
+    const editProject = useNavigateToProjectEdit()
+
 
     const saveEdit = () => {
         projectCollection.update(project.id, project => {
@@ -64,6 +67,14 @@ export const ProjectCard = ({project}: ProjectCardProps) => {
                             variant="ghost"
                             size="sm"
                             onClick={() => setEnableEdit(true)}
+                            className="size-8 p-0 hover:bg-gray-100"
+                        >
+                            <BookA className="size-4"/>
+                        </Button>
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => editProject(project.id)}
                             className="size-8 p-0 hover:bg-gray-100"
                         >
                             <Edit3 className="size-4"/>

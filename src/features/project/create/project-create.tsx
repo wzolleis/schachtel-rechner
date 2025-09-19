@@ -1,15 +1,15 @@
 import {CreateProjectDialog} from "@/features/project/create/create-project-dialog";
 import {useState} from "react";
-import {useNavigateToProjectAdministration} from "@/features/project/dashboard/navigate-to-project-administration";
+import {useNavigateToProjects} from "@/features/project/hooks/navigate-to-projects";
 
 export const ProjectCreate = () => {
     const [showCreateProjectDialog, setShowCreateProjectDialog] = useState<boolean>(true)
-    const navigateToProjectAdministration = useNavigateToProjectAdministration()
+    const {navigateToProjects} = useNavigateToProjects()
 
 
     const onOpenChange = (open: boolean) => {
         setShowCreateProjectDialog(open)
-        navigateToProjectAdministration()
+        navigateToProjects()
     }
 
     return (
