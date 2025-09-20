@@ -1,5 +1,3 @@
-import {projectStore$} from "@/features/projects/repo/project-store"
-import {use$} from "@legendapp/state/react"
 import {useLiveQuery} from "@tanstack/react-db";
 import {projectCollection} from "@/features/projects/repo/project-collection";
 import {BreadcrumbItem} from "@/components/ui/breadcrumb";
@@ -14,16 +12,18 @@ import {FolderIcon, Plus} from "lucide-react";
 import {Project} from "@/features/projects/project-schema";
 import {useNavigateToProjectEdit} from "@/features/projects/hooks/navigate-to-project-edit";
 import {useNavigateToProjectCreate} from "@/features/projects/hooks/navigate-to-project-create";
+import {useProjectStore} from "@/features/projects/hooks/use-project-store";
 
 export function ProjectSwitcher() {
-    const currentProjectId = use$(projectStore$.currentProjectId)
+    const {currentProjectId, setProject} = useProjectStore()
     const {data: projects} = useLiveQuery((q) => q.from({project: projectCollection}))
     const currentProject = projects.find(project => project.id === currentProjectId)
     const navigateToProjectEdit = useNavigateToProjectEdit()
     const navigateToProjectCreate = useNavigateToProjectCreate()
 
+
     const onSelectProject = (project: Project) => {
-        projectStore$.setProject(project.id)
+        setProject(project.id)
         navigateToProjectEdit(project.id)
     }
 

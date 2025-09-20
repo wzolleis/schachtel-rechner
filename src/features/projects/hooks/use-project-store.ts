@@ -3,7 +3,7 @@ import {projectStore$} from "@/features/projects/repo/project-store";
 
 export const useProjectStore = () => {
     const currentProjectId = use$(projectStore$.currentProjectId)
-    const setProject = use$(projectStore$.setProject)
+    const setProject = projectStore$.setProject
 
     return {
         currentProjectId,
