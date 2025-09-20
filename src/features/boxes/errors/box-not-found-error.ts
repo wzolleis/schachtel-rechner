@@ -1,7 +1,7 @@
 export class BoxNotFoundError extends Error {
-    private boxId: string
+    private boxId: string | null = null
 
-    constructor(boxId: string) {
+    constructor(boxId: string | null = null) {
         super(`Could not find box with id ${boxId}`);
         this.boxId = boxId
     }
