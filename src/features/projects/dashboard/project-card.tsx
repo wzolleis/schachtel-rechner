@@ -5,6 +5,7 @@ import {Card, CardAction, CardContent, CardHeader, CardTitle} from "@/components
 import {Input} from "@/components/ui/input"
 import {projectCollection} from "@/features/projects/repo/project-collection"
 import {type Project} from "@/features/projects/project-schema"
+import {projectStore$} from "@/features/projects/repo/project-store";
 import {useNavigateToProjectEdit} from "@/features/projects/hooks/navigate-to-project-edit";
 
 interface ProjectCardProps {
@@ -14,9 +15,7 @@ interface ProjectCardProps {
 export const ProjectCard = ({project}: ProjectCardProps) => {
     const [enableEdit, setEnableEdit] = useState(false)
     const [editName, setEditName] = useState(project.name)
-    const editProject = useNavigateToProjectEdit()
-
-
+    const {navigateToProjectEdit} = useNavigateToProjectEdit()
     const saveEdit = () => {
         projectCollection.update(project.id, project => {
             project.name = editName.trim()
@@ -36,6 +35,11 @@ export const ProjectCard = ({project}: ProjectCardProps) => {
         if (event.key === "Escape") {
             cancelEdit()
         }
+    }
+
+    const handleEditProject = (projectId: string) => {
+        projectStore$.setProject(projectId)
+        navigateToProjectEdit(projectId)
     }
 
     const handleDeleteProject = () => {
@@ -74,7 +78,7 @@ export const ProjectCard = ({project}: ProjectCardProps) => {
                         <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => editProject(project.id)}
+                            onClick={() => handleEditProject(project.id)}
                             className="size-8 p-0 hover:bg-gray-100"
                         >
                             <Edit3 className="size-4"/>

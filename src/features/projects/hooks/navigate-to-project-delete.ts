@@ -1,6 +1,0 @@
-import {useNavigate} from "react-router";
-
-export const useNavigateToProjectDelete = () => {
-    const navigate = useNavigate();
-    return (projectId: string) => navigate(`/projects/${projectId}/delete`);
-}

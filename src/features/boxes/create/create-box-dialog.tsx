@@ -7,7 +7,7 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from "@
 import {createId} from "@paralleldrive/cuid2";
 import {startTransition, useEffect} from "react";
 import {boxCollection} from "@/features/boxes/repo/box-collection";
-import {selectedBox$} from "@/features/boxes/repo/box-store";
+import {boxStore$} from "@/features/boxes/repo/box-store";
 import {CreateBox, createBoxSchema} from "@/features/boxes/box-schema";
 import {defaultSides} from "@/features/boxes/default-box";
 import {use$} from "@legendapp/state/react";
@@ -52,7 +52,7 @@ export function CreateBoxDialog({open, onOpenChange}: CreateBoxDialogProps) {
             boxCollection.insert(newBox)
             //We can "select" it immediately
             form.reset()
-            selectedBox$.selectBox(newBox.id)
+            boxStore$.selectBox(newBox.id)
         })
         onOpenChange(false)
     }

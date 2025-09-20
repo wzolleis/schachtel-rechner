@@ -3,14 +3,11 @@ import {projectCollection} from "@/features/projects/repo/project-collection";
 import {use$} from "@legendapp/state/react";
 import {projectStore$} from "@/features/projects/repo/project-store";
 import {PageDescription, PageHeaderSeparator, PageTitle} from "@/components/ui/page-header";
-import {Button} from "@/components/ui/button";
-import {Plus} from "lucide-react";
 import {AnimatePresence, motion} from "motion/react";
 import {ProjectsEmpty} from "@/features/projects/dashboard/projects-empty";
 import {NoProjectFoundError} from "@/features/projects/errors/no-project-found-error";
-import {useNavigateToBoxCreate} from "@/features/boxes/hooks/navigate-to-box-create";
 import {boxCollection} from "@/features/boxes/repo/box-collection";
-import {BoxCard} from "@/features/boxes/edit/box-card";
+import {BoxCard} from "@/features/boxes/dashboard/box-card";
 
 export const ProjectEdit = () => {
     const currentProjectId = use$(projectStore$.currentProjectId)
@@ -18,8 +15,6 @@ export const ProjectEdit = () => {
     const currentProject = projects.find(project => project.id === currentProjectId)
     const {data: boxes} = useLiveQuery((q) => q.from({boxes: boxCollection}))
     const projectBoxes = boxes.filter(box => box.projectId === currentProjectId)
-
-    const navigateToBoxCreate = useNavigateToBoxCreate()
 
     if (!currentProject || !currentProjectId) {
         return <NoProjectFoundError/>
@@ -33,14 +28,7 @@ export const ProjectEdit = () => {
                     <PageHeaderSeparator/>
                     <PageDescription>Hier bearbeitest du dein Projekt</PageDescription>
                 </div>
-                <Button
-                    onClick={() => navigateToBoxCreate(currentProjectId)}
-                    className="font-mono uppercase tracking-wider"
-                >
-                    <Plus className="w-4 h-4 mr-2"/>
-                    Neue Box
-                </Button>
-                </div>
+            </div>
 
             {boxes.length > 0 ?
                 <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

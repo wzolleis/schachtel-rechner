@@ -4,12 +4,12 @@ import {ObservablePersistLocalStorage} from "@legendapp/state/persist-plugins/lo
 
 interface ProjectStore {
     currentProjectId: string | null
-    setProject: (projectId: string) => void
+    setProject: (projectId: string | null) => void
 }
 
 export const projectStore$ = observable<ProjectStore>({
     currentProjectId: null,
-    setProject: (newProjectId: string) => {
+    setProject: (newProjectId: string | null) => {
         projectStore$.currentProjectId.set(newProjectId)
     }
 })

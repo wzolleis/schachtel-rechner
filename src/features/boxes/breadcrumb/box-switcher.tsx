@@ -1,5 +1,4 @@
 import {use$} from "@legendapp/state/react"
-import {useLiveQuery} from "@tanstack/react-db";
 import {BreadcrumbItem} from "@/components/ui/breadcrumb";
 import {
     DropdownMenu,
@@ -10,18 +9,23 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {FolderIcon, Plus} from "lucide-react";
 import {useState} from "react";
-import {boxCollection} from "@/features/boxes/repo/box-collection";
-import {selectedBox$} from "@/features/boxes/repo/box-store";
+import {boxStore$} from "@/features/boxes/repo/box-store";
 import {CreateBoxDialog} from "@/features/boxes/create/create-box-dialog";
 import {projectStore$} from "@/features/projects/repo/project-store";
 import {Box} from "@/features/boxes/box-schema";
+import {useFindAllBoxes} from "@/features/boxes/repo/box-queries";
+import {ErrorPage} from "@/components/errors/error-page";
 
 export function BoxSwitcher() {
-    const currentBoxId = use$(selectedBox$.selectedBoxId)
+    const currentBoxId = use$(boxStore$.selectedBoxId)
     const [showCreateBoxDialog, setShowCreateBoxDialog] = useState<boolean>(false)
-    const {data: boxes} = useLiveQuery((q) => q.from({box: boxCollection}))
+    const boxesResult = useFindAllBoxes()
     const currentProjectId = use$(projectStore$.currentProjectId)
 
+    if (boxesResult.isErr()) {
+        return <ErrorPage error={boxesResult.error}/>
+    }
+    const boxes = boxesResult.value
     const currentBox = boxes.find(box => {
         const boxMatches = box.id === currentBoxId
         const projectMatches = box.projectId === currentProjectId
@@ -34,7 +38,7 @@ export function BoxSwitcher() {
     // console.table(boxesForProject)
 
     const onSelectBox = (box: Box) => {
-        selectedBox$.selectBox(box.id)
+        boxStore$.selectBox(box.id)
     }
 
     return (

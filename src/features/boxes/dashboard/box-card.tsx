@@ -14,7 +14,7 @@ interface BoxCardProps {
 export const BoxCard = ({box}: BoxCardProps) => {
     const [enableEdit, setEnableEdit] = useState(false)
     const [editName, setEditName] = useState(box.name)
-    const editBox = useNavigateToBoxEdit()
+    const {navigateToBoxEdit} = useNavigateToBoxEdit()
     const saveEdit = () => {
         boxCollection.update(box.id, box => {
             box.name = editName.trim()
@@ -41,7 +41,7 @@ export const BoxCard = ({box}: BoxCardProps) => {
     }
 
     const handleEditBox = () => {
-        editBox(box.id)
+        navigateToBoxEdit(box.id)
     }
 
     const handleVisualizeBox = () => {
