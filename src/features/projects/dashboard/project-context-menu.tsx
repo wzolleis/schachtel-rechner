@@ -17,7 +17,7 @@ interface ProjectContextMenuProps {
 }
 
 export function ProjectContextMenu({project}: ProjectContextMenuProps) {
-    const projectUpdate = useNavigateToProjectEdit()
+    const {navigateToProjectEdit} = useNavigateToProjectEdit()
 
     return (
         <DropdownMenu>
@@ -34,7 +34,7 @@ export function ProjectContextMenu({project}: ProjectContextMenuProps) {
                 <DropdownMenuLabel>{`${project.name}`}</DropdownMenuLabel>
                 <DropdownMenuSeparator/>
                 <DropdownMenuGroup>
-                    <DropdownMenuItem onSelect={() => projectUpdate(project.id)}>
+                    <DropdownMenuItem onSelect={() => navigateToProjectEdit(project.id)}>
                         <Edit2 className="mr-2 h-4 w-4"/>
                         <span>Bearbeiten</span>
                     </DropdownMenuItem>

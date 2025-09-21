@@ -3,6 +3,7 @@ import {createBrowserRouter, createRoutesFromElements, RouterProvider} from "rea
 import {createRoot} from "react-dom/client";
 import {StrictMode} from "react";
 import AppRoutes from "./app/routes";
+import {Toaster} from "@/components/ui/sonner";
 
 console.log('base url = ', import.meta.env.BASE_URL)
 
@@ -17,6 +18,7 @@ const router = createBrowserRouter(
 // @ts-expect-error expecting root
 createRoot(document.getElementById("root")).render(
     <StrictMode>
+        <Toaster/>
         <RouterProvider router={router} />
     </StrictMode>
 );
