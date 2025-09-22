@@ -19,17 +19,15 @@ export const BoxEdit = () => {
     }
 
     return (
-        <div className="bg-white p-6 h-full">
+        <div className="p-6">
             <div>
                 <PageTitle>{`${box?.name}`}</PageTitle>
                 <PageHeaderSeparator/>
                 <PageDescription>Hier bearbeitest du die Box</PageDescription>
             </div>
 
-            <div className="mt-4  max-w-7xl mx-auto">
-                <div>
+            <div className="mt-4">
                     <BoxEditForm box={box}/>
-                </div>
             </div>
         </div>
     )

@@ -1,30 +1,68 @@
-import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import {Input} from "@/components/ui/input";
+import {Form} from "@/components/ui/form";
 import {Box, BoxSchema} from "@/features/boxes/box-schema";
 import {useForm} from "react-hook-form";
 import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Button} from "@/components/ui/button";
-import {useFindAllProjects} from "@/features/projects/repo/project-queries";
-import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
-import {cn} from "@/lib/utils";
-import {Check, ChevronsUpDown} from "lucide-react";
-import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList} from "@/components/ui/command";
 import {toast} from "sonner"
+import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
+import {BoxCommonSettingsForm} from "@/features/boxes/edit/box-common-settings-form";
+import {DiameterIcon, FrameIcon, KeyboardIcon, Rows4Icon} from "lucide-react";
 
 
 const formSchema = z.object({
     box: BoxSchema
 })
 
+export type EditBoxFormSchema = z.infer<typeof formSchema>
+
 export interface BoxEditFormProps {
     box: Box
 }
 
+
+const tabs = [
+    {
+        name: 'Allgemein',
+        value: 'common',
+        icon: KeyboardIcon,
+        content: <BoxCommonSettingsForm/>
+    },
+    {
+        name: 'Seiten',
+        value: 'sides',
+        icon: FrameIcon,
+        content: (
+            <div className={'h-1/4'}>
+                <p>Seiten</p>
+            </div>
+        )
+    },
+    {
+        name: 'Gehrung',
+        value: 'miter',
+        icon: DiameterIcon,
+        content: (
+            <div>
+                <p>Gehrung</p>
+            </div>
+        )
+    },
+    {
+        name: 'Schubladen',
+        value: 'drawer',
+        icon: Rows4Icon,
+        content: (
+            <div>
+                <p>Schubladen</p>
+            </div>
+        )
+    },
+]
+
 export const BoxEditForm = (props: BoxEditFormProps) => {
-    const projects = useFindAllProjects()
     const {box} = props
-    const form = useForm<z.infer<typeof formSchema>>({
+    const form = useForm<EditBoxFormSchema>({
         resolver: zodResolver(formSchema),
         defaultValues: {box: {...box}},
     })
@@ -41,92 +79,34 @@ export const BoxEditForm = (props: BoxEditFormProps) => {
         })
     }
 
-    const projectId = form.watch('box.projectId')
-    const projectName = projects.find(p => p.id === projectId)?.name || 'Kein Projekt'
 
     return (
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-16">
-            <Form {...form}>
+        <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                    <FormField
-                        control={form.control}
-                        name="box.projectId"
-                        render={({field}) => (
-                            <FormItem className="flex flex-col">
-                                <FormLabel>Projekt</FormLabel>
-                                <Popover>
-                                    <PopoverTrigger asChild>
-                                        <FormControl>
-                                            <Button
-                                                variant="outline"
-                                                role="combobox"
-                                                className={cn(
-                                                    "w-[200px] justify-between",
-                                                    !field.value && "text-muted-foreground"
-                                                )}
-                                            >
-                                                {projectName ? projectName : "Select Project"}
-                                                <ChevronsUpDown className="opacity-50"/>
-                                            </Button>
-                                        </FormControl>
-                                    </PopoverTrigger>
-                                    <PopoverContent className="w-[200px] p-0">
-                                        <Command>
-                                            <CommandInput
-                                                placeholder="Projekte durchsuchen..."
-                                                className="h-9"
-                                            />
-                                            <CommandList>
-                                                <CommandEmpty>Kein Projekt gefunden</CommandEmpty>
-                                                <CommandGroup>
-                                                    {projects.map((p) => (
-                                                        <CommandItem
-                                                            value={p.id}
-                                                            key={p.id}
-                                                            onSelect={() => {
-                                                                form.setValue("box.projectId", p.id)
-                                                            }}
-                                                        >
-                                                            {p.name}
-                                                            <Check
-                                                                className={cn(
-                                                                    "ml-auto",
-                                                                    p.id === field.value
-                                                                        ? "opacity-100"
-                                                                        : "opacity-0"
-                                                                )}
-                                                            />
-                                                        </CommandItem>
-                                                    ))}
-                                                </CommandGroup>
-                                            </CommandList>
-                                        </Command>
-                                    </PopoverContent>
-                                </Popover>
-                                <FormDescription>
-                                    Das Projekt zu der die Box gehört
-                                </FormDescription>
-                                <FormMessage/>
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="box.name"
-                        render={({field}) => (
-                            <FormItem>
-                                <FormLabel>Name</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="Name" {...field} />
-                                </FormControl>
-                                <FormDescription>Der Name der Box.</FormDescription>
-                                <FormMessage/>
-                            </FormItem>
-                        )}
-                    />
+                    <div className="flex w-full h-full flex-col gap-6 p-4">
+                        <Tabs defaultValue='common' className='gap-4'>
+                            <TabsList className='h-full'>
+                                {tabs.map(({icon: Icon, name, value}) => (
+                                    <TabsTrigger key={value}
+                                                 value={value}
+                                                 className='flex flex-col items-center gap-1 px-2.5 sm:px-3'
+                                    >
+                                        <Icon/>
+                                        {name}
+                                    </TabsTrigger>
+                                ))}
+                            </TabsList>
+                            {tabs.map(tab => (
+                                <TabsContent key={tab.value} value={tab.value}
+                                             className={'bg-white border-2 p-5'}>
+                                    {tab.content}
+                                </TabsContent>
+                            ))}
+                        </Tabs>
+                    </div>
+
                     <Button type="submit">Submit</Button>
                 </form>
-            </Form>
-        </div>
+        </Form>
     )
 }
