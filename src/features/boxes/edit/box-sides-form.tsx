@@ -15,17 +15,17 @@ export const BoxSidesForm = () => {
     const onSameThickness = useCallback((checked: boolean) => {
         setSameThickness(checked)
         form.setValue('box.sides.sameThickness', checked)
-    }, [setSameThickness])
+    }, [setSameThickness, form])
 
     const onSameFrontAndBack = useCallback((checked: boolean) => {
         setSameFrontAndBack(checked)
         form.setValue('box.sides.sameFrontAndBack', checked)
-    }, [setSameFrontAndBack])
+    }, [setSameFrontAndBack, form])
 
     const onSameLeftAndRight = useCallback((checked: boolean) => {
         setSameLeftAndRight(checked)
         form.setValue('box.sides.sameLeftAndRight', checked)
-    }, [setSameLeftAndRight])
+    }, [setSameLeftAndRight, form])
 
     return (
         <div className={'mt-4 p-4 flex flex-col gap-4 bg-gray-200:35'}>
