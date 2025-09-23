@@ -76,7 +76,7 @@ export const BoxEditForm = (props: BoxEditFormProps) => {
     }
 
     const watchedValues = form.watch()
-    const boxTabs = useMemo(() => tabs(), [box])
+    const boxTabs = useMemo(() => tabs(), [])
 
     useEffect(() => {
         const parsed: Box = BoxSchema.parse(watchedValues)
