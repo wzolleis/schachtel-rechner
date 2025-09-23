@@ -100,6 +100,7 @@ export const BoxEditForm = (props: BoxEditFormProps) => {
                             ))}
                             <TabsTrigger value={'vieualization'}
                                          key={'visualization'}
+                                         className='flex flex-col items-center gap-1 px-2.5 sm:px-3'
                             >
                                 <ViewIcon/>
                                 {"Visualization"}
