@@ -8,6 +8,7 @@ import {toast} from "sonner"
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {BoxCommonSettingsForm} from "@/features/boxes/edit/box-common-settings-form";
 import {DiameterIcon, FrameIcon, KeyboardIcon, Rows4Icon} from "lucide-react";
+import {BoxSidesForm} from "@/features/boxes/edit/box-sides-form";
 
 
 const formSchema = z.object({
@@ -32,11 +33,7 @@ const tabs = [
         name: 'Seiten',
         value: 'sides',
         icon: FrameIcon,
-        content: (
-            <div className={'h-1/4'}>
-                <p>Seiten</p>
-            </div>
-        )
+        content: <BoxSidesForm/>
     },
     {
         name: 'Gehrung',

@@ -19,6 +19,9 @@ const BoxSidesSchema = z.object({
     bottom: BoxSideSchema,
     left: BoxSideSchema,
     right: BoxSideSchema,
+    sameThickness: z.boolean().default(true),
+    sameFrontAndBack: z.boolean().default(true),
+    sameLeftAndRight: z.boolean().default(true),
 })
 
 
