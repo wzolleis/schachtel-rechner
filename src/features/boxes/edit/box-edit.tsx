@@ -26,6 +26,7 @@ export const BoxEdit = () => {
                 <PageDescription>Hier bearbeitest du die Box</PageDescription>
             </div>
 
+
             <div className="mt-4">
                     <BoxEditForm box={box}/>
             </div>

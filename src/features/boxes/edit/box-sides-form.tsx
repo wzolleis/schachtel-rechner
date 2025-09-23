@@ -2,8 +2,9 @@ import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessag
 import {Input} from "@/components/ui/input";
 import {useFormContext} from "react-hook-form";
 import {EditBoxFormSchema} from "@/features/boxes/edit/box-edit-form";
-import {Checkbox} from "@/components/ui/checkbox";
 import {useBoolean} from "@/hooks/use-boolean";
+import {CheckboxFormField} from "@/components/form/checkbox-form-field";
+import {useCallback} from "react";
 
 export const BoxSidesForm = () => {
     const form = useFormContext<EditBoxFormSchema>();
@@ -11,34 +12,70 @@ export const BoxSidesForm = () => {
     const {value: sameFrontAndBack, setValue: setSameFrontAndBack} = useBoolean(true)
     const {value: sameLeftAndRight, setValue: setSameLeftAndRight} = useBoolean(true)
 
-    const onSameThickness = (checked: boolean) => {
+    const onSameThickness = useCallback((checked: boolean) => {
         setSameThickness(checked)
         form.setValue('box.sides.sameThickness', checked)
-    }
+    }, [setSameThickness])
+
+    const onSameFrontAndBack = useCallback((checked: boolean) => {
+        setSameFrontAndBack(checked)
+        form.setValue('box.sides.sameFrontAndBack', checked)
+    }, [setSameFrontAndBack])
+
+    const onSameLeftAndRight = useCallback((checked: boolean) => {
+        setSameLeftAndRight(checked)
+        form.setValue('box.sides.sameLeftAndRight', checked)
+    }, [setSameLeftAndRight])
 
     return (
         <div className={'mt-4 p-4 flex flex-col gap-4 bg-gray-200:35'}>
-            <FormField
-                control={form.control}
-                name="box.sides.sameThickness"
-                render={({field: _field}) => {
-                    return (
-                        <FormItem
-                            className="flex flex-row items-center gap-2"
-                        >
-                            <FormControl>
-                                <Checkbox defaultChecked={sameThickness}
-                                          onCheckedChange={onSameThickness}
-                                />
-                            </FormControl>
-                            <FormLabel className="text-sm font-normal">
-                                {'Gleiche Materialstärke'}
-                            </FormLabel>
-                            <FormMessage/>
-                        </FormItem>
-                    )
-                }}
-            />
+            <div className="flex flex-row gap-4 ">
+                <FormField
+                    control={form.control}
+                    name="box.sides.sameThickness"
+                    render={(props) => {
+                        return (
+                            <CheckboxFormField {...props}
+                                               className="flex flex-row items-center gap-2"
+                                               label={"Gleiche Materialstärke"}
+                                               defaultChecked={sameThickness}
+                                               onCheckedChange={onSameThickness}
+                                               disabled={true}
+                            />
+                        )
+                    }}
+                />
+                <FormField
+                    control={form.control}
+                    name="box.sides.sameFrontAndBack"
+                    render={(props) => {
+                        return (
+                            <CheckboxFormField {...props}
+                                               className="flex flex-row items-center gap-2"
+                                               label={"Gleiche Front und Rückseite"}
+                                               defaultChecked={sameFrontAndBack}
+                                               onCheckedChange={onSameFrontAndBack}
+                                               disabled={true}
+                            />
+                        )
+                    }}
+                />
+                <FormField
+                    control={form.control}
+                    name="box.sides.sameLeftAndRight"
+                    render={(props) => {
+                        return (
+                            <CheckboxFormField {...props}
+                                               className="flex flex-row items-center gap-2"
+                                               label={"Gleiche Seiten"}
+                                               defaultChecked={sameLeftAndRight}
+                                               onCheckedChange={onSameLeftAndRight}
+                                               disabled={true}
+                            />
+                        )
+                    }}
+                />
+            </div>
             <FormField
                 control={form.control}
                 name="box.sides.front.thickness.value"

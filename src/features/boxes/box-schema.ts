@@ -19,9 +19,9 @@ const BoxSidesSchema = z.object({
     bottom: BoxSideSchema,
     left: BoxSideSchema,
     right: BoxSideSchema,
-    sameThickness: z.boolean().default(true),
-    sameFrontAndBack: z.boolean().default(true),
-    sameLeftAndRight: z.boolean().default(true),
+    sameThickness: z.boolean().default(true).nonoptional(),
+    sameFrontAndBack: z.boolean().default(true).nonoptional(),
+    sameLeftAndRight: z.boolean().default(true).nonoptional()
 })
 
 
@@ -43,7 +43,6 @@ export const createBoxSchema = z.object({
 })
 
 
-export type BoxSide = z.infer<typeof BoxSideSchema>
 export type BoxSides = z.infer<typeof BoxSidesSchema>
 
 export type Box = z.infer<typeof BoxSchema>
