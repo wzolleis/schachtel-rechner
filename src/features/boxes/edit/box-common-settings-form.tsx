@@ -11,7 +11,7 @@ import {useFindAllProjects} from "@/features/projects/repo/project-queries";
 
 export const BoxCommonSettingsForm = () => {
     const form = useFormContext<EditBoxFormSchema>()
-    const projectId = form.watch('box.projectId')
+    const projectId = form.watch('projectId')
     const projects = useFindAllProjects()
     const projectName = projects.find(p => p.id === projectId)?.name || 'Kein Projekt'
 
@@ -19,7 +19,7 @@ export const BoxCommonSettingsForm = () => {
         <>
             <FormField
                 control={form.control}
-                name="box.projectId"
+                name="projectId"
                 render={({field}) => (
                     <FormItem className="flex flex-col">
                         <FormLabel>Projekt</FormLabel>
@@ -53,7 +53,7 @@ export const BoxCommonSettingsForm = () => {
                                                     value={p.id}
                                                     key={p.id}
                                                     onSelect={() => {
-                                                        form.setValue("box.projectId", p.id)
+                                                        form.setValue("projectId", p.id)
                                                     }}
                                                 >
                                                     {p.name}
@@ -81,7 +81,7 @@ export const BoxCommonSettingsForm = () => {
             />
             <FormField
                 control={form.control}
-                name="box.name"
+                name="name"
                 render={({field}) => (
                     <FormItem>
                         <FormLabel>Name</FormLabel>

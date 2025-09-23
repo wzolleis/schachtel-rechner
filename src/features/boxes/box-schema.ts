@@ -2,7 +2,11 @@ import {z} from "zod";
 
 export const ValueWithUnitSchema = z.object({
     unit: z.enum(["mm", "cm"]),
-    value: z.number()
+    value: z.coerce.number()
+        .transform((value: unknown) => {
+            const valueAsNumber = parseInt(value?.toString() || '')
+            return Number.isInteger(valueAsNumber) ? valueAsNumber : -1
+        })
 })
 export type ValueWithUnit = z.infer<typeof ValueWithUnitSchema>
 
@@ -42,6 +46,9 @@ export const createBoxSchema = z.object({
     name: BoxNameSchema,
 })
 
+export type BoxSchemaInput = z.input<typeof BoxSchema>
+
+export type BoxSchemaOutput = z.output<typeof BoxSchema>
 
 export type BoxSides = z.infer<typeof BoxSidesSchema>
 

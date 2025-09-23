@@ -2,7 +2,6 @@ import {ControllerRenderProps, FieldValues, Path} from "react-hook-form";
 import {FormControl, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Checkbox} from "@/components/ui/checkbox";
 import {CheckboxProps} from "@radix-ui/react-checkbox";
-import * as React from "react";
 
 type CheckboxFormFieldProps<TFieldValues extends FieldValues, TName extends Path<TFieldValues>> =
     {

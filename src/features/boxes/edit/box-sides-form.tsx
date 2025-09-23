@@ -1,10 +1,10 @@
-import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import {Input} from "@/components/ui/input";
+import {FormField} from "@/components/ui/form";
 import {useFormContext} from "react-hook-form";
 import {EditBoxFormSchema} from "@/features/boxes/edit/box-edit-form";
 import {useBoolean} from "@/hooks/use-boolean";
 import {CheckboxFormField} from "@/components/form/checkbox-form-field";
 import {useCallback} from "react";
+import {InputFormField} from "@/components/form/input-form-field";
 
 export const BoxSidesForm = () => {
     const form = useFormContext<EditBoxFormSchema>();
@@ -14,17 +14,17 @@ export const BoxSidesForm = () => {
 
     const onSameThickness = useCallback((checked: boolean) => {
         setSameThickness(checked)
-        form.setValue('box.sides.sameThickness', checked)
+        form.setValue('sides.sameThickness', checked)
     }, [setSameThickness, form])
 
     const onSameFrontAndBack = useCallback((checked: boolean) => {
         setSameFrontAndBack(checked)
-        form.setValue('box.sides.sameFrontAndBack', checked)
+        form.setValue('sides.sameFrontAndBack', checked)
     }, [setSameFrontAndBack, form])
 
     const onSameLeftAndRight = useCallback((checked: boolean) => {
         setSameLeftAndRight(checked)
-        form.setValue('box.sides.sameLeftAndRight', checked)
+        form.setValue('sides.sameLeftAndRight', checked)
     }, [setSameLeftAndRight, form])
 
     return (
@@ -32,7 +32,7 @@ export const BoxSidesForm = () => {
             <div className="flex flex-row gap-4 ">
                 <FormField
                     control={form.control}
-                    name="box.sides.sameThickness"
+                    name="sides.sameThickness"
                     render={(props) => {
                         return (
                             <CheckboxFormField {...props}
@@ -47,7 +47,7 @@ export const BoxSidesForm = () => {
                 />
                 <FormField
                     control={form.control}
-                    name="box.sides.sameFrontAndBack"
+                    name="sides.sameFrontAndBack"
                     render={(props) => {
                         return (
                             <CheckboxFormField {...props}
@@ -62,7 +62,7 @@ export const BoxSidesForm = () => {
                 />
                 <FormField
                     control={form.control}
-                    name="box.sides.sameLeftAndRight"
+                    name="sides.sameLeftAndRight"
                     render={(props) => {
                         return (
                             <CheckboxFormField {...props}
@@ -78,25 +78,50 @@ export const BoxSidesForm = () => {
             </div>
             <FormField
                 control={form.control}
-                name="box.sides.front.thickness.value"
-                render={({field}) => (
-                    <FormItem>
-                        <FormLabel
-                            className="text-xs font-mono text-gray-700 uppercase tracking-wider">Material-Stärke
-                            (Front)</FormLabel>
-                        <FormControl>
-                            <Input
-                                placeholder="10"
-                                {...field}
-                                type="number"
-                                className="border-gray-300 border-0 border-b-2 rounded-none bg-transparent px-0 py-2 focus:border-gray-900 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 outline-none font-mono"
-                            />
-                        </FormControl>
-                        <FormDescription className="text-xs text-gray-500 font-mono mt-1">
-                            Materialstärke in mm
-                        </FormDescription>
-                        <FormMessage/>
-                    </FormItem>
+                name="sides.front.thickness.value"
+                render={(props) => (
+                    <InputFormField {...props}
+                                    label={'Materialstärke'}
+                                    description={'Materialstärke in mm'}
+                                    type={'number'}
+                                    placeholder={'10'}
+                    />
+                )}
+            />
+            <FormField
+                control={form.control}
+                name="sides.front.height.value"
+                render={(props) => (
+                    <InputFormField {...props}
+                                    label={'Höhe der Wände'}
+                                    description={'Höhe in mm'}
+                                    type={'number'}
+                                    placeholder={'10'}
+                    />
+                )}
+            />
+            <FormField
+                control={form.control}
+                name="sides.front.width.value"
+                render={(props) => (
+                    <InputFormField {...props}
+                                    label={'Breite'}
+                                    description={'Breite in mm'}
+                                    type={'number'}
+                                    placeholder={'10'}
+                    />
+                )}
+            />
+            <FormField
+                control={form.control}
+                name="sides.left.width.value"
+                render={(props) => (
+                    <InputFormField {...props}
+                                    label={'Tiefe'}
+                                    description={'Breite in mm'}
+                                    type={'number'}
+                                    placeholder={'10'}
+                    />
                 )}
             />
         </div>
