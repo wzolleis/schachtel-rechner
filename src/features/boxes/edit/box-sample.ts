@@ -7,6 +7,9 @@ export const drawerBox: Box = {
     projectId: "example-project",
     name: "Kitchen Drawer",
     sides: {
+        sameThickness: true,
+        sameLeftAndRight: true,
+        sameFrontAndBack: true,
         // Front face (what you see when drawer is closed)
         front: {
             width: withUnit(250, {unit: "mm"}),   // 45cm wide
