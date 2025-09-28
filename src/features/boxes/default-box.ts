@@ -38,9 +38,6 @@ export const defaultSides: BoxSides = {
         height: withUnit(450, {unit: "mm"}),  // Same as front/back width
         thickness: withUnit(10, {unit: "mm"}) // Same thickness as sides
     },
-    sameFrontAndBack: true,
-    sameLeftAndRight: true,
-    sameThickness: true
 }
 
 

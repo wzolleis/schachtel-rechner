@@ -1,69 +1,71 @@
 import {Form} from "@/components/ui/form";
-import {Box, BoxSchema, BoxSchemaInput} from "@/features/boxes/box-schema";
+import {Box, BoxSchema} from "@/features/boxes/box-schema";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Button} from "@/components/ui/button";
 import {toast} from "sonner"
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
-import {BoxCommonSettingsForm} from "@/features/boxes/edit/box-common-settings-form";
-import {DiameterIcon, FrameIcon, KeyboardIcon, Rows4Icon, ViewIcon} from "lucide-react";
-import {BoxSidesForm} from "@/features/boxes/edit/box-sides-form";
 import {BoxVisualization} from "@/features/boxes/edit/box-visualization";
-import {useEffect, useMemo, useState} from "react";
-
-
-export type EditBoxFormSchema = BoxSchemaInput
+import {useMemo} from "react";
+import {
+    EditBoxFormInput,
+    EditBoxFormOutput,
+    EditBoxFormSchema,
+    EditBoxFormValues
+} from "@/features/boxes/edit/box-edit-form-types";
+import {boxEditTabs} from "@/features/boxes/edit/box-edit-tabs";
+import {ViewIcon} from "lucide-react";
+import {BoxCalculator} from "@/lib/box-calc-utils";
+import {z} from "zod";
 
 export type  BoxEditFormProps = {
-    box: Box
+    box: Box,
 }
-
-
-const tabs = () => [
-    {
-        name: 'Allgemein',
-        value: 'common',
-        icon: KeyboardIcon,
-        content: <BoxCommonSettingsForm/>
-    },
-    {
-        name: 'Seiten',
-        value: 'sides',
-        icon: FrameIcon,
-        content: <BoxSidesForm/>
-    },
-    {
-        name: 'Gehrung',
-        value: 'miter',
-        icon: DiameterIcon,
-        content: (
-            <div>
-                <p>Gehrung</p>
-            </div>
-        )
-    },
-    {
-        name: 'Schubladen',
-        value: 'drawer',
-        icon: Rows4Icon,
-        content:
-            <div>
-                <p>Schubladen</p>
-            </div>
-    }
-]
 
 export const BoxEditForm = (props: BoxEditFormProps) => {
     const {box} = props
-    const defaultValues: BoxSchemaInput = {...box}
-    const [formBox, setFormBox] = useState<Box>(box)
+    const defaultValues: EditBoxFormInput = useMemo(() => {
+        return {
+            simpleSideDefinition: true,
+            projectId: box.projectId,
+            name: box.name,
+            height: box.sides.left.height,
+            width: box.sides.front.width,
+            depth: box.sides.left.width,
+            thickness: box.sides.left.thickness
+        }
+    }, [box])
 
-    const form = useForm<EditBoxFormSchema>({
-        resolver: zodResolver(BoxSchema),
+    const form = useForm<EditBoxFormInput, EditBoxFormOutput>({
+        resolver: zodResolver(EditBoxFormSchema),
+        mode: "onChange",
         defaultValues
     })
 
-    const onSubmit = (data: EditBoxFormSchema) => {
+    const watchedValues = form.watch()
+    console.log(watchedValues)
+
+    const calculateBox = (values: EditBoxFormInput) => {
+        const formValues = z.parse(EditBoxFormSchema, values)
+
+        const calculatedBoxSides = new BoxCalculator().calculateBoxSidesFrom({
+            thickness: formValues.thickness,
+            depth: formValues.depth,
+            height: formValues.height,
+            width: formValues.width,
+        })
+
+        return z.parse(BoxSchema,
+            {
+                ...box,
+                sides: calculatedBoxSides
+            }
+        )
+    }
+
+    const visualizedBox = calculateBox(watchedValues)
+
+    const onSubmit = (data: EditBoxFormValues) => {
         console.log(data)
 
         toast("You submitted the following values", {
@@ -75,13 +77,7 @@ export const BoxEditForm = (props: BoxEditFormProps) => {
         })
     }
 
-    const watchedValues = form.watch()
-    const boxTabs = useMemo(() => tabs(), [])
-
-    useEffect(() => {
-        const parsed: Box = BoxSchema.parse(watchedValues)
-        setFormBox(parsed)
-    }, [watchedValues]);
+    const boxTabs = useMemo(() => boxEditTabs(), [])
 
     return (
         <Form {...form}>
@@ -115,7 +111,7 @@ export const BoxEditForm = (props: BoxEditFormProps) => {
                         <TabsContent value={'vieualization'}
                                      key={'visualization'}
                                      className={'bg-white border-2 p-5'}>
-                            <BoxVisualization box={formBox}/>
+                            <BoxVisualization box={visualizedBox}/>
                         </TabsContent>
                     </Tabs>
                 </div>

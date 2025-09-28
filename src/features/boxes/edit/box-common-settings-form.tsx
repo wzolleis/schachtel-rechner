@@ -6,11 +6,11 @@ import {Check, ChevronsUpDown} from "lucide-react";
 import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList} from "@/components/ui/command";
 import {Input} from "@/components/ui/input";
 import {useFormContext} from "react-hook-form";
-import {EditBoxFormSchema} from "@/features/boxes/edit/box-edit-form";
 import {useFindAllProjects} from "@/features/projects/repo/project-queries";
+import {EditBoxFormInput} from "@/features/boxes/edit/box-edit-form-types";
 
 export const BoxCommonSettingsForm = () => {
-    const form = useFormContext<EditBoxFormSchema>()
+    const form = useFormContext<EditBoxFormInput>()
     const projectId = form.watch('projectId')
     const projects = useFindAllProjects()
     const projectName = projects.find(p => p.id === projectId)?.name || 'Kein Projekt'

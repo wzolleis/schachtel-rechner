@@ -8,7 +8,7 @@ import {createId} from "@paralleldrive/cuid2";
 import {startTransition, useEffect} from "react";
 import {boxCollection} from "@/features/boxes/repo/box-collection";
 import {boxStore$} from "@/features/boxes/repo/box-store";
-import {CreateBox, createBoxSchema} from "@/features/boxes/box-schema";
+import {CeateBoxSchema, CreateBox} from "@/features/boxes/box-schema";
 import {defaultSides} from "@/features/boxes/default-box";
 import {use$} from "@legendapp/state/react";
 import {projectStore$} from "@/features/projects/repo/project-store";
@@ -28,7 +28,7 @@ export function CreateBoxDialog({open, onOpenChange}: CreateBoxDialogProps) {
     const currentProject = projects.find((project => project.id === projectId))
 
     const form = useForm<CreateBox>({
-        resolver: zodResolver(createBoxSchema),
+        resolver: zodResolver(CeateBoxSchema),
         defaultValues: {
             name: "",
             projectId: 'no-project-id',

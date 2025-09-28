@@ -1,14 +1,11 @@
 import {z} from "zod";
 
 export const ValueWithUnitSchema = z.object({
-    unit: z.enum(["mm", "cm"]),
+    unit: z.enum(["mm", "cm"]).nonoptional(),
     value: z.coerce.number()
-        .transform((value: unknown) => {
-            const valueAsNumber = parseInt(value?.toString() || '')
-            return Number.isInteger(valueAsNumber) ? valueAsNumber : -1
-        })
 })
-export type ValueWithUnit = z.infer<typeof ValueWithUnitSchema>
+
+export const IdTypeSchema = z.string().nonempty().nonoptional()
 
 const BoxSideSchema = z.object({
     width: ValueWithUnitSchema,
@@ -23,35 +20,35 @@ const BoxSidesSchema = z.object({
     bottom: BoxSideSchema,
     left: BoxSideSchema,
     right: BoxSideSchema,
-    sameThickness: z.boolean().default(true).nonoptional(),
-    sameFrontAndBack: z.boolean().default(true).nonoptional(),
-    sameLeftAndRight: z.boolean().default(true).nonoptional()
 })
 
 
-const BoxNameSchema = z.string().min(1, {
-    error: "Please provide a name for your box"
-}).max(100, {error: "The name of your box must not exceed 100 characters"})
+export const BoxNameSchema = z.string()
+    .min(1, {
+        error: "Please provide a name for your box"
+    }).max(100, {
+        error: "The name of your box must not exceed 100 characters"
+    })
+    .nonoptional()
 
 
 export const BoxSchema = z.object({
-    id: z.string(),
-    projectId: z.string(),
+    id: IdTypeSchema,
+    projectId: IdTypeSchema,
     name: BoxNameSchema,
     sides: BoxSidesSchema,
 })
-export const createBoxSchema = z.object({
-    projectId: z.string(),
-    projectName: z.string(),
+export const CeateBoxSchema = z.object({
+    projectId: IdTypeSchema,
+    projectName: IdTypeSchema,
     name: BoxNameSchema,
 })
 
-export type BoxSchemaInput = z.input<typeof BoxSchema>
-
-export type BoxSchemaOutput = z.output<typeof BoxSchema>
-
+export type BoxSide = z.infer<typeof BoxSideSchema>
+export type ValueWithUnit = z.infer<typeof ValueWithUnitSchema>
 export type BoxSides = z.infer<typeof BoxSidesSchema>
-
 export type Box = z.infer<typeof BoxSchema>
-
-export type CreateBox = z.infer<typeof createBoxSchema>
+export type CreateBox = z.infer<typeof CeateBoxSchema>
+export type BoxName = z.infer<typeof BoxNameSchema>
+export type BoxId = z.infer<typeof IdTypeSchema>
+export type ProjectId = z.infer<typeof IdTypeSchema>
