@@ -32,10 +32,7 @@ export class BoxCalculator {
         const front: BoxSide = {
             thickness: {...thickness},
             height: {...height},
-            width: {
-                ...width,
-                value: width.value - 2 * thickness.value
-            }
+            width: {...width,}
         }
 
         // noinspection JSSuspiciousNameCombination

@@ -3,6 +3,7 @@ import {useFormContext} from "react-hook-form";
 import {InputFormField} from "@/components/form/input-form-field";
 import {CheckboxFormField} from "@/components/form/checkbox-form-field";
 import {EditBoxFormInput} from "@/features/boxes/edit/box-edit-form-types";
+import {DimensionSeparator} from "@/components/form/dimension-separator";
 
 export const BoxSidesForm = () => {
     const form = useFormContext<EditBoxFormInput>();
@@ -37,42 +38,51 @@ export const BoxSidesForm = () => {
                     />
                 )}
             />
-            <FormField
-                control={form.control}
-                name="height.value"
-                render={(props) => (
-                    <InputFormField {...props}
-                                    label={'Höhe der Wände'}
-                                    description={'Höhe in mm'}
-                                    type={'number'}
-                                    placeholder={'10'}
-                    />
-                )}
-            />
-            <FormField
-                control={form.control}
-                name="width.value"
-                render={(props) => (
-                    <InputFormField {...props}
-                                    label={'Breite'}
-                                    description={'Breite in mm'}
-                                    type={'number'}
-                                    placeholder={'10'}
-                    />
-                )}
-            />
-            <FormField
-                control={form.control}
-                name="depth.value"
-                render={(props) => (
-                    <InputFormField {...props}
-                                    label={'Tiefe'}
-                                    description={'Breite in mm'}
-                                    type={'number'}
-                                    placeholder={'10'}
-                    />
-                )}
-            />
+            <div className={'mt-4 flex flex-row gap-4'}>
+                <FormField
+                    control={form.control}
+                    name="height.value"
+                    render={(props) => (
+                        <>
+                            <InputFormField {...props}
+                                            label={'Höhe'}
+                                            description={'Höhe in mm'}
+                                            type={'number'}
+                                            placeholder={'10'}
+                            />
+                            <DimensionSeparator/>
+                        </>
+                    )}
+                />
+
+                <FormField
+                    control={form.control}
+                    name="width.value"
+                    render={(props) => (
+                        <>
+                            <InputFormField {...props}
+                                            label={'Breite'}
+                                            description={'Breite in mm'}
+                                            type={'number'}
+                                            placeholder={'10'}
+                            />
+                            <DimensionSeparator/>
+                        </>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="depth.value"
+                    render={(props) => (
+                        <InputFormField {...props}
+                                        label={'Tiefe'}
+                                        description={'Breite in mm'}
+                                        type={'number'}
+                                        placeholder={'10'}
+                        />
+                    )}
+                />
+            </div>
         </div>
     )
 }

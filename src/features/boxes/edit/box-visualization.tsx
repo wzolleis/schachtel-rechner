@@ -41,6 +41,7 @@ export const BoxVisualization = (props: BoxVisualizationProps) => {
                         Left View Visualization
                     </h3>
                     <Button
+                        type={'button'}
                         variant="outline"
                         size="sm"
                         onClick={() => setShowInner(!showInner)}
@@ -53,6 +54,12 @@ export const BoxVisualization = (props: BoxVisualizationProps) => {
                     viewPort={{width: 400, height: "auto"}}
                     box={box}
                     viewType={"left"}
+                    showInnerDimensions={showInner}
+                />
+                <View2D
+                    viewPort={{width: 400, height: "auto"}}
+                    box={box}
+                    viewType={"bottom"}
                     showInnerDimensions={showInner}
                 />
             </div>

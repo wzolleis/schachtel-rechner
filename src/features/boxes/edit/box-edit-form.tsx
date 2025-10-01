@@ -3,20 +3,15 @@ import {Box, BoxSchema} from "@/features/boxes/box-schema";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Button} from "@/components/ui/button";
-import {toast} from "sonner"
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {BoxVisualization} from "@/features/boxes/edit/box-visualization";
-import {useMemo} from "react";
-import {
-    EditBoxFormInput,
-    EditBoxFormOutput,
-    EditBoxFormSchema,
-    EditBoxFormValues
-} from "@/features/boxes/edit/box-edit-form-types";
+import {startTransition, useMemo} from "react";
+import {EditBoxFormInput, EditBoxFormOutput, EditBoxFormSchema} from "@/features/boxes/edit/box-edit-form-types";
 import {boxEditTabs} from "@/features/boxes/edit/box-edit-tabs";
 import {ViewIcon} from "lucide-react";
 import {BoxCalculator} from "@/lib/box-calc-utils";
 import {z} from "zod";
+import {boxCollection} from "@/features/boxes/repo/box-collection";
 
 export type  BoxEditFormProps = {
     box: Box,
@@ -43,7 +38,6 @@ export const BoxEditForm = (props: BoxEditFormProps) => {
     })
 
     const watchedValues = form.watch()
-    console.log(watchedValues)
 
     const calculateBox = (values: EditBoxFormInput) => {
         const formValues = z.parse(EditBoxFormSchema, values)
@@ -63,21 +57,22 @@ export const BoxEditForm = (props: BoxEditFormProps) => {
         )
     }
 
-    const visualizedBox = calculateBox(watchedValues)
-
-    const onSubmit = (data: EditBoxFormValues) => {
-        console.log(data)
-
-        toast("You submitted the following values", {
-            description: (
-                <div className="mt-2 w-[320px] rounded-mdbg-neutral-950 p-4">
-                    <div className="text-xs text-black">{JSON.stringify(data, null, 2)}</div>
-                </div>
-            ),
+    const onSubmit = (data: EditBoxFormInput) => {
+        startTransition(() => {
+            const toUpdate = calculateBox(data)
+            console.log('toUpdate', toUpdate)
+            console.log('orignal box', box)
+            boxCollection.update(toUpdate.id,
+                (draft) => {
+                    draft.name = toUpdate.name
+                    draft.sides = toUpdate.sides
+                    draft.projectId = toUpdate.projectId
+                })
         })
     }
 
     const boxTabs = useMemo(() => boxEditTabs(), [])
+    const visualizedBox = calculateBox(watchedValues)
 
     return (
         <Form {...form}>
@@ -116,7 +111,7 @@ export const BoxEditForm = (props: BoxEditFormProps) => {
                     </Tabs>
                 </div>
 
-                <Button type="submit">Submit</Button>
+                <Button type="submit">Speichern</Button>
             </form>
         </Form>
     )

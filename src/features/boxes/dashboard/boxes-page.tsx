@@ -7,7 +7,6 @@ import {BoxCard} from "@/features/boxes/dashboard/box-card";
 
 export const BoxesPage = () => {
     const {data: boxes} = useLiveQuery(q => q.from({boxes: boxCollection}))
-
     return (
         <>
             <div className="flex items-center justify-between">

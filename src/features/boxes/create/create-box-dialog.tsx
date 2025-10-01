@@ -45,8 +45,6 @@ export function CreateBoxDialog({open, onOpenChange}: CreateBoxDialogProps) {
     }, [form, currentProject])
 
     const onValid = (data: CreateBox) => {
-        console.log('submitHandler: create box ', data)
-
         const newBox = ({id: createId(), name: data.name, projectId: data.projectId, sides: defaultSides})
         startTransition(() => {
             boxCollection.insert(newBox)
