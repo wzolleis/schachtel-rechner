@@ -6,7 +6,6 @@ import {Input} from "@/components/ui/input"
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form"
 import {createId} from "@paralleldrive/cuid2";
 import {startTransition, useEffect} from "react";
-import {boxCollection} from "@/features/boxes/repo/box-collection";
 import {boxStore$} from "@/features/boxes/repo/box-store";
 import {CeateBoxSchema, CreateBox} from "@/features/boxes/box-schema";
 import {defaultSides} from "@/features/boxes/default-box";
@@ -14,6 +13,7 @@ import {use$} from "@legendapp/state/react";
 import {projectStore$} from "@/features/projects/repo/project-store";
 import {useLiveQuery} from "@tanstack/react-db";
 import {projectCollection} from "@/features/projects/repo/project-collection";
+import {boxRepo} from "@/features/boxes/repo/box-repo";
 
 interface CreateBoxDialogProps {
     open: boolean
@@ -47,7 +47,7 @@ export function CreateBoxDialog({open, onOpenChange}: CreateBoxDialogProps) {
     const onValid = (data: CreateBox) => {
         const newBox = ({id: createId(), name: data.name, projectId: data.projectId, sides: defaultSides})
         startTransition(() => {
-            boxCollection.insert(newBox)
+            boxRepo.insert(newBox)
             //We can "select" it immediately
             form.reset()
             boxStore$.selectBox(newBox.id)

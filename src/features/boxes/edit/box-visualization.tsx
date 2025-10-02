@@ -40,15 +40,6 @@ export const BoxVisualization = (props: BoxVisualizationProps) => {
                     <h3 className="text-lg font-medium text-gray-900 tracking-wider uppercase">
                         Left View Visualization
                     </h3>
-                    <Button
-                        type={'button'}
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setShowInner(!showInner)}
-                        className="font-mono text-xs"
-                    >
-                        {showInner ? "Show Outer" : "Show Inner"}
-                    </Button>
                 </div>
                 <View2D
                     viewPort={{width: 400, height: "auto"}}
@@ -56,6 +47,13 @@ export const BoxVisualization = (props: BoxVisualizationProps) => {
                     viewType={"left"}
                     showInnerDimensions={showInner}
                 />
+            </div>
+            <div className="mt-8">
+                <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-medium text-gray-900 tracking-wider uppercase">
+                        Bottom View Visualization
+                    </h3>
+                </div>
                 <View2D
                     viewPort={{width: 400, height: "auto"}}
                     box={box}

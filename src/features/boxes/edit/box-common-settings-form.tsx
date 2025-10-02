@@ -8,12 +8,18 @@ import {Input} from "@/components/ui/input";
 import {useFormContext} from "react-hook-form";
 import {useFindAllProjects} from "@/features/projects/repo/project-queries";
 import {EditBoxFormInput} from "@/features/boxes/edit/box-edit-form-types";
+import {Separator} from "@/components/ui/separator";
+import {BoxVisualization} from "@/features/boxes/edit/box-visualization";
+import {calculateBox} from "@/features/boxes/edit/calculate-box";
+import {BoxEditTabProps} from "@/features/boxes/edit/box-edit-tabs";
 
-export const BoxCommonSettingsForm = () => {
+export const BoxCommonSettingsForm = ({box}: BoxEditTabProps) => {
     const form = useFormContext<EditBoxFormInput>()
     const projectId = form.watch('projectId')
     const projects = useFindAllProjects()
     const projectName = projects.find(p => p.id === projectId)?.name || 'Kein Projekt'
+    const watchedValues = form.watch()
+    const visualizedBox = box ? calculateBox(box, watchedValues) : undefined
 
     return (
         <>
@@ -93,6 +99,8 @@ export const BoxCommonSettingsForm = () => {
                     </FormItem>
                 )}
             />
+            <Separator/>
+            {!!visualizedBox && <BoxVisualization box={visualizedBox}/>}
         </>
 
     )
