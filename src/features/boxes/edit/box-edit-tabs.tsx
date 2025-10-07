@@ -1,8 +1,9 @@
-import {FrameIcon, KeyboardIcon, LucideIcon} from "lucide-react";
+import {BluetoothConnectedIcon, FrameIcon, KeyboardIcon, LucideIcon} from "lucide-react";
 import {BoxCommonSettingsForm} from "@/features/boxes/edit/box-common-settings-form";
 import {BoxSidesForm} from "@/features/boxes/edit/box-sides-form";
 import {Box} from "@/features/boxes/box-schema";
 import {FunctionComponent} from "react";
+import {BoxConnectionTypes} from "@/features/boxes/edit/box-connection-types";
 
 export interface BoxEditTabProps {
     box?: Box
@@ -27,19 +28,15 @@ export const boxEditTabs = (): BoxEditTab[] => [
         name: 'Seiten',
         value: 'sides',
         icon: FrameIcon,
-        content: ({box}) => <BoxSidesForm box={box}/>
+        content: () => <BoxSidesForm/>
+    },
+    {
+        name: 'Verbindungen',
+        value: 'connextion-types',
+        icon: BluetoothConnectedIcon,
+        content: () => <BoxConnectionTypes/>
     },
     /*
-    {
-        name: 'Gehrung',
-        value: 'miter',
-        icon: DiameterIcon,
-        content: (
-            <div>
-                <p>Gehrung</p>
-            </div>
-        )
-    },
     {
         name: 'Schubladen',
         value: 'drawer',

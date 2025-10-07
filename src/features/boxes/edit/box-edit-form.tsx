@@ -50,7 +50,7 @@ export const BoxEditForm = (props: BoxEditFormProps) => {
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="flex w-full h-full flex-col gap-6 p-4">
-                    <Tabs defaultValue='common' className='gap-4'>
+                    <Tabs defaultValue='common' className='gap-0'>
                         <TabsList className='h-full'>
                             {boxTabs.map(({icon: Icon, name, value}) => (
                                 <TabsTrigger key={value}

@@ -1,11 +1,12 @@
-import {useEffect, useRef, useState} from "react"
+import {useEffect, useRef} from "react"
 import {Plus} from "lucide-react"
 import {Button} from "@/components/ui/button"
 import {FoldersIcon, type FoldersIconHandle} from "@/components/ui/folders";
 import {CreateBoxDialog} from "@/features/boxes/create/create-box-dialog";
+import {useBoolean} from "@/hooks/use-boolean";
 
 export const BoxesEmpty = () => {
-    const [createDialogOpen, setCreateDialogOpen] = useState(false)
+    const createDialog = useBoolean(false)
     const foldersRef = useRef<FoldersIconHandle>(null)
 
     useEffect(() => {
@@ -29,8 +30,8 @@ export const BoxesEmpty = () => {
     return (
         <>
             <CreateBoxDialog
-                open={createDialogOpen}
-                onOpenChange={setCreateDialogOpen}
+                open={createDialog.value}
+                onOpenChange={createDialog.setValue}
             />
             <div className="flex flex-col items-center justify-center min-h-[400px]">
                 <div className="text-center">
@@ -48,11 +49,11 @@ export const BoxesEmpty = () => {
                         Erstellen deine erste Box
                     </p>
                     <Button
-                        onClick={() => setCreateDialogOpen(true)}
+                        onClick={createDialog.setTrue}
                         className="font-mono uppercase tracking-wider"
                     >
                         <Plus className="w-4 h-4 mr-2"/>
-                        Projekt erstellen
+                        Box erstellen
                     </Button>
                 </div>
             </div>

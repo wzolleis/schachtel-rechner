@@ -18,8 +18,6 @@ export const BoxEdit = () => {
         )
     }
 
-    console.log('box edit', box)
-
     return (
         <div className="p-6">
             <div>
