@@ -61,7 +61,7 @@ export const BoxConnectionTypes = () => (
             <Card className={'bg-amber-50'}>
                 <CardHeader>
                     <CardTitle>Verbindung zwischen den Seiten</CardTitle>
-                    <CardDescription>Wähle einen Verbindungstyp aus</CardDescription>
+                    <CardDescription>Wähle einen Verbindungstyp für die Seitenteile aus</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <Choicebox
@@ -86,7 +86,10 @@ export const BoxConnectionTypes = () => (
                     </Choicebox>
                 </CardContent>
                 <CardFooter>
-                    <p>Der Verbindungstyp wirkt sich auf die Längen der Seitenteile ausr</p>
+                    <p>
+                        Der Verbindungstyp wirkt sich auf die Dimension aller Seitenteile aus.<br/>
+                        Außerdem wird die Größe von Boden u. Deckel damit beeinflusst.
+                    </p>
                 </CardFooter>
             </Card>
             <Card className={'mt-2 bg-blue-50'}>
@@ -117,7 +120,7 @@ export const BoxConnectionTypes = () => (
                     </Choicebox>
                 </CardContent>
                 <CardFooter>
-                    <p>Der Verbindungstyp wirkt sich auf die Längen der Seitenteile ausr</p>
+                    <p>Der Verbindungstyp wirkt sich auf Dimension der Rückwand aus</p>
                 </CardFooter>
             </Card>
         </CardContent>

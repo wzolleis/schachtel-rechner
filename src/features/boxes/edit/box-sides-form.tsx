@@ -4,12 +4,26 @@ import {InputFormField} from "@/components/form/input-form-field";
 import {CheckboxFormField} from "@/components/form/checkbox-form-field";
 import {EditBoxFormInput} from "@/features/boxes/edit/box-edit-form-types";
 import {DimensionSeparator} from "@/components/form/dimension-separator";
+import {SaveButton} from "@/components/buttons/save-button";
+import {useSaveBox} from "@/features/boxes/hooks/use-save-box";
+import {Box} from "@/features/boxes/box-schema";
+import {toast} from "sonner"
 
-export const BoxSidesForm = () => {
+export const BoxSidesForm = ({box}: { box: Box }) => {
     const form = useFormContext<EditBoxFormInput>();
+    const {saveBox,} = useSaveBox()
+
+    const onSaveBox = () => {
+        saveBox(box, form.getValues())
+        toast.info("Speichere Box...", {
+            closeButton: true,
+            duration: 1000
+        })
+    }
+
     return (
         <div className={'mt-4 p-4 flex flex-col gap-4 bg-gray-200:35'}>
-            <div className="flex flex-row gap-4 ">
+            <div className="flex flex-rows gap-4 ">
                 <FormField
                     control={form.control}
                     name="simpleSideDefinition"
@@ -82,6 +96,9 @@ export const BoxSidesForm = () => {
                         />
                     )}
                 />
+            </div>
+            <div className={'mt-4 flex flex-col gap-4 ms-auto'}>
+                <SaveButton onClick={onSaveBox}/>
             </div>
         </div>
     )

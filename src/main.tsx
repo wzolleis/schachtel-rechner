@@ -18,7 +18,8 @@ const router = createBrowserRouter(
 // @ts-expect-error expecting root
 createRoot(document.getElementById("root")).render(
     <StrictMode>
-        <Toaster/>
         <RouterProvider router={router} />
+        <Toaster visibleToasts={1} position={'top-center'} />
+
     </StrictMode>
 );

@@ -28,7 +28,7 @@ export const boxEditTabs = (): BoxEditTab[] => [
         name: 'Seiten',
         value: 'sides',
         icon: FrameIcon,
-        content: () => <BoxSidesForm/>
+        content: ({box}) => <BoxSidesForm box={box}/>
     },
     {
         name: 'Verbindungen',

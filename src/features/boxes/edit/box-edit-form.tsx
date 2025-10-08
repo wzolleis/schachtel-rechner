@@ -2,15 +2,13 @@ import {Form} from "@/components/ui/form";
 import {Box} from "@/features/boxes/box-schema";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {Button} from "@/components/ui/button";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
-import {startTransition, useMemo} from "react";
+import {useMemo} from "react";
 import {EditBoxFormInput, EditBoxFormOutput, EditBoxFormSchema} from "@/features/boxes/edit/box-edit-form-types";
 import {boxEditTabs} from "@/features/boxes/edit/box-edit-tabs";
 import {FileStackIcon} from "lucide-react";
-import {boxRepo} from "@/features/boxes/repo/box-repo";
 import {BoxParts} from "@/features/boxes/edit/box-parts";
-import {calculateBox} from "@/features/boxes/edit/calculate-box";
+import {useSaveBox} from "@/features/boxes/hooks/use-save-box";
 
 export type  BoxEditFormProps = {
     box: Box,
@@ -36,19 +34,17 @@ export const BoxEditForm = (props: BoxEditFormProps) => {
         defaultValues
     })
 
+    const {saveBox} = useSaveBox()
 
-    const onSubmit = (data: EditBoxFormInput) => {
-        startTransition(() => {
-            const toUpdate = calculateBox(box, data)
-            boxRepo.update(toUpdate)
-        })
+    const onSaveBox = (data: EditBoxFormInput) => {
+        saveBox(box, data)
     }
 
     const boxTabs = useMemo(() => boxEditTabs(), [])
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={form.handleSubmit(onSaveBox)} className="space-y-6">
                 <div className="flex w-full h-full flex-col gap-6 p-4">
                     <Tabs defaultValue='common' className='gap-0'>
                         <TabsList className='h-full'>
@@ -82,8 +78,6 @@ export const BoxEditForm = (props: BoxEditFormProps) => {
                         </TabsContent>
                     </Tabs>
                 </div>
-
-                <Button type="submit">Speichern</Button>
             </form>
         </Form>
     )
