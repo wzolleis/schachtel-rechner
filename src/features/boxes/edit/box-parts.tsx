@@ -1,4 +1,4 @@
-import {Box} from "@/features/boxes/box-schema";
+import {Box} from "@/features/boxes/schema/box-schema";
 
 export interface BoxPartProps {
     box: Box

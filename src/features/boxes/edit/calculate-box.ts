@@ -1,6 +1,6 @@
-import {EditBoxFormInput, EditBoxFormSchema} from "@/features/boxes/edit/box-edit-form-types";
+import {EditBoxFormInput, EditBoxFormSchema} from "@/features/boxes/schema/box-edit-schema";
 import {BoxCalculator} from "@/lib/box-calc-utils";
-import {Box, BoxSchema} from "@/features/boxes/box-schema";
+import {Box, BoxSchema} from "@/features/boxes/schema/box-schema";
 import {z} from "zod";
 
 export const calculateBox = (box: Box, values: EditBoxFormInput) => {

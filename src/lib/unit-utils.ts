@@ -1,4 +1,4 @@
-import {ValueWithUnit} from "@/features/boxes/box-schema";
+import {ValueWithUnit} from "@/features/boxes/schema/box-schema";
 
 export type Unit = "mm" | "cm"
 

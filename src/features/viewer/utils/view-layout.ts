@@ -2,7 +2,7 @@
  * Layout calculations for positioning rectangles in box views
  */
 
-import {Box} from "@/features/boxes/box-schema";
+import {Box} from "@/features/boxes/schema/box-schema";
 import {getValueAs} from "@/lib/unit-utils";
 import {BoxDimensions, BoxViewType, Rectangle, ViewportPadding} from "./view-types";
 import {isHorizontalView} from "./view-type-helpers";

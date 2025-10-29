@@ -7,7 +7,7 @@ import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandL
 import {Input} from "@/components/ui/input";
 import {useFormContext} from "react-hook-form";
 import {useFindAllProjects} from "@/features/projects/repo/project-queries";
-import {EditBoxFormInput} from "@/features/boxes/edit/box-edit-form-types";
+import {EditBoxFormInput} from "@/features/boxes/schema/box-edit-schema";
 import {Separator} from "@/components/ui/separator";
 import {BoxVisualization} from "@/features/boxes/edit/box-visualization";
 import {calculateBox} from "@/features/boxes/edit/calculate-box";

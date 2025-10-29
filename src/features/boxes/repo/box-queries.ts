@@ -1,7 +1,7 @@
 import {useLiveQuery} from "@tanstack/react-db";
 import {boxCollection} from "@/features/boxes/repo/box-collection";
 import {ok, Result} from "neverthrow";
-import {Box} from "@/features/boxes/box-schema";
+import {Box} from "@/features/boxes/schema/box-schema";
 
 export const useFindAllBoxes = (): Result<Box[], Error> => {
     const {data: boxes} = useLiveQuery((q) => q.from({box: boxCollection}))

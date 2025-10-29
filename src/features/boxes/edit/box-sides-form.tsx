@@ -2,24 +2,12 @@ import {FormField} from "@/components/ui/form";
 import {useFormContext} from "react-hook-form";
 import {InputFormField} from "@/components/form/input-form-field";
 import {CheckboxFormField} from "@/components/form/checkbox-form-field";
-import {EditBoxFormInput} from "@/features/boxes/edit/box-edit-form-types";
+import {EditBoxFormInput} from "@/features/boxes/schema/box-edit-schema";
 import {DimensionSeparator} from "@/components/form/dimension-separator";
-import {SaveButton} from "@/components/buttons/save-button";
-import {useSaveBox} from "@/features/boxes/hooks/use-save-box";
-import {Box} from "@/features/boxes/box-schema";
-import {toast} from "sonner"
+import {Box} from "@/features/boxes/schema/box-schema";
 
-export const BoxSidesForm = ({box}: { box: Box }) => {
-    const form = useFormContext<EditBoxFormInput>();
-    const {saveBox,} = useSaveBox()
-
-    const onSaveBox = () => {
-        saveBox(box, form.getValues())
-        toast.info("Speichere Box...", {
-            closeButton: true,
-            duration: 1000
-        })
-    }
+export const BoxSidesForm = ({box: _box}: { box: Box | undefined }) => {
+    const form = useFormContext<EditBoxFormInput>()
 
     return (
         <div className={'mt-4 p-4 flex flex-col gap-4 bg-gray-200:35'}>
@@ -90,15 +78,12 @@ export const BoxSidesForm = ({box}: { box: Box }) => {
                     render={(props) => (
                         <InputFormField {...props}
                                         label={'Tiefe'}
-                                        description={'Breite in mm'}
+                                        description={'Tiefe in mm'}
                                         type={'number'}
                                         placeholder={'10'}
                         />
                     )}
                 />
-            </div>
-            <div className={'mt-4 flex flex-col gap-4 ms-auto'}>
-                <SaveButton onClick={onSaveBox}/>
             </div>
         </div>
     )

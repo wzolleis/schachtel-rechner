@@ -1,6 +1,6 @@
 // Example drawer box with realistic dimensions
 import {withUnit} from "@/lib/unit-utils";
-import {Box} from "@/features/boxes/box-schema";
+import {Box} from "@/features/boxes/schema/box-schema";
 
 export const drawerBox: Box = {
     id: "example-drawer",

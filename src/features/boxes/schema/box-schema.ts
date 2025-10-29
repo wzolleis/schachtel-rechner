@@ -8,9 +8,10 @@ export const ValueWithUnitSchema = z.object({
 export const IdTypeSchema = z.string().nonempty().nonoptional()
 
 const BoxSideSchema = z.object({
+    id: IdTypeSchema.optional(),
     width: ValueWithUnitSchema,
     height: ValueWithUnitSchema,
-    thickness: ValueWithUnitSchema
+    thickness: ValueWithUnitSchema,
 })
 
 const BoxSidesSchema = z.object({

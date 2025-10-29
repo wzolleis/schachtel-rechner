@@ -12,7 +12,7 @@ import {useState} from "react";
 import {boxStore$} from "@/features/boxes/repo/box-store";
 import {CreateBoxDialog} from "@/features/boxes/create/create-box-dialog";
 import {projectStore$} from "@/features/projects/repo/project-store";
-import {Box} from "@/features/boxes/box-schema";
+import {Box} from "@/features/boxes/schema/box-schema";
 import {useFindAllBoxes} from "@/features/boxes/repo/box-queries";
 import {ErrorPage} from "@/components/errors/error-page";
 

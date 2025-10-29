@@ -1,9 +1,9 @@
 import {BluetoothConnectedIcon, FrameIcon, KeyboardIcon, LucideIcon} from "lucide-react";
 import {BoxCommonSettingsForm} from "@/features/boxes/edit/box-common-settings-form";
 import {BoxSidesForm} from "@/features/boxes/edit/box-sides-form";
-import {Box} from "@/features/boxes/box-schema";
+import {Box} from "@/features/boxes/schema/box-schema";
 import {FunctionComponent} from "react";
-import {BoxConnectionTypes} from "@/features/boxes/edit/box-connection-types";
+import {BoxConnectionTypesForm} from "@/features/box-connection-types/edit/box-connection-types-form";
 
 export interface BoxEditTabProps {
     box?: Box
@@ -32,9 +32,9 @@ export const boxEditTabs = (): BoxEditTab[] => [
     },
     {
         name: 'Verbindungen',
-        value: 'connextion-types',
+        value: 'connection-types',
         icon: BluetoothConnectedIcon,
-        content: () => <BoxConnectionTypes/>
+        content: ({box}) => <BoxConnectionTypesForm box={box}/>
     },
     /*
     {

@@ -1,4 +1,4 @@
-import {Box, BoxSides} from "@/features/boxes/box-schema";
+import {Box, BoxSides} from "@/features/boxes/schema/box-schema";
 import {withUnit} from "@/lib/unit-utils";
 
 export const defaultSides: BoxSides = {

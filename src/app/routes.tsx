@@ -6,6 +6,7 @@ import {ProjectEdit} from "@/features/projects/edit/project-edit";
 import {ProjectCreate} from "@/features/projects/create/project-create";
 import {BoxesPage} from "@/features/boxes/dashboard/boxes-page";
 import {BoxEdit} from "@/features/boxes/edit/box-edit";
+import {ProjectBoxesOverview} from "@/features/projects/project-boxes/project-boxes-overview";
 
 const AppRutes =
     <Route path={'/'}
@@ -29,6 +30,10 @@ const AppRutes =
                                  children={[
                                      <Route path={'edit'}
                                             element={<ProjectEdit/>}
+                                            index={true}
+                                     />,
+                                     <Route path={'boxes'}
+                                            element={<ProjectBoxesOverview/>}
                                             index={true}
                                      />,
                                  ]}

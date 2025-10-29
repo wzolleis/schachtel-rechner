@@ -7,8 +7,8 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from "@
 import {createId} from "@paralleldrive/cuid2";
 import {startTransition, useEffect} from "react";
 import {boxStore$} from "@/features/boxes/repo/box-store";
-import {CeateBoxSchema, CreateBox} from "@/features/boxes/box-schema";
-import {defaultSides} from "@/features/boxes/default-box";
+import {CeateBoxSchema, CreateBox} from "@/features/boxes/schema/box-schema";
+import {defaultSides} from "@/features/boxes/schema/default-box";
 import {use$} from "@legendapp/state/react";
 import {projectStore$} from "@/features/projects/repo/project-store";
 import {useLiveQuery} from "@tanstack/react-db";

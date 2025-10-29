@@ -1,5 +1,5 @@
 import {z} from "zod";
-import {BoxNameSchema, IdTypeSchema, ValueWithUnitSchema} from "@/features/boxes/box-schema";
+import {BoxNameSchema, IdTypeSchema, ValueWithUnitSchema} from "@/features/boxes/schema/box-schema";
 
 export const EditBoxFormSchema = z.object({
     simpleSideDefinition: z.boolean().default(true).nonoptional(),
@@ -13,4 +13,3 @@ export const EditBoxFormSchema = z.object({
 
 export type EditBoxFormInput = z.input<typeof EditBoxFormSchema>
 export type EditBoxFormOutput = z.output<typeof EditBoxFormSchema>
-export type EditBoxFormValues = z.infer<EditBoxFormInput>

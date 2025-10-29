@@ -2,7 +2,7 @@
  * Box dimension calculations for 2D views
  */
 
-import {Box} from "@/features/boxes/box-schema";
+import {Box} from "@/features/boxes/schema/box-schema";
 import {getValueAs} from "@/lib/unit-utils";
 import {BoxDimensions, BoxViewType, Viewport} from "./view-types";
 import {getViewportCenter} from "./viewport-utils";

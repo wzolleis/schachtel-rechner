@@ -3,7 +3,7 @@ import {BookA, Edit3, GitGraph, Trash2} from "lucide-react"
 import {Button} from "@/components/ui/button"
 import {Card, CardAction, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
 import {Input} from "@/components/ui/input"
-import {Box} from "@/features/boxes/box-schema";
+import {Box} from "@/features/boxes/schema/box-schema";
 import {boxCollection} from "@/features/boxes/repo/box-collection";
 import {useNavigateToBoxEdit} from "@/features/boxes/hooks/navigate-to-box-edit";
 

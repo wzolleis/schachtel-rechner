@@ -1,4 +1,4 @@
-import {Box} from "@/features/boxes/box-schema";
+import {Box} from "@/features/boxes/schema/box-schema";
 import {BoxViewType, FlexibleViewport} from "@/features/viewer/utils/view-types";
 import {createStandardPadding, getDrawingArea} from "@/features/viewer/utils/viewport-utils";
 import {calculateBoxDimensions} from "@/features/viewer/utils/box-dimensions";

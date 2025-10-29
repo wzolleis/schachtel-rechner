@@ -1,5 +1,5 @@
 import {createCollection, localStorageCollectionOptions} from "@tanstack/react-db";
-import {BoxSchema} from "@/features/boxes/box-schema";
+import {BoxSchema} from "@/features/boxes/schema/box-schema";
 
 export const boxCollection = createCollection(localStorageCollectionOptions({
     schema: BoxSchema,

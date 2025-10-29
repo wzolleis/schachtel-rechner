@@ -1,4 +1,4 @@
-import {BoxSide, BoxSides, ValueWithUnit} from "@/features/boxes/box-schema";
+import {BoxSide, BoxSides, ValueWithUnit} from "@/features/boxes/schema/box-schema";
 
 /**
  * Berechnet eine Box aus der Höhe, Breite, Tiefe und Materialstärke

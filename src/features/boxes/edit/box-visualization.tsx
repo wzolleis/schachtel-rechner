@@ -1,4 +1,4 @@
-import {Box} from "@/features/boxes/box-schema";
+import {Box} from "@/features/boxes/schema/box-schema";
 import {Button} from "@/components/ui/button";
 import {View2D} from "@/features/boxes/viewer/2d-view";
 import {useState} from "react";
