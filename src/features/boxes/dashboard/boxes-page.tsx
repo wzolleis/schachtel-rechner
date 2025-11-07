@@ -3,7 +3,7 @@ import {boxCollection} from "@/features/boxes/repo/box-collection";
 import {BoxesEmpty} from "@/features/boxes/dashboard/boxes-empty";
 import {PageDescription, PageHeaderSeparator, PageTitle} from "@/components/ui/page-header";
 import {AnimatePresence, motion} from "motion/react";
-import {BoxCard} from "@/features/boxes/dashboard/box-card";
+import BoxCard from "@/features/boxes/dashboard/box-card";
 
 export const BoxesPage = () => {
     const {data: boxes} = useLiveQuery(q => q.from({boxes: boxCollection}))

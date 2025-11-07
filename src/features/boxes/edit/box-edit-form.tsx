@@ -10,13 +10,17 @@ import {FileStackIcon} from "lucide-react";
 import {BoxParts} from "@/features/boxes/edit/box-parts";
 import {useSaveBox} from "@/features/boxes/hooks/use-save-box";
 import _ from "lodash";
+import { toast } from "sonner"
+import {useSaveBoxConnections} from "@/features/box-connections/hooks/use-save-box-connections";
+import {BoxConnections} from "@/features/boxes/schema/box-connection-schema";
 
 export type  BoxEditFormProps = {
     box: Box,
+    boxConnections: BoxConnections
 }
 
 export const BoxEditForm = (props: BoxEditFormProps) => {
-    const {box} = props
+    const {box, boxConnections} = props
     const defaultValues: EditBoxFormInput = useMemo(() => {
         return {
             simpleSideDefinition: true,
@@ -25,7 +29,8 @@ export const BoxEditForm = (props: BoxEditFormProps) => {
             height: box.sides.left.height,
             width: box.sides.front.width,
             depth: box.sides.left.width,
-            thickness: box.sides.left.thickness
+            thickness: box.sides.left.thickness,
+            connections: boxConnections
         }
     }, [box])
 
@@ -36,13 +41,15 @@ export const BoxEditForm = (props: BoxEditFormProps) => {
     })
 
     const {saveBox} = useSaveBox()
+    const {saveBoxConnections} = useSaveBoxConnections()
     const watchedData = form.watch()
 
     const debouncedSave = useCallback(
         _.debounce(() => {
             if (!!box) {
                 saveBox(box, watchedData)
-                console.log('------> debouncedSave box', watchedData)
+                saveBoxConnections(boxConnections, watchedData)
+                toast("Box wurde gespeichert")
             }
         }, 1000),
         [form, saveBox],

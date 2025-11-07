@@ -1,29 +1,34 @@
 import {KeyboardEvent, useState} from "react"
-import {BookA, Edit3, GitGraph, Trash2} from "lucide-react"
-import {Button} from "@/components/ui/button"
+import {BluetoothConnectedIcon, BookA, Edit3, GitGraph, Trash2} from "lucide-react"
 import {Card, CardAction, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
 import {Input} from "@/components/ui/input"
 import {Box} from "@/features/boxes/schema/box-schema";
 import {boxCollection} from "@/features/boxes/repo/box-collection";
 import {useNavigateToBoxEdit} from "@/features/boxes/hooks/navigate-to-box-edit";
+import {ButtonWithTooltip} from "@/components/form/button-with-tooltip";
+import {useBoolean} from "@/hooks/use-boolean";
 
 interface BoxCardProps {
     box: Box
 }
 
-export const BoxCard = ({box}: BoxCardProps) => {
-    const [enableEdit, setEnableEdit] = useState(false)
+const BoxCard = ({box}: BoxCardProps) => {
+    const enableRenameBox = useBoolean(false)
     const [editName, setEditName] = useState(box.name)
     const {navigateToBoxEdit} = useNavigateToBoxEdit()
     const saveEdit = () => {
         boxCollection.update(box.id, box => {
             box.name = editName.trim()
         })
-        setEnableEdit(false)
+        enableRenameBox.setFalse()
+    }
+
+    const handleEditBoxConnections = () => {
+
     }
 
     const cancelEdit = () => {
-        setEnableEdit(false)
+        enableRenameBox.setFalse()
         setEditName(box.name)
     }
 
@@ -54,7 +59,7 @@ export const BoxCard = ({box}: BoxCardProps) => {
         >
             <CardHeader>
                 <CardTitle className="font-mono tracking-wider text-sm">
-                    {enableEdit ? (
+                    {enableRenameBox.value ? (
                         <Input
                             value={editName}
                             onChange={({target}) => setEditName(target.value)}
@@ -67,42 +72,37 @@ export const BoxCard = ({box}: BoxCardProps) => {
                         <div>{box.name}</div>
                     )}
                 </CardTitle>
-                <CardAction>
-                    <div className="flex gap-2">
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => setEnableEdit(true)}
-                            className="size-8 p-0 hover:bg-gray-100"
-                        >
-                            <BookA className="size-4"/>
-                        </Button>
-                        <Button
-                            onClick={handleEditBox}
-                            variant="ghost"
-                            size="sm"
-                            className="h-8 w-8 p-0 hover:bg-amber-600 hover:text-white"
-                        >
-                            <Edit3 className="h-3 w-3"/>
-                        </Button>
-                        <Button
-                            onClick={handleVisualizeBox}
-                            variant="ghost"
-                            size="sm"
-                            className="h-8 w-8 p-0 hover:bg-amber-600 hover:text-white"
-                        >
-                            <GitGraph className="h-3 w-3"/>
-                        </Button>
-                        <Button
-                            onClick={handleDeleteBox}
-                            variant="ghost"
-                            size="sm"
-                            className="h-8 w-8 p-0 hover:bg-red-50 hover:text-red-600"
-                        >
-                            <Trash2 className="h-3 w-3"/>
-                        </Button>
-                    </div>
-                </CardAction>
+                {
+                    !enableRenameBox.value &&
+                    <CardAction>
+                        <div className="flex gap-2">
+                            <ButtonWithTooltip handleButtonClick={enableRenameBox.setTrue}
+                                               tooltipText={"Rename Box"}
+                                               Icon={BookA}
+                            />
+                            <ButtonWithTooltip handleButtonClick={handleEditBox}
+                                               tooltipText={"Edit Box"}
+                                               Icon={Edit3}
+                                               buttonClasses={"h-8 w-8 p-0 hover:bg-green-600 hover:text-white"}
+                            />
+                            <ButtonWithTooltip handleButtonClick={handleVisualizeBox}
+                                               tooltipText={"Visualize Box"}
+                                               Icon={GitGraph}
+                                               buttonClasses={"h-8 w-8 p-0 hover:bg-blue-600 hover:text-white"}
+                            />
+                            <ButtonWithTooltip handleButtonClick={handleEditBoxConnections}
+                                               tooltipText={"Edit Box Connections"}
+                                               Icon={BluetoothConnectedIcon}
+                                               buttonClasses={"h-8 w-8 p-0 hover:bg-amber-600 hover:text-white"}
+                            />
+                            <ButtonWithTooltip handleButtonClick={handleDeleteBox}
+                                               tooltipText={"Delete Box"}
+                                               Icon={Trash2}
+                                               buttonClasses={"h-8 w-8 p-0 hover:bg-red-600 hover:text-white"}
+                            />
+                        </div>
+                    </CardAction>
+                }
             </CardHeader>
             <CardContent>
                 <p className="text-xs text-muted-foreground font-mono">
@@ -115,3 +115,4 @@ export const BoxCard = ({box}: BoxCardProps) => {
         </Card>
     )
 }
+export default BoxCard

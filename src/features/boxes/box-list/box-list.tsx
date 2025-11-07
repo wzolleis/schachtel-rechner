@@ -1,5 +1,5 @@
 import {AnimatePresence, motion} from "motion/react";
-import {BoxCard} from "@/features/boxes/dashboard/box-card";
+import BoxCard from "@/features/boxes/dashboard/box-card";
 import {Box} from "@/features/boxes/schema/box-schema";
 
 export interface BoxListProps {

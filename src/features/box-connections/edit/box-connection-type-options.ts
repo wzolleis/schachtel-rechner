@@ -1,4 +1,4 @@
-import {SideConnectionType} from "@/features/box-connection-types/schema/box-connectiontype-schema";
+import {SideConnectionType} from "@/features/box-connections/schema/box-connectiontype-schema";
 
 const nextId = (value: number, prefix: string | undefined = 'SC') => {
     return `${prefix}${value}`

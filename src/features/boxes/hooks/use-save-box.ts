@@ -9,6 +9,7 @@ export const useSaveBox = () => {
     const saveBox =  useCallback((box: Box, data: EditBoxFormInput) => {
         startTransition(() => {
             const toUpdate = calculateBox(box, data)
+            console.log('---> useSaveBox()', toUpdate)
             boxRepo.update(toUpdate)
         })
     }, [startTransition])

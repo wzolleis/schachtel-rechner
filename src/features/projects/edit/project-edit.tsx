@@ -7,7 +7,7 @@ import {AnimatePresence, motion} from "motion/react";
 import {ProjectsEmpty} from "@/features/projects/dashboard/projects-empty";
 import {NoProjectFoundError} from "@/features/projects/errors/no-project-found-error";
 import {boxCollection} from "@/features/boxes/repo/box-collection";
-import {BoxCard} from "@/features/boxes/dashboard/box-card";
+import BoxCard from "@/features/boxes/dashboard/box-card";
 
 export const ProjectEdit = () => {
     const currentProjectId = use$(projectStore$.currentProjectId)

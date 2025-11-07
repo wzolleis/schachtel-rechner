@@ -23,7 +23,6 @@ const BoxSidesSchema = z.object({
     right: BoxSideSchema,
 })
 
-
 export const BoxNameSchema = z.string()
     .min(1, {
         error: "Please provide a name for your box"
@@ -39,6 +38,7 @@ export const BoxSchema = z.object({
     name: BoxNameSchema,
     sides: BoxSidesSchema,
 })
+
 export const CeateBoxSchema = z.object({
     projectId: IdTypeSchema,
     projectName: IdTypeSchema,
