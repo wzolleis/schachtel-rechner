@@ -4,9 +4,8 @@ import {InputFormField} from "@/components/form/input-form-field";
 import {CheckboxFormField} from "@/components/form/checkbox-form-field";
 import {EditBoxFormInput} from "@/features/boxes/schema/box-edit-schema";
 import {DimensionSeparator} from "@/components/form/dimension-separator";
-import {Box} from "@/features/boxes/schema/box-schema";
 
-export const BoxSidesForm = ({box: _box}: { box: Box | undefined }) => {
+export const BoxSidesForm = () => {
     const form = useFormContext<EditBoxFormInput>()
 
     return (

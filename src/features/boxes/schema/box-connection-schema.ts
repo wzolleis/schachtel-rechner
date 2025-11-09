@@ -1,5 +1,5 @@
 import {z} from "zod";
-import {IdTypeSchema} from "@/features/boxes/schema/box-schema";
+import {IdTypeSchema} from "@/common/schemas/id-type-schema";
 
 const BoxConnectionTypeSchema = z.enum(["gehrung", "nut", "schubladenfräser"])
 

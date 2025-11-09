@@ -21,9 +21,10 @@ export const defaultBoxCoverConnection = (id: string) => {
     }
 }
 
-export const defaultBoxConnections = (id: string, boxId: string): BoxConnections => {
+export const defaultBoxConnections = (args: {connectionsId: string, boxId: string}): BoxConnections => {
+    const {connectionsId, boxId} = args
     return {
-        id,
+        id: connectionsId,
         boxId,
         leftFront: defaultBoxSideConnection(createId()),
         leftBack: defaultBoxSideConnection(createId()),

@@ -1,5 +1,7 @@
 import {Box, BoxSides} from "@/features/boxes/schema/box-schema";
 import {withUnit} from "@/lib/unit-utils";
+import {defaultBoxConnections} from "@/features/boxes/schema/default-box-connections";
+import {createId} from "@paralleldrive/cuid2";
 
 export const defaultSides: BoxSides = {
     // Front face (what you see when drawer is closed)
@@ -41,12 +43,14 @@ export const defaultSides: BoxSides = {
 }
 
 
-export const defaultBox = (args: { id: string, projectId: string, name: string }): Box => {
-    const {id, projectId, name} = args;
+
+export const defaultBox = (args: { boxId: string, projectId: string, name: string }): Box => {
+    const {boxId, projectId, name} = args;
     return {
-        id,
+        id: boxId,
         projectId,
         name,
-        sides: defaultSides
+        sides: defaultSides,
+        connections: defaultBoxConnections({connectionsId: createId(), boxId}),
     }
 }

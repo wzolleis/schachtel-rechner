@@ -1,11 +1,11 @@
 import {z} from "zod";
+import {BoxConnectionsSchema} from "@/features/boxes/schema/box-connection-schema";
+import {IdTypeSchema} from "@/common/schemas/id-type-schema";
 
 export const ValueWithUnitSchema = z.object({
     unit: z.enum(["mm", "cm"]).nonoptional(),
     value: z.coerce.number()
 })
-
-export const IdTypeSchema = z.string().nonempty().nonoptional()
 
 const BoxSideSchema = z.object({
     id: IdTypeSchema.optional(),
@@ -37,6 +37,7 @@ export const BoxSchema = z.object({
     projectId: IdTypeSchema,
     name: BoxNameSchema,
     sides: BoxSidesSchema,
+    connections: BoxConnectionsSchema.optional()
 })
 
 export const CeateBoxSchema = z.object({

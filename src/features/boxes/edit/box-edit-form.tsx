@@ -8,11 +8,10 @@ import {EditBoxFormInput, EditBoxFormOutput, EditBoxFormSchema} from "@/features
 import {boxEditTabs} from "@/features/boxes/edit/box-edit-tabs";
 import {FileStackIcon} from "lucide-react";
 import {BoxParts} from "@/features/boxes/edit/box-parts";
-import {useSaveBox} from "@/features/boxes/hooks/use-save-box";
 import _ from "lodash";
-import { toast } from "sonner"
-import {useSaveBoxConnections} from "@/features/box-connections/hooks/use-save-box-connections";
+import {toast} from "sonner"
 import {BoxConnections} from "@/features/boxes/schema/box-connection-schema";
+import {saveBox} from "@/features/boxes/repo/save-box";
 
 export type  BoxEditFormProps = {
     box: Box,
@@ -32,7 +31,7 @@ export const BoxEditForm = (props: BoxEditFormProps) => {
             thickness: box.sides.left.thickness,
             connections: boxConnections
         }
-    }, [box])
+    }, [box, boxConnections])
 
     const form = useForm<EditBoxFormInput, EditBoxFormOutput>({
         resolver: zodResolver(EditBoxFormSchema),
@@ -40,20 +39,17 @@ export const BoxEditForm = (props: BoxEditFormProps) => {
         defaultValues
     })
 
-    const {saveBox} = useSaveBox()
-    const {saveBoxConnections} = useSaveBoxConnections()
-    const watchedData = form.watch()
-
-    const debouncedSave = useCallback(
-        _.debounce(() => {
-            if (!!box) {
-                saveBox(box, watchedData)
-                saveBoxConnections(boxConnections, watchedData)
-                toast("Box wurde gespeichert")
-            }
-        }, 1000),
-        [form, saveBox],
+    const saveCallback = useCallback(() => {
+                if (box) {
+                    const values = form.getValues()
+                    saveBox(box, values)
+                    toast("Box wurde gespeichert")
+                }
+            },
+        [ box, form],
     );
+
+    const debouncedSave = _.debounce(saveCallback)
 
     const boxTabs = useMemo(() => boxEditTabs(), [])
 
