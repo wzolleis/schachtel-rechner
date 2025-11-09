@@ -5,8 +5,6 @@ import {useFindBoxById} from "@/features/boxes/repo/box-queries";
 import {ErrorPage} from "@/components/errors/error-page";
 import {BoxNotFoundError} from "@/features/boxes/errors/box-not-found-error";
 import {BoxEditForm} from "@/features/boxes/edit/box-edit-form";
-import {defaultBoxConnections} from "@/features/boxes/schema/default-box-connections";
-import {createId} from "@paralleldrive/cuid2";
 
 export const BoxEdit = () => {
     const currentBoxId = use$(boxStore$.selectedBoxId)
@@ -14,11 +12,6 @@ export const BoxEdit = () => {
     // const boxes = useFindAllBoxes()
     const {findBoxById} = useFindBoxById()
     const box = findBoxById(currentBoxId)
-    // todo Watched Repo verwenden
-    const boxConnections = defaultBoxConnections({
-        connectionsId: createId(), boxId:  box?.id ?? ''
-    })
-
     if (!box) {
         return (
             <ErrorPage error={new BoxNotFoundError(currentBoxId)}/>
@@ -35,7 +28,7 @@ export const BoxEdit = () => {
 
 
             <div className="mt-4">
-                    <BoxEditForm box={box} boxConnections={boxConnections}/>
+                    <BoxEditForm box={box}/>
             </div>
         </div>
     )

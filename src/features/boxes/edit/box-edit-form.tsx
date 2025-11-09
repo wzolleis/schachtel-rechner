@@ -10,16 +10,15 @@ import {FileStackIcon} from "lucide-react";
 import {BoxParts} from "@/features/boxes/edit/box-parts";
 import _ from "lodash";
 import {toast} from "sonner"
-import {BoxConnections} from "@/features/boxes/schema/box-connection-schema";
-import {saveBox} from "@/features/boxes/repo/save-box";
+import {calculateBox} from "@/features/boxes/edit/calculate-box";
+import {boxRepo} from "@/features/boxes/repo/box-repo";
 
 export type  BoxEditFormProps = {
     box: Box,
-    boxConnections: BoxConnections
 }
 
 export const BoxEditForm = (props: BoxEditFormProps) => {
-    const {box, boxConnections} = props
+    const {box} = props
     const defaultValues: EditBoxFormInput = useMemo(() => {
         return {
             simpleSideDefinition: true,
@@ -29,9 +28,10 @@ export const BoxEditForm = (props: BoxEditFormProps) => {
             width: box.sides.front.width,
             depth: box.sides.left.width,
             thickness: box.sides.left.thickness,
-            connections: boxConnections
+            sideConnectionType: box.sideConnectionType,
+            coverConnectinType: box.coverConnectionType
         }
-    }, [box, boxConnections])
+    }, [box])
 
     const form = useForm<EditBoxFormInput, EditBoxFormOutput>({
         resolver: zodResolver(EditBoxFormSchema),
@@ -42,7 +42,8 @@ export const BoxEditForm = (props: BoxEditFormProps) => {
     const saveCallback = useCallback(() => {
                 if (box) {
                     const values = form.getValues()
-                    saveBox(box, values)
+                    const toUpdate = calculateBox(box, values)
+                    boxRepo.update(toUpdate)
                     toast("Box wurde gespeichert")
                 }
             },

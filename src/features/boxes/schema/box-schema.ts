@@ -31,13 +31,17 @@ export const BoxNameSchema = z.string()
     })
     .nonoptional()
 
+export const BoxSideConnectionTypeSchema = z.enum(["stumpf", "gehrung", "nut"]);
+export const BoxCoverConnectionTypeSchema = z.enum(["nut", "none"]);
 
 export const BoxSchema = z.object({
     id: IdTypeSchema,
     projectId: IdTypeSchema,
     name: BoxNameSchema,
     sides: BoxSidesSchema,
-    connections: BoxConnectionsSchema.optional()
+    connections: BoxConnectionsSchema.optional(),
+    sideConnectionType: BoxSideConnectionTypeSchema.optional(),
+    coverConnectionType: BoxCoverConnectionTypeSchema.optional()
 })
 
 export const CeateBoxSchema = z.object({

@@ -1,6 +1,10 @@
 import {z} from "zod";
-import {BoxNameSchema, ValueWithUnitSchema} from "@/features/boxes/schema/box-schema";
-import {BoxConnectionsSchema} from "@/features/boxes/schema/box-connection-schema";
+import {
+    BoxCoverConnectionTypeSchema,
+    BoxNameSchema,
+    BoxSideConnectionTypeSchema,
+    ValueWithUnitSchema
+} from "@/features/boxes/schema/box-schema";
 import {IdTypeSchema} from "@/common/schemas/id-type-schema";
 
 export const EditBoxFormSchema = z.object({
@@ -11,7 +15,8 @@ export const EditBoxFormSchema = z.object({
     width: ValueWithUnitSchema,
     depth: ValueWithUnitSchema,
     thickness: ValueWithUnitSchema,
-    connections: BoxConnectionsSchema.optional()
+    sideConnectionType: BoxSideConnectionTypeSchema.optional().default('stumpf'),
+    coverConnectionType: BoxCoverConnectionTypeSchema.optional().default('nut')
 })
 
 export type EditBoxFormInput = z.input<typeof EditBoxFormSchema>
