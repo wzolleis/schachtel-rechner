@@ -2,8 +2,14 @@ import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} f
 import {Save} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {Box} from "@/features/boxes/schema/box-schema";
+import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {Input} from "@/components/ui/input";
+import {useFormContext} from "react-hook-form";
+import {EditBoxFormInput} from "@/features/boxes/schema/box-edit-schema";
 
 export const BoxConnectionTypesForm = ({box:_box}: { box: Box | undefined }) => {
+    const form = useFormContext<EditBoxFormInput>()
+
     return (
         <div>
             <CardHeader>
@@ -13,11 +19,24 @@ export const BoxConnectionTypesForm = ({box:_box}: { box: Box | undefined }) => 
 
                 <Card className={'bg-amber-50'}>
                     <CardHeader>
-                        <CardTitle>Verbindung definieren</CardTitle>
-                        <CardDescription>Wähle einen Verbindungstyp und die Seiten dafür aus</CardDescription>
+                        <CardTitle>Verbindung der Seitenwände definieren</CardTitle>
+                        <CardDescription>Wähle einen Verbindungstyp</CardDescription>
                     </CardHeader>
                     <CardContent>
-
+                        <FormField
+                            control={form.control}
+                            name="sideConnectionType"
+                            render={({field}) => (
+                                <FormItem>
+                                    <FormLabel>Name</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Verbindungsart der Seiten" {...field} />
+                                    </FormControl>
+                                    <FormDescription>Der Name der Box.</FormDescription>
+                                    <FormMessage/>
+                                </FormItem>
+                            )}
+                        />
                     </CardContent>
                     <CardFooter>
                         <p>

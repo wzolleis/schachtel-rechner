@@ -31,8 +31,11 @@ export const BoxNameSchema = z.string()
     })
     .nonoptional()
 
-export const BoxSideConnectionTypeSchema = z.enum(["stumpf", "gehrung", "nut"]);
-export const BoxCoverConnectionTypeSchema = z.enum(["nut", "none"]);
+export const SideConnectionTypes =["stumpf", "gehrung", "nut"] as const;
+export const CoverConnectionTypes = ["nut", "none"] as const
+
+export const BoxSideConnectionTypeSchema = z.enum(SideConnectionTypes);
+export const BoxCoverConnectionTypeSchema = z.enum(CoverConnectionTypes);
 
 export const BoxSchema = z.object({
     id: IdTypeSchema,
@@ -58,3 +61,5 @@ export type CreateBox = z.infer<typeof CeateBoxSchema>
 export type BoxName = z.infer<typeof BoxNameSchema>
 export type BoxId = z.infer<typeof IdTypeSchema>
 export type ProjectId = z.infer<typeof IdTypeSchema>
+export type ProjectName = z.infer<typeof IdTypeSchema>
+export type BoxSideConnectionType = z.infer<typeof BoxSideConnectionTypeSchema>
