@@ -7,6 +7,7 @@ const update = (toUpdate: Box) => {
             draft.name = toUpdate.name
             draft.sides = toUpdate.sides
             draft.projectId = toUpdate.projectId
+            draft.sideConnectionType = toUpdate.sideConnectionType
         })
 }
 

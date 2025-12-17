@@ -1,13 +1,21 @@
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {Save} from "lucide-react";
 import {Button} from "@/components/ui/button";
-import {Box} from "@/features/boxes/schema/box-schema";
-import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import {Input} from "@/components/ui/input";
+import {Box, SideConnectionTypes} from "@/features/boxes/schema/box-schema";
+import {FormField} from "@/components/ui/form";
 import {useFormContext} from "react-hook-form";
 import {EditBoxFormInput} from "@/features/boxes/schema/box-edit-schema";
+import {ComboboxItemType, ComboboxFormField} from "@/components/form/combobox-form-field";
 
-export const BoxConnectionTypesForm = ({box:_box}: { box: Box | undefined }) => {
+const sideConnectionTypeComboboxData: ComboboxItemType[] = SideConnectionTypes.map((s) => {
+    return {
+        label: s,
+        value: s,
+        key: s,
+    }
+})
+
+export const BoxConnectionTypesForm = ({box: _box}: { box: Box | undefined }) => {
     const form = useFormContext<EditBoxFormInput>()
 
     return (
@@ -26,16 +34,19 @@ export const BoxConnectionTypesForm = ({box:_box}: { box: Box | undefined }) => 
                         <FormField
                             control={form.control}
                             name="sideConnectionType"
-                            render={({field}) => (
-                                <FormItem>
-                                    <FormLabel>Name</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="Verbindungsart der Seiten" {...field} />
-                                    </FormControl>
-                                    <FormDescription>Der Name der Box.</FormDescription>
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
+                            render={({field}) => {
+                                return (
+                                    <ComboboxFormField type={"Box Side Connection Type"}
+                                                       data={sideConnectionTypeComboboxData}
+                                                       label={'Verbindungstyp'}
+                                                       description={'Verbindungstyp'}
+                                                       onValueChange={field.onChange}
+                                                       defaultValue={field.value ?? 'stumpf'}
+                                                       field={field}
+
+                                    />
+                                )
+                            }}
                         />
                     </CardContent>
                     <CardFooter>

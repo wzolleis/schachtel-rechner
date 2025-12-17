@@ -43,8 +43,8 @@ export const BoxSchema = z.object({
     name: BoxNameSchema,
     sides: BoxSidesSchema,
     connections: BoxConnectionsSchema.optional(),
-    sideConnectionType: BoxSideConnectionTypeSchema.optional(),
-    coverConnectionType: BoxCoverConnectionTypeSchema.optional()
+    sideConnectionType: BoxSideConnectionTypeSchema.nonoptional().default('stumpf'),
+    coverConnectionType: BoxCoverConnectionTypeSchema.nonoptional().default('nut')
 })
 
 export const CeateBoxSchema = z.object({

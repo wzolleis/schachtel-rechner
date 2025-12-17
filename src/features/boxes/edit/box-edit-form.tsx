@@ -44,6 +44,7 @@ export const BoxEditForm = (props: BoxEditFormProps) => {
                     const values = form.getValues()
                     const toUpdate = calculateBox(box, values)
                     boxRepo.update(toUpdate)
+                    console.log('---> save box in callback', toUpdate)
                     toast("Box wurde gespeichert")
                 }
             },

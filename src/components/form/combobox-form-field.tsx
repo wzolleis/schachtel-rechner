@@ -1,64 +1,62 @@
 import {
-    ComboboxTrigger,
     Combobox,
-    ComboboxInput,
-    ComboboxEmpty,
     ComboboxContent,
+    ComboboxEmpty,
     ComboboxGroup,
+    ComboboxInput,
     ComboboxItem,
-    ComboboxList, ComboboxProps
+    ComboboxList,
+    ComboboxProps,
+    ComboboxTrigger
 } from "@/components/ui/shadcn-io/combobox";
-import {ControllerRenderProps, FieldValues, Path, useFormContext} from "react-hook-form";
-import {EditBoxFormInput} from "@/features/boxes/schema/box-edit-schema";
-import {FormField} from "@/components/ui/form";
+import {ControllerRenderProps, FieldValues, Path} from "react-hook-form";
+import {FormDescription, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {ComponentProps} from "react";
 
-export type ComboboxData = {
+export type ComboboxItemType = {
+    label: string,
     value: string,
-    label: string
+    key: string
 }
 
-export type ComboboxFormFieldProps<TFieldValues extends FieldValues, TName extends Path<TFieldValues>> =
+export type ComboboxFormFieldProps< TFieldValues extends FieldValues, TName extends Path<TFieldValues>> =
     {
+        label: string
+        description: string
         field: ControllerRenderProps<TFieldValues, TName>;
-        data: ComboboxData[]
-    } & ComboboxProps
-export type BoxSideConnectionTypeInputProps = {} & ComboboxProps
+        data: ComboboxItemType[]
+    } & ComboboxProps & ComponentProps<"div">
+
 
 export const ComboboxFormField =
     <TFieldValues extends FieldValues, TName extends Path<TFieldValues>, >(props: ComboboxFormFieldProps<TFieldValues, TName>) => {
-        const form = useFormContext<EditBoxFormInput>()
-        const {data} = props;
-
+        const {data, label, description, className, field} = props;
 
         return (
-            <FormField
-                control={form.control}
-                name="sideConnectionType"
-                render={(_props) => {
-                    return (
-                        <Combobox
-                            data={data}
-                            onOpenChange={(open) => console.log('Combobox is open?', open)}
-                            onValueChange={(newValue) => console.log('Combobox value:', newValue)}
-                            type="framework"
-                        >
-                            <ComboboxTrigger/>
-                            <ComboboxContent>
-                                <ComboboxInput/>
-                                <ComboboxEmpty/>
-                                <ComboboxList>
-                                    <ComboboxGroup>
-                                        {data.map((item) => (
-                                            <ComboboxItem key={item.value} value={item.value}>
-                                                {item.label}
-                                            </ComboboxItem>
-                                        ))}
-                                    </ComboboxGroup>
-                                </ComboboxList>
-                            </ComboboxContent>
-                        </Combobox>
-                    )
-                }}
-            />
+            <FormItem className={className}>
+                <FormLabel
+                    className="text-xs font-mono text-gray-700 uppercase tracking-wider">{label}</FormLabel>
+                    <Combobox {...props}>
+                        <ComboboxTrigger/>
+                        <ComboboxContent>
+                            <ComboboxInput {...field}/>
+                            <ComboboxEmpty/>
+                            <ComboboxList>
+                                <ComboboxGroup>
+                                    {data.map((item) => (
+                                        <ComboboxItem key={item.key}
+                                                      value={item.value}>
+                                            {item.label}
+                                        </ComboboxItem>
+                                    ))}
+                                </ComboboxGroup>
+                            </ComboboxList>
+                        </ComboboxContent>
+                    </Combobox>
+                <FormDescription className="text-xs text-gray-500 font-mono mt-1">
+                    {description}
+                </FormDescription>
+                <FormMessage/>
+            </FormItem>
         )
     }
